@@ -1,0 +1,3 @@
+Coloque a descrição do Produto 3 da Shopee aqui.
+
+Imagens do produto devem ser salvas nesta mesma pasta.

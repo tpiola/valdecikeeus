@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#1c1c21"/>
+  <circle cx="300" cy="260" r="110" fill="none" stroke="#2a2a30" stroke-width="3"/>
+  <text x="300" y="270" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#d8ff4f" text-anchor="middle" letter-spacing="3">KEEUS</text>
+  <text x="300" y="430" font-family="Arial, sans-serif" font-size="18" fill="#93939c" text-anchor="middle" letter-spacing="3">VISUALIZAÇÃO 360° EM BREVE</text>
+</svg>
