@@ -7,6 +7,7 @@ import SocialProof from "@/components/home/SocialProof";
 import SocialChannels from "@/components/home/SocialChannels";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
+import SummerDivider from "@/components/ui/SummerDivider";
 import { PRODUCTS, getFeaturedProducts, getNewArrivals } from "@/lib/products";
 import { FAQ_ITEMS } from "@/lib/constants";
 
@@ -69,6 +70,8 @@ export default function Home() {
       {/* Barra de confiança */}
       <TrustBar />
 
+      <SummerDivider />
+
       {/* Lançamentos */}
       <ProductGrid
         title="Lançamentos"
@@ -80,6 +83,8 @@ export default function Home() {
       {/* Depoimentos */}
       <SocialProof />
 
+      <SummerDivider />
+
       {/* Mais vendidos */}
       <ProductGrid
         title="Mais Vendidos"
@@ -90,6 +95,8 @@ export default function Home() {
 
       {/* Canais de venda: Shopee, Facebook, WhatsApp */}
       <SocialChannels />
+
+      <SummerDivider />
 
       {/* Newsletter */}
       <LeadCapture />

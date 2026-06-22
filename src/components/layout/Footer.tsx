@@ -200,17 +200,59 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* ── Map section ── */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
+          <p className="mb-4 text-center text-[11px] font-bold uppercase tracking-widest text-white/30">
+            📍 Onde estamos
+          </p>
+          <a
+            href={SITE.mapsDirectionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative mx-auto block max-w-2xl overflow-hidden rounded-2xl border-2 border-white/10 transition-all hover:border-accent/50"
+            title="Abrir no Google Maps"
+          >
+            <iframe
+              src={SITE.mapsEmbedUrl}
+              width="100%"
+              height="220"
+              className="pointer-events-none block"
+              style={{ border: 0, filter: "grayscale(40%)" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Localização Keeus Store"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all group-hover:bg-black/30">
+              <span className="rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-white opacity-0 shadow-lg transition-all group-hover:opacity-100">
+                📍 Abrir no Google Maps
+              </span>
+            </div>
+          </a>
+          <p className="mt-3 text-center text-xs text-white/40">
+            {SITE.address.full}
+          </p>
+        </div>
+      </div>
+
       {/* ── Bottom bar ── */}
       <div className="border-t border-white/10 bg-black/30">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-white/30 md:flex-row md:px-8">
           <div>
-            <p>© {year} <strong>VALDECIKEEUS Comércio de Calçados Ltda</strong> — CNPJ: 00.000.000/0001-00</p>
-            <p className="mt-0.5">Franca – SP / Brasil · Todos os direitos reservados.</p>
+            <p>© {year} <strong>VALDECIKEEUS Comércio de Calçados Ltda</strong> — CNPJ: {SITE.cnpj}</p>
+            <p className="mt-0.5">{SITE.address.city} – {SITE.address.state} / Brasil · Todos os direitos reservados.</p>
           </div>
-          <div className="flex items-center gap-1">
-            <span>Desenvolvido com</span>
-            <span className="text-accent">♥</span>
-            <span>no Brasil</span>
+          <div className="flex items-center gap-1.5">
+            <span>Criado por</span>
+            <a
+              href="https://reidasvendas.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-accent transition-colors hover:text-white"
+            >
+              Rei das Vendas
+            </a>
           </div>
         </div>
       </div>

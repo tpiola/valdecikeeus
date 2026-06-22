@@ -7,6 +7,18 @@ export const SITE = {
   whatsappNumber: "5511999999999",
   instagram: "https://instagram.com/keeusoficial",
   facebook: "https://www.facebook.com/keeusoficial",
+  cnpj: "00.000.000/0001-00",
+  address: {
+    street: "Av. Presidente Vargas, 1000",
+    city: "Franca",
+    state: "SP",
+    zip: "14400-000",
+    full: "Av. Presidente Vargas, 1000 — Franca, SP — CEP 14400-000",
+  },
+  mapsEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.123456789!2d-47.4009!3d-20.5401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDMyJzI0LjQiUyA0N8KwMjQnMDMuMiJX!5e0!3m2!1spt-BR!2sbr!4v1234567890",
+  mapsDirectionsUrl:
+    "https://www.google.com/maps/dir/?api=1&destination=-20.5401,-47.4009",
 };
 
 export const NAV_LINKS = [

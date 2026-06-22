@@ -108,6 +108,7 @@ h1, h2, h3 {
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(255,95,0,0.35), 0 0 40px rgba(255,95,0,0.1);
 }
 .btn-primary:active {
   transform: translateY(0);
@@ -193,6 +194,56 @@ h1, h2, h3 {
   animation: shimmer 1.8s ease-in-out infinite;
 }
 
+/* ── Neon Glow (laranja Keeus) ── */
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(255,95,0,0.4), 0 0 20px rgba(255,95,0,0.15), 0 0 40px rgba(255,95,0,0.05); }
+  50%      { box-shadow: 0 0 14px rgba(255,95,0,0.6), 0 0 32px rgba(255,95,0,0.25), 0 0 60px rgba(255,95,0,0.1); }
+}
+.neon-glow {
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+.neon-text {
+  text-shadow: 0 0 10px rgba(255,95,0,0.4), 0 0 30px rgba(255,95,0,0.15);
+}
+.neon-border {
+  box-shadow: 0 0 12px rgba(255,95,0,0.3), inset 0 0 12px rgba(255,95,0,0.05);
+}
+
+/* ── Summer Wave Divider ── */
+.summer-divider {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #FFF8F0 0%, #FFECD2 50%, #FFE0B2 100%);
+}
+.summer-divider::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(255,149,0,0.12) 40px,
+    rgba(255,149,0,0.12) 44px
+  );
+  border-radius: 50%;
+}
+.summer-divider-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  font-size: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Ken Burns ── */
 @keyframes kenBurns {
   0%   { transform: scale(1.0); }
   100% { transform: scale(1.08); }
