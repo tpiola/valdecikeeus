@@ -130,6 +130,7 @@ export default function ModelViewer3D({
             />
             <p className="text-xs text-muted">Carregando modelo 3D…</p>
           </div>
+          {/* @ts-expect-error - custom web component */}
         </model-viewer>
       </div>
 
