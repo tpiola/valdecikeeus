@@ -1,0 +1,14 @@
+{
+  "name": "Keeus — Chinelos Premium",
+  "short_name": "Keeus",
+  "description": "Chinelos premium com entrega rápida para todo o Brasil",
+  "icons": [
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#FF5F00",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "start_url": "/",
+  "lang": "pt-BR"
+}

@@ -1,65 +1,220 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   KEEUS DESIGN SYSTEM — Regra 60-30-10
+   60% → Branco / Off-white (fundo e superfícies)
+   30% → Preto carbono (textos, bordas, ícones)
+   10% → Laranja #FF5F00 (CTAs, badges, destaque)
+───────────────────────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #0a0a0b;
-  --surface: #131316;
-  --surface-light: #1c1c21;
-  --foreground: #f5f5f1;
-  --muted: #93939c;
-  --border: rgba(255, 255, 255, 0.08);
-  --accent: #d8ff4f;
-  --accent-foreground: #0a0a0b;
-  --accent-soft: rgba(216, 255, 79, 0.12);
-  --signal: #5b8cff;
+  /* 60% — Fundo / Superfícies */
+  --background:     #FFFFFF;
+  --surface:        #F8F9FA;
+  --surface-mid:    #F1F3F5;
+  --surface-dark:   #E9ECEF;
+
+  /* 30% — Estrutura / Texto */
+  --foreground:     #111111;
+  --foreground-mid: #333333;
+  --muted:          #6C757D;
+  --border:         #E9ECEF;
+  --border-mid:     #DEE2E6;
+
+  /* 10% — Destaque / Ação */
+  --accent:         #FF5F00;
+  --accent-hover:   #E65600;
+  --accent-light:   #FFF3EC;
+  --accent-fore:    #FFFFFF;
+
+  /* Utilitários */
+  --success:        #28A745;
+  --signal:         #0066FF;
+  --radius:         8px;
+  --radius-lg:      12px;
+  --radius-xl:      16px;
+  --shadow-card:    0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover:   0 8px 24px rgba(0, 0, 0, 0.10);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-light: var(--surface-light);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent-soft: var(--accent-soft);
-  --color-signal: var(--signal);
-  --font-display: var(--font-space-grotesk);
-  --font-sans: var(--font-inter);
+  --color-background:    var(--background);
+  --color-surface:       var(--surface);
+  --color-surface-mid:   var(--surface-mid);
+  --color-surface-dark:  var(--surface-dark);
+  --color-foreground:    var(--foreground);
+  --color-foreground-mid: var(--foreground-mid);
+  --color-muted:         var(--muted);
+  --color-border:        var(--border);
+  --color-border-mid:    var(--border-mid);
+  --color-accent:        var(--accent);
+  --color-accent-hover:  var(--accent-hover);
+  --color-accent-light:  var(--accent-light);
+  --color-accent-fore:   var(--accent-fore);
+  --color-success:       var(--success);
+  --color-signal:        var(--signal);
+  --font-display:        var(--font-plus-jakarta);
+  --font-sans:           var(--font-inter);
 }
 
+/* ── Base ── */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 * {
-  scrollbar-color: var(--surface-light) var(--background);
+  scrollbar-color: var(--border) var(--surface);
+  scrollbar-width: thin;
 }
 
+/* ── Typography ── */
 .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
 }
 
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: var(--accent-fore);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+/* ── Product Card ── */
+.product-card {
+  background: var(--background);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s, transform 0.25s;
+  overflow: hidden;
+}
+.product-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Badge ── */
+.badge {
+  background: var(--accent);
+  color: var(--accent-fore);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.badge-new {
+  background: var(--foreground);
+  color: var(--background);
+}
+.badge-limited {
+  background: var(--signal);
+  color: var(--background);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
+  50% { opacity: 0.6; }
 }
 .animate-pulse-soft {
   animation: pulse-soft 2s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
+  0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 .animate-shimmer {
-  background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background-image: linear-gradient(90deg, transparent, rgba(0,0,0,0.04), transparent);
   background-size: 200% 100%;
   animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+.animate-ken-burns {
+  animation: kenBurns 8s ease-out infinite alternate;
+}
+
+/* ── Divider ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ── Free shipping bar ── */
+.free-shipping-bar {
+  background: var(--accent);
+  color: var(--accent-fore);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 16px;
+  letter-spacing: 0.03em;
 }

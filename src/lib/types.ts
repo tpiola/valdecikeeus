@@ -16,4 +16,5 @@ export interface Product {
   image: string;
   gallery: string[];
   angleCount: number;
+  originalPrice?: number;
 }
