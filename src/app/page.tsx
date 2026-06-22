@@ -1,4 +1,5 @@
 import Script from "next/script";
+import ProductStrip from "@/components/home/ProductStrip";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import ProductGrid from "@/components/home/ProductGrid";
@@ -58,6 +59,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
       />
+
+      {/* Strip de produtos — montagem acima da hero */}
+      <ProductStrip />
 
       {/* Hero com slider cinematográfico */}
       <Hero />

@@ -2,32 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-// Register <model-viewer> web component type for JSX
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "model-viewer": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & {
-          src?: string;
-          "ios-src"?: string;
-          alt?: string;
-          ar?: boolean | string;
-          "ar-modes"?: string;
-          "camera-controls"?: boolean | string;
-          poster?: string;
-          "shadow-intensity"?: string;
-          "auto-rotate"?: boolean | string;
-          "environment-image"?: string;
-          exposure?: string;
-          slot?: string;
-          style?: React.CSSProperties;
-        },
-        HTMLElement
-      >;
-    }
-  }
-}
-
 interface ModelViewer3DProps {
   slug: string;
   productName: string;
