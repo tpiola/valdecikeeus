@@ -77,6 +77,7 @@ export default function ModelViewer3D({
 
       {/* model-viewer */}
       <div className="relative" style={{ height: 400 }}>
+        {/* @ts-expect-error - custom web component */}
         <model-viewer
           src={modelSrc}
           ios-src={iosSrc}
