@@ -7,12 +7,13 @@ import SocialProof from "@/components/home/SocialProof";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
 import SummerDivider from "@/components/ui/SummerDivider";
-import { PRODUCTS, getFeaturedProducts, getNewArrivals } from "@/lib/products";
+import { PRODUCTS, getFeaturedProducts, getNewArrivals, getChinelos } from "@/lib/products";
 import { FAQ_ITEMS } from "@/lib/constants";
 
 export default function Home() {
   const newArrivals = getNewArrivals().slice(0, 8);
   const featured = getFeaturedProducts();
+  const chinelos = getChinelos();
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -91,6 +92,16 @@ export default function Home() {
         subtitle="As preferidas de quem joga bola todo fim de semana"
         products={featured}
         viewAllHref="/colecao"
+      />
+
+      <SummerDivider />
+
+      {/* Chinelos */}
+      <ProductGrid
+        title="Chinelos Premium"
+        subtitle="Do vestiário para a rua — conforto que vai além do campo"
+        products={chinelos}
+        viewAllHref="/colecao?categoria=chinelo"
       />
 
       <SummerDivider />

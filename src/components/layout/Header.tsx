@@ -135,7 +135,7 @@ export default function Header() {
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Buscar chuteiras, marcas, modelos..."
+                  placeholder="Buscar chuteiras, chinelos, marcas, modelos..."
                   className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
                 />
                 <button

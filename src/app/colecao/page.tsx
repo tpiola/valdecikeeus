@@ -5,7 +5,7 @@ import ProductGrid from "@/components/home/ProductGrid";
 
 export const metadata: Metadata = {
   title: `Coleção | ${SITE.name}`,
-  description: "Todas as chuteiras da Keeus. Nike, Adidas, Puma, Mizuno, Umbro e Penalty para campo, society e futsal.",
+  description: "Toda a coleção Keeus. Chuteiras e chinelos premium: Nike, Adidas, Puma, Mizuno, Umbro, Penalty e linha própria Keeus.",
 };
 
 export default async function ColecaoPage({
@@ -16,7 +16,7 @@ export default async function ColecaoPage({
   const { categoria, filtro } = await searchParams;
 
   let products = PRODUCTS;
-  if (categoria === "campo" || categoria === "society" || categoria === "futsal") {
+  if (categoria === "campo" || categoria === "society" || categoria === "futsal" || categoria === "chinelo") {
     products = products.filter((p) => p.category === categoria);
   }
   if (filtro === "lancamentos") {
@@ -29,7 +29,7 @@ export default async function ColecaoPage({
   return (
     <ProductGrid
       title="Coleção Keeus"
-      subtitle={`${products.length} chuteiras disponíveis`}
+      subtitle={`${products.length} produtos disponíveis`}
       products={products}
     />
   );

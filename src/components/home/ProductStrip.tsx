@@ -15,7 +15,7 @@ export default function ProductStrip() {
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-border" />
           <span className="text-[10px] font-black uppercase tracking-[0.25em] text-foreground/20">
-            Chuteiras em destaque
+            Destaques da semana
           </span>
           <div className="h-px flex-1 bg-border" />
         </div>
@@ -62,7 +62,7 @@ export default function ProductStrip() {
                 <div className="mt-0.5 flex items-center gap-1.5">
                   <Zap size={10} className="text-accent" />
                   <span className="text-[10px] font-semibold text-muted">
-                    {product.category === "campo" ? "Campo" : product.category === "society" ? "Society" : "Futsal"}
+                    {product.category === "campo" ? "Campo" : product.category === "society" ? "Society" : product.category === "futsal" ? "Futsal" : "Chinelo"}
                   </span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-1.5">
@@ -84,7 +84,7 @@ export default function ProductStrip() {
             href="/colecao"
             className="text-xs font-bold text-foreground underline underline-offset-4 hover:text-accent"
           >
-            Ver todas as chuteiras →
+            Ver todos os produtos →
           </Link>
         </div>
       </div>

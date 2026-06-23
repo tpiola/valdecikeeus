@@ -29,7 +29,7 @@ export interface Product {
   id: number;
   slug: string;
   name: string;
-  category: "campo" | "society" | "futsal";
+  category: "campo" | "society" | "futsal" | "chinelo";
   brand: string;
   price: number;
   installmentPrice: number;

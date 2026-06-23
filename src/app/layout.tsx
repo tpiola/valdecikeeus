@@ -26,15 +26,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
-    template: `%s | Keeus Chuteiras`,
+    default: "Keeus — Chuteiras e Chinelos Premium",
+    template: `%s | Keeus`,
   },
   description:
-    "Keeus Chuteiras: loja oficial de chuteiras premium para campo, society e futsal. Modelos exclusivos, frete grátis Brasil e garantia de 7 dias.",
+    "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle. Frete grátis Brasil e garantia de 7 dias.",
   keywords: [
-    "chuteiras premium", "chuteiras campo", "chuteiras society", "chuteiras futsal",
-    "loja de chuteiras", "keeus", "chuteiras frete grátis",
-    "chuteiras profissional", "chuteira nike", "chuteira adidas",
+    "chuteiras premium", "chinelos premium", "chuteiras campo", "chuteiras society", "chuteiras futsal",
+    "keeus chinelos", "keeus chuteiras", "loja de chuteiras", "chinelo slide",
+    "chinelo esportivo", "chuteiras frete grátis",
   ],
   icons: {
     icon: [
@@ -47,18 +47,18 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   themeColor: "#00FF41",
   openGraph: {
-    title: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
-    description: "Domine o campo com estilo. Chuteiras premium para campo, society e futsal. Frete grátis Brasil.",
+    title: "Keeus — Chuteiras e Chinelos Premium",
+    description: "Chuteiras e chinelos premium para campo, society, futsal e lifestyle. Frete grátis Brasil.",
     url: SITE.url,
-    siteName: "Keeus Chuteiras",
+    siteName: "Keeus",
     locale: "pt_BR",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Chuteiras Premium" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Chuteiras e Chinelos Premium" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
-    description: "Domine o campo com estilo. Chuteiras premium para futebol.",
+    title: "Keeus — Chuteiras e Chinelos Premium",
+    description: "Chuteiras e chinelos premium. Do campo ao rolê.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -70,8 +70,8 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Keeus Chuteiras",
-    alternateName: "Keeus Loja de Chuteiras Premium",
+    name: "Keeus",
+    alternateName: "Keeus Chuteiras e Chinelos Premium",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     contactPoint: {

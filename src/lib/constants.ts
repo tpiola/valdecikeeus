@@ -1,8 +1,8 @@
 export const SITE = {
-  name: "Keeus Chuteiras",
-  tagline: "Domine o campo com estilo",
+  name: "Keeus",
+  tagline: "Chuteiras e Chinelos Premium",
   description:
-    "Keeus Chuteiras: loja oficial de chuteiras premium para campo, society e futsal. Modelos exclusivos, frete grátis para todo Brasil e garantia de 7 dias.",
+    "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle. Frete grátis para todo Brasil e garantia de 7 dias.",
   url: "https://www.keeus.com.br",
 };
 
@@ -10,6 +10,7 @@ export const NAV_LINKS = [
   { label: "Campo", href: "/colecao?categoria=campo" },
   { label: "Society", href: "/colecao?categoria=society" },
   { label: "Futsal", href: "/colecao?categoria=futsal" },
+  { label: "Chinelos", href: "/colecao?categoria=chinelo" },
   { label: "Lançamentos", href: "/colecao?filtro=novos" },
 ];
 

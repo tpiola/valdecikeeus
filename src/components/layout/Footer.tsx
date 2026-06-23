@@ -42,7 +42,7 @@ export default function Footer() {
               className="h-auto w-[100px] brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-foreground/60">
-              {SITE.tagline}. Loja oficial de chuteiras premium para campo, society e futsal. Frete grátis para todo Brasil.
+              {SITE.tagline}. Loja oficial de chuteiras e chinelos premium. Do campo ao rolê. Frete grátis para todo Brasil.
             </p>
           </div>
 
@@ -56,6 +56,7 @@ export default function Footer() {
                 { label: "Chuteiras Campo", href: "/colecao?categoria=campo" },
                 { label: "Chuteiras Society", href: "/colecao?categoria=society" },
                 { label: "Chuteiras Futsal", href: "/colecao?categoria=futsal" },
+                { label: "Chinelos", href: "/colecao?categoria=chinelo" },
                 { label: "Lançamentos", href: "/colecao?filtro=novos" },
               ].map((item) => (
                 <li key={item.href}>
@@ -106,7 +107,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <span className="mt-0.5 text-accent">✓</span>
-                <span>Chuteiras 100% originais</span>
+                <span>Chuteiras e chinelos 100% originais</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <span className="mt-0.5 text-accent">✓</span>
@@ -162,7 +163,7 @@ export default function Footer() {
       <div className="border-t border-border bg-background">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-foreground/20 md:flex-row md:px-8">
           <div>
-            <p>© {year} <strong className="text-foreground/40">Keeus Chuteiras</strong> — Loja Oficial de Chuteiras Premium</p>
+            <p>© {year} <strong className="text-foreground/40">Keeus</strong> — Chuteiras e Chinelos Premium</p>
             <p className="mt-0.5">Brasil · Todos os direitos reservados.</p>
           </div>
           <div className="flex items-center gap-1.5">
