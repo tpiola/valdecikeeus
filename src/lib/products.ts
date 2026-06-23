@@ -472,8 +472,8 @@ export const PRODUCTS: Product[] = [
     colors: ["#FF5F00", "#0a0a0b"],
     description:
       "Nova marca brasileira que chegou pra ficar. A Roberto Pro Elite traz cabedal em microfiber premium com tecnologia de ajuste térmico, palmilha ergonômica e solado com travas cônicas. Performance de elite com preço justo — o equilíbrio que o futebol brasileiro merece.",
-    image: "/products/placeholder.svg",
-    gallery: ["/products/placeholder.svg"],
+    image: "/products/roberto.jpg",
+    gallery: ["/products/roberto.jpg"],
     angleCount: 1,
   },
 ];
