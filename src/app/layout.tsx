@@ -26,14 +26,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus — Chinelos e Sandálias Premium | Entrega Rápida",
+    default: "Keeus — Marketplace de Cursos Online | Cursos que Transformam",
     template: `%s | Keeus`,
   },
   description:
-    "Keeus Store: chinelos tratorados, sandálias e slides premium com design exclusivo. Linha Bahamas, Toledo e Malibú. Entrega rápida para todo o Brasil. Parcele em 3x sem juros.",
+    "Keeus: marketplace de cursos online com certificado. Farmácia, Negócios, Tecnologia, Marketing, Gastronomia e Design. Aulas gravadas, acesso vitalício e suporte.",
   keywords: [
-    "chinelo", "sandália", "slide", "keeus", "bahamas", "toledo", "malibú",
-    "chinelo tratorado", "sandália masculina", "sandália feminina", "calçado premium",
+    "curso online", "marketplace de cursos", "keeus", "certificado",
+    "curso farmácia", "curso negócios", "curso tecnologia", "curso marketing",
+    "curso gastronomia", "curso design", "aulas gravadas", "acesso vitalício",
   ],
   icons: {
     icon: [
@@ -45,18 +46,18 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Keeus — Chinelos Premium",
-    description: "Chinelos e sandálias premium com design exclusivo. Linha Bahamas, Toledo e Malibú.",
+    title: "Keeus — Marketplace de Cursos Online",
+    description: "Cursos online com certificado, aulas gravadas e acesso vitalício. Farmácia, Negócios, Tecnologia, Marketing, Gastronomia e Design.",
     url: SITE.url,
     siteName: SITE.name,
     locale: "pt_BR",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Store" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Marketplace de Cursos" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keeus — Chinelos Premium",
-    description: "Design, conforto e atitude em cada par.",
+    title: "Keeus — Marketplace de Cursos Online",
+    description: "Cursos que transformam conhecimento em resultado.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -68,17 +69,15 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Valdecikeeus Comércio de Calçados Ltda",
-    alternateName: "Keeus Store",
+    name: "Keeus",
+    alternateName: "Keeus Marketplace de Cursos",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+55-11-99999-9999",
       contactType: "customer service",
       availableLanguage: "Portuguese",
     },
-    sameAs: [SITE.instagram, SITE.facebook, "https://shopee.com.br/keeusstore"],
   };
 
   return (

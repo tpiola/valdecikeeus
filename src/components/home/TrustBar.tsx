@@ -1,9 +1,15 @@
 "use client";
 
-import { ShieldCheck, Truck, CreditCard, RefreshCw } from "lucide-react";
-import { TRUST_BADGES } from "@/lib/constants";
+import { BookOpen, Clock, Award, Users } from "lucide-react";
 
-const ICONS = [Truck, RefreshCw, CreditCard, ShieldCheck];
+const TRUST_BADGES = [
+  { label: "Acesso vitalício", detail: "Estude no seu ritmo, para sempre" },
+  { label: "Certificado incluso", detail: "Certificado digital em todos os cursos" },
+  { label: "Suporte individual", detail: "Tire dúvidas direto com o instrutor" },
+  { label: "7 dias de garantia", detail: "Não gostou? Devolvemos 100% do valor" },
+];
+
+const ICONS = [BookOpen, Clock, Users, Award];
 
 export default function TrustBar() {
   return (

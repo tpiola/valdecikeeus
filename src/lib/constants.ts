@@ -1,59 +1,46 @@
 export const SITE = {
   name: "Keeus",
-  tagline: "Calçados que pensam em cada passo",
+  tagline: "Cursos que transformam conhecimento em resultado",
   description:
-    "Keeus é a loja de calçados mais avançada do Brasil: tecnologia de ajuste de tamanho por IA, visualização 360°, frete calculado em tempo real e checkout em Pix, cartão ou boleto.",
+    "Keeus é o marketplace de cursos online onde especialistas de mercado ensinam o que realmente funciona. Farmácia, Negócios, Tecnologia, Marketing, Gastronomia e Design — cursos gravados, com certificado e acesso vitalício.",
   url: "https://www.keeus.com.br",
-  whatsappNumber: "5511999999999",
-  instagram: "https://instagram.com/keeusoficial",
-  facebook: "https://www.facebook.com/keeusoficial",
-  cnpj: "00.000.000/0001-00",
-  address: {
-    street: "Av. Presidente Vargas, 1000",
-    city: "Franca",
-    state: "SP",
-    zip: "14400-000",
-    full: "Av. Presidente Vargas, 1000 — Franca, SP — CEP 14400-000",
-  },
-  mapsEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.123456789!2d-47.4009!3d-20.5401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDMyJzI0LjQiUyA0N8KwMjQnMDMuMiJX!5e0!3m2!1spt-BR!2sbr!4v1234567890",
-  mapsDirectionsUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=-20.5401,-47.4009",
 };
 
 export const NAV_LINKS = [
-  { label: "Lançamentos", href: "/colecao?filtro=lancamentos" },
-  { label: "Masculino", href: "/colecao?categoria=masculino" },
-  { label: "Feminino", href: "/colecao?categoria=feminino" },
-  { label: "Edição Limitada", href: "/colecao?filtro=edicao-limitada" },
+  { label: "Farmácia", href: "/cursos?categoria=farmacia" },
+  { label: "Negócios", href: "/cursos?categoria=negocios" },
+  { label: "Tecnologia", href: "/cursos?categoria=tecnologia" },
+  { label: "Marketing", href: "/cursos?categoria=marketing" },
+  { label: "Gastronomia", href: "/cursos?categoria=gastronomia" },
+  { label: "Design", href: "/cursos?categoria=design" },
 ];
 
 export const TRUST_BADGES = [
-  { label: "Entrega rápida", detail: "Todo o Brasil em 2-7 dias úteis" },
-  { label: "Troca grátis", detail: "30 dias para troca sem custo" },
-  { label: "Pagamento seguro", detail: "Pix, cartão em até 3x ou boleto" },
-  { label: "Garantia Keeus", detail: "6 meses contra defeito de fabricação" },
+  { label: "Certificado", detail: "Certificado digital ao concluir o curso" },
+  { label: "Aulas gravadas", detail: "Estude no seu ritmo, quando quiser" },
+  { label: "Acesso vitalício", detail: "Compre uma vez, acesse para sempre" },
+  { label: "Suporte", detail: "Tire dúvidas direto com o instrutor" },
 ];
 
 export const FAQ_ITEMS = [
   {
-    question: "Qual o prazo de entrega da Keeus para todo o Brasil?",
+    question: "Como funcionam os cursos da Keeus?",
     answer:
-      "Capitais recebem em 2 a 4 dias úteis e demais regiões em até 7 dias úteis, calculado em tempo real pelo seu CEP.",
+      "Os cursos da Keeus são 100% online e gravados. Você assiste às aulas no seu ritmo, de qualquer dispositivo, e recebe um certificado digital ao concluir todas as etapas.",
   },
   {
-    question: "Como funciona a recomendação de tamanho por IA da Keeus?",
+    question: "Quais formas de pagamento são aceitas?",
     answer:
-      "Você informa a marca e o tamanho que costuma usar, e nosso sistema cruza com o histórico de medidas de cada modelo para sugerir o tamanho ideal.",
+      "Aceitamos Pix com desconto, cartão de crédito em até 12x e boleto bancário. A liberação do acesso é imediata após a confirmação do pagamento.",
   },
   {
-    question: "Posso trocar o calçado se o tamanho não servir?",
+    question: "Por quanto tempo tenho acesso ao curso?",
     answer:
-      "Sim, a Keeus oferece troca grátis em até 30 dias após o recebimento, sem custo de frete de retorno.",
+      "O acesso é vitalício. Após a compra, você pode assistir às aulas quantas vezes quiser, sem limite de tempo.",
   },
   {
-    question: "Quais formas de pagamento a Keeus aceita?",
+    question: "Os cursos oferecem certificado?",
     answer:
-      "Pix com 5% de desconto extra, cartão de crédito em até 3x sem juros e boleto bancário.",
+      "Sim! Todos os cursos da Keeus oferecem certificado digital de conclusão. Basta completar todas as aulas e módulos para emitir o seu.",
   },
 ];

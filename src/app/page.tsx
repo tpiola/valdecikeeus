@@ -1,19 +1,18 @@
 import Script from "next/script";
-import ProductStrip from "@/components/home/ProductStrip";
+import CourseStrip from "@/components/home/CourseStrip";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
-import ProductGrid from "@/components/home/ProductGrid";
+import CourseGrid from "@/components/home/CourseGrid";
 import SocialProof from "@/components/home/SocialProof";
-import SocialChannels from "@/components/home/SocialChannels";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
 import SummerDivider from "@/components/ui/SummerDivider";
-import { PRODUCTS, getFeaturedProducts, getNewArrivals } from "@/lib/products";
+import { COURSES, getFeaturedCourses, getNewCourses } from "@/lib/courses";
 import { FAQ_ITEMS } from "@/lib/constants";
 
 export default function Home() {
-  const newArrivals = getNewArrivals().slice(0, 8);
-  const featured = getFeaturedProducts();
+  const newCourses = getNewCourses().slice(0, 8);
+  const featured = getFeaturedCourses();
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -25,24 +24,24 @@ export default function Home() {
     })),
   };
 
-  const productListJsonLd = {
+  const courseListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Coleção Keeus 2025",
-    itemListElement: PRODUCTS.slice(0, 6).map((p, i) => ({
+    name: "Catálogo de Cursos",
+    itemListElement: COURSES.slice(0, 6).map((c, i) => ({
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "Product",
-        name: p.name,
-        description: p.description,
-        image: `https://www.keeus.com.br${p.image}`,
+        "@type": "Course",
+        name: c.name,
+        description: c.description,
+        image: `https://www.keeus.com.br${c.image}`,
         offers: {
           "@type": "Offer",
-          price: p.price.toFixed(2),
+          price: c.price.toFixed(2),
           priceCurrency: "BRL",
-          availability: p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-          url: `https://www.keeus.com.br/produto/${p.slug}`,
+          availability: "https://schema.org/InStock",
+          url: `https://www.keeus.com.br/curso/${c.slug}`,
         },
       },
     })),
@@ -56,13 +55,13 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Script
-        id="product-list-schema"
+        id="course-list-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseListJsonLd) }}
       />
 
-      {/* Strip de produtos — montagem acima da hero */}
-      <ProductStrip />
+      {/* Strip de cursos — montagem acima da hero */}
+      <CourseStrip />
 
       {/* Hero com slider cinematográfico */}
       <Hero />
@@ -72,29 +71,26 @@ export default function Home() {
 
       <SummerDivider />
 
-      {/* Lançamentos */}
-      <ProductGrid
-        title="Lançamentos"
-        subtitle="Os modelos mais recentes da coleção Keeus 2025"
-        products={newArrivals}
-        viewAllHref="/colecao?filtro=lancamentos"
+      {/* Novos cursos */}
+      <CourseGrid
+        title="Novos Cursos"
+        subtitle="Os cursos mais recentes da nossa plataforma"
+        courses={newCourses}
+        viewAllHref="/cursos?filtro=novos"
       />
 
-      {/* Depoimentos */}
+      {/* Instrutores */}
       <SocialProof />
 
       <SummerDivider />
 
-      {/* Mais vendidos */}
-      <ProductGrid
-        title="Mais Vendidos"
-        subtitle="Os preferidos de quem já é Keeus"
-        products={featured}
-        viewAllHref="/colecao"
+      {/* Mais populares */}
+      <CourseGrid
+        title="Mais Populares"
+        subtitle="Os preferidos de quem já é aluno"
+        courses={featured}
+        viewAllHref="/cursos"
       />
-
-      {/* Canais de venda: Shopee, Facebook, WhatsApp */}
-      <SocialChannels />
 
       <SummerDivider />
 

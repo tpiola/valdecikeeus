@@ -3,9 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/constants";
-import {
-  MessageCircle, MapPin, Phone, Mail, Shield, Award, Truck, RefreshCw
-} from "lucide-react";
+import { Shield, Award } from "lucide-react";
 
 const PAYMENT_METHODS = [
   { name: "Visa", color: "#1A1F71", abbr: "VISA", textColor: "#fff" },
@@ -21,8 +19,8 @@ const PAYMENT_METHODS = [
 const SECURITY_BADGES = [
   { icon: Shield, label: "Site Seguro SSL" },
   { icon: Award, label: "Marca Registrada" },
-  { icon: Truck, label: "Frete Rápido" },
-  { icon: RefreshCw, label: "Troca Grátis" },
+  { icon: Shield, label: "Certificado" },
+  { icon: Award, label: "Suporte" },
 ];
 
 export default function Footer() {
@@ -44,53 +42,23 @@ export default function Footer() {
               className="h-auto w-[100px] brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
-              {SITE.tagline}. Chinelos premium com design exclusivo, conforto superior e entrega rápida para todo o Brasil.
+              {SITE.tagline}. Marketplace de cursos online com certificado, aulas gravadas e acesso vitalício.
             </p>
-            {/* Social */}
-            <div className="mt-5 flex gap-3">
-              <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              </a>
-              <a
-                href={SITE.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              </a>
-              <a
-                href={`https://wa.me/${SITE.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-[#25D366]"
-              >
-                <MessageCircle size={16} />
-              </a>
-            </div>
           </div>
 
-          {/* Col 2 — Navegação */}
+          {/* Col 2 — Categorias */}
           <div>
             <p className="mb-4 text-[11px] font-bold uppercase tracking-widest text-white/40">
-              Coleções
+              Categorias
             </p>
             <ul className="space-y-3 text-sm">
               {[
-                { label: "Linha Bahamas", href: "/colecao?linha=bahamas" },
-                { label: "Linha Toledo", href: "/colecao?linha=toledo" },
-                { label: "Linha Malibú", href: "/colecao?linha=malibu" },
-                { label: "Lançamentos", href: "/colecao?filtro=lancamentos" },
-                { label: "Edição Limitada", href: "/colecao?filtro=edicao-limitada" },
-                { label: "Ver tudo", href: "/colecao" },
+                { label: "Farmácia", href: "/cursos?categoria=farmacia" },
+                { label: "Negócios", href: "/cursos?categoria=negocios" },
+                { label: "Tecnologia", href: "/cursos?categoria=tecnologia" },
+                { label: "Marketing", href: "/cursos?categoria=marketing" },
+                { label: "Gastronomia", href: "/cursos?categoria=gastronomia" },
+                { label: "Design", href: "/cursos?categoria=design" },
               ].map((item) => (
                 <li key={item.href}>
                   <Link
@@ -112,7 +80,6 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               {[
                 { label: "Sobre a Keeus", href: "/sobre" },
-                { label: "Trocas e devoluções", href: "/trocas-e-devolucoes" },
                 { label: "Perguntas frequentes", href: "/perguntas-frequentes" },
                 { label: "Política de privacidade", href: "/privacidade" },
                 { label: "Termos de uso", href: "/termos" },
@@ -129,34 +96,27 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 — Contato */}
+          {/* Col 4 — Diferenciais */}
           <div>
             <p className="mb-4 text-[11px] font-bold uppercase tracking-widest text-white/40">
-              Atendimento
+              Por que Keeus?
             </p>
             <ul className="space-y-3 text-sm text-white/60">
               <li className="flex items-start gap-2.5">
-                <MessageCircle size={15} className="mt-0.5 flex-shrink-0 text-accent" />
-                <a
-                  href={`https://wa.me/${SITE.whatsappNumber}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent"
-                >
-                  WhatsApp · Seg–Sex 9h–18h
-                </a>
+                <span className="mt-0.5 text-accent">✓</span>
+                <span>Cursos 100% online e gravados</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <Mail size={15} className="mt-0.5 flex-shrink-0 text-accent" />
-                <span>contato@keeus.com.br</span>
+                <span className="mt-0.5 text-accent">✓</span>
+                <span>Certificado digital de conclusão</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone size={15} className="mt-0.5 flex-shrink-0 text-accent" />
-                <span>(11) 99999-9999</span>
+                <span className="mt-0.5 text-accent">✓</span>
+                <span>Acesso vitalício ao conteúdo</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin size={15} className="mt-0.5 flex-shrink-0 text-accent" />
-                <span>São Paulo – SP, Brasil</span>
+                <span className="mt-0.5 text-accent">✓</span>
+                <span>Suporte direto com instrutores</span>
               </li>
             </ul>
 
@@ -200,48 +160,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Map section ── */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-          <p className="mb-4 text-center text-[11px] font-bold uppercase tracking-widest text-white/30">
-            📍 Onde estamos
-          </p>
-          <a
-            href={SITE.mapsDirectionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative mx-auto block max-w-2xl overflow-hidden rounded-2xl border-2 border-white/10 transition-all hover:border-accent/50"
-            title="Abrir no Google Maps"
-          >
-            <iframe
-              src={SITE.mapsEmbedUrl}
-              width="100%"
-              height="220"
-              className="pointer-events-none block"
-              style={{ border: 0, filter: "grayscale(40%)" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Localização Keeus Store"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all group-hover:bg-black/30">
-              <span className="rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-white opacity-0 shadow-lg transition-all group-hover:opacity-100">
-                📍 Abrir no Google Maps
-              </span>
-            </div>
-          </a>
-          <p className="mt-3 text-center text-xs text-white/40">
-            {SITE.address.full}
-          </p>
-        </div>
-      </div>
-
       {/* ── Bottom bar ── */}
       <div className="border-t border-white/10 bg-black/30">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-4 text-[11px] text-white/30 md:flex-row md:px-8">
           <div>
-            <p>© {year} <strong>VALDECIKEEUS Comércio de Calçados Ltda</strong> — CNPJ: {SITE.cnpj}</p>
-            <p className="mt-0.5">{SITE.address.city} – {SITE.address.state} / Brasil · Todos os direitos reservados.</p>
+            <p>© {year} <strong>Keeus</strong> — Marketplace de Cursos Online</p>
+            <p className="mt-0.5">Brasil · Todos os direitos reservados.</p>
           </div>
           <div className="flex items-center gap-1.5">
             <span>Criado por</span>

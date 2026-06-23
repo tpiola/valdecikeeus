@@ -7,7 +7,7 @@ import { COURSES } from "@/lib/courses";
 
 const TOP_COURSES = COURSES.slice(0, 6);
 
-export default function ProductStrip() {
+export default function CourseStrip() {
   return (
     <section className="border-b border-border bg-[#FAFAFA]">
       <div className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-6">
