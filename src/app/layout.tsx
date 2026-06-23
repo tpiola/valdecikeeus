@@ -8,6 +8,7 @@ import CartDrawer from "@/components/cart/CartDrawer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import CookieBanner from "@/components/ui/CookieBanner";
 import { SITE } from "@/lib/constants";
+import { PRODUCTS } from "@/lib/products";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -74,11 +75,73 @@ export default function RootLayout({
     alternateName: "Keeus Chuteiras e Chinelos Premium",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
+    description:
+      "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle.",
+    sameAs: [
+      "https://instagram.com/keeus",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
+      telephone: "+55-11-99999-9999",
       availableLanguage: "Portuguese",
+      areaServed: "BR",
     },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "BR",
+    },
+  };
+
+  const productCatalogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Catálogo Keeus — Chuteiras e Chinelos Premium",
+    url: `${SITE.url}/colecao`,
+    numberOfItems: PRODUCTS.length,
+    itemListElement: PRODUCTS.slice(0, 12).map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: p.name,
+        brand: { "@type": "Brand", name: p.brand },
+        description: p.description,
+        image: `${SITE.url}${p.image}`,
+        offers: {
+          "@type": "Offer",
+          price: p.price.toFixed(2),
+          priceCurrency: "BRL",
+          availability: "https://schema.org/InStock",
+          url: `${SITE.url}/produto/${p.slug}`,
+        },
+      },
+    })),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Coleção",
+        item: `${SITE.url}/colecao`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Contato",
+        item: `${SITE.url}/contato`,
+      },
+    ],
   };
 
   const scrollObserverScript = `
@@ -134,6 +197,16 @@ export default function RootLayout({
           id="schema-org"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <Script
+          id="schema-product-catalog"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productCatalogJsonLd) }}
+        />
+        <Script
+          id="schema-breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <Header />
         <main className="flex-1">{children}</main>

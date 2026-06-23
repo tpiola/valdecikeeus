@@ -8,7 +8,7 @@ import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
 import SummerDivider from "@/components/ui/SummerDivider";
 import { PRODUCTS, getFeaturedProducts, getNewArrivals, getChinelos } from "@/lib/products";
-import { FAQ_ITEMS } from "@/lib/constants";
+import { FAQ_ITEMS, SITE } from "@/lib/constants";
 
 export default function Home() {
   const newArrivals = getNewArrivals().slice(0, 8);
@@ -37,13 +37,13 @@ export default function Home() {
         name: p.name,
         brand: { "@type": "Brand", name: p.brand },
         description: p.description,
-        image: `https://www.keeus.com.br${p.image}`,
+        image: `${SITE.url}${p.image}`,
         offers: {
           "@type": "Offer",
           price: p.price.toFixed(2),
           priceCurrency: "BRL",
           availability: "https://schema.org/InStock",
-          url: `https://www.keeus.com.br/produto/${p.slug}`,
+          url: `${SITE.url}/produto/${p.slug}`,
         },
       },
     })),

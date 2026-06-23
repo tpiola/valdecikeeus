@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Chuteiras e Chinelos Premium",
   description:
     "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle. Frete grátis para todo Brasil e garantia de 7 dias.",
-  url: "https://www.keeus.com.br",
+  url: "https://valdecikeeus.vercel.app",
 };
 
 export const NAV_LINKS = [
