@@ -26,15 +26,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus — Marketplace de Cursos Online | Cursos que Transformam",
-    template: `%s | Keeus`,
+    default: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
+    template: `%s | Keeus Chuteiras`,
   },
   description:
-    "Keeus: marketplace de cursos online com certificado. Farmácia, Negócios, Tecnologia, Marketing, Gastronomia e Design. Aulas gravadas, acesso vitalício e suporte.",
+    "Keeus Chuteiras: loja oficial de chuteiras premium para campo, society e futsal. Modelos exclusivos, frete grátis Brasil e garantia de 7 dias.",
   keywords: [
-    "curso online", "marketplace de cursos", "keeus", "certificado",
-    "curso farmácia", "curso negócios", "curso tecnologia", "curso marketing",
-    "curso gastronomia", "curso design", "aulas gravadas", "acesso vitalício",
+    "chuteiras premium", "chuteiras campo", "chuteiras society", "chuteiras futsal",
+    "loja de chuteiras", "keeus", "chuteiras frete grátis",
+    "chuteiras profissional", "chuteira nike", "chuteira adidas",
   ],
   icons: {
     icon: [
@@ -45,19 +45,20 @@ export const metadata: Metadata = {
     shortcut: "/favicon-32x32.png",
   },
   manifest: "/site.webmanifest",
+  themeColor: "#00FF41",
   openGraph: {
-    title: "Keeus — Marketplace de Cursos Online",
-    description: "Cursos online com certificado, aulas gravadas e acesso vitalício. Farmácia, Negócios, Tecnologia, Marketing, Gastronomia e Design.",
+    title: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
+    description: "Domine o campo com estilo. Chuteiras premium para campo, society e futsal. Frete grátis Brasil.",
     url: SITE.url,
-    siteName: SITE.name,
+    siteName: "Keeus Chuteiras",
     locale: "pt_BR",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Marketplace de Cursos" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Chuteiras Premium" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keeus — Marketplace de Cursos Online",
-    description: "Cursos que transformam conhecimento em resultado.",
+    title: "Keeus Chuteiras — Loja Oficial de Chuteiras Premium",
+    description: "Domine o campo com estilo. Chuteiras premium para futebol.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -69,8 +70,8 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Keeus",
-    alternateName: "Keeus Marketplace de Cursos",
+    name: "Keeus Chuteiras",
+    alternateName: "Keeus Loja de Chuteiras Premium",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     contactPoint: {
@@ -80,12 +81,55 @@ export default function RootLayout({
     },
   };
 
+  const scrollObserverScript = `
+    (function() {
+      // Scroll progress bar
+      var bar = document.querySelector('.progress-bar');
+      if (bar) {
+        window.addEventListener('scroll', function() {
+          var docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+          bar.style.width = pct + '%';
+        }, { passive: true });
+      }
+
+      // IntersectionObserver for reveal animations
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal-fade, .reveal-scale').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+  `;
+
   return (
     <html
       lang="pt-BR"
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="theme-color" content="#00FF41" />
+        <meta name="color-scheme" content="dark" />
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        {/* Scroll progress bar */}
+        <div className="progress-bar" style={{ width: "0%" }} />
+
+        <Script
+          id="scroll-observer"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: scrollObserverScript }}
+        />
         <Script
           id="schema-org"
           type="application/ld+json"

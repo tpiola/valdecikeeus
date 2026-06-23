@@ -1,40 +1,39 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   KEEUS DESIGN SYSTEM — Regra 60-30-10
-   60% → Branco / Off-white (fundo e superfícies)
-   30% → Preto carbono (textos, bordas, ícones)
-   10% → Laranja #FF5F00 (CTAs, badges, destaque)
+   KEEUS CHUTEIRAS — VERDE NEON FUTEBOL
+   bg=#0A0A0A preto · accent=#00FF41 verde neon · surface=#111111 cinza escuro
+   foreground=#FFFFFF branco · text-muted=#888888
 ───────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* 60% — Fundo / Superfícies */
-  --background:     #FFFFFF;
-  --surface:        #F8F9FA;
-  --surface-mid:    #F1F3F5;
-  --surface-dark:   #E9ECEF;
+  /* Fundo / Superfícies */
+  --background:     #0A0A0A;
+  --surface:        #111111;
+  --surface-mid:    #1A1A1A;
+  --surface-dark:   #222222;
 
-  /* 30% — Estrutura / Texto */
-  --foreground:     #111111;
-  --foreground-mid: #333333;
-  --muted:          #6C757D;
-  --border:         #E9ECEF;
-  --border-mid:     #DEE2E6;
+  /* Texto / Estrutura */
+  --foreground:     #FFFFFF;
+  --foreground-mid: #CCCCCC;
+  --muted:          #888888;
+  --border:         #2A2A2A;
+  --border-mid:     #333333;
 
-  /* 10% — Destaque / Ação */
-  --accent:         #FF5F00;
-  --accent-hover:   #E65600;
-  --accent-light:   #FFF3EC;
-  --accent-fore:    #FFFFFF;
+  /* Destaque — Verde Neon */
+  --accent:         #00FF41;
+  --accent-hover:   #00E03A;
+  --accent-light:   #0A2A0F;
+  --accent-fore:    #0A0A0A;
 
   /* Utilitários */
-  --success:        #28A745;
-  --signal:         #0066FF;
+  --success:        #00FF41;
+  --signal:         #39FF14;
   --radius:         8px;
   --radius-lg:      12px;
   --radius-xl:      16px;
-  --shadow-card:    0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-hover:   0 8px 24px rgba(0, 0, 0, 0.10);
+  --shadow-card:    0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-hover:   0 8px 24px rgba(0, 255, 65, 0.15);
 }
 
 @theme inline {
@@ -73,8 +72,26 @@ body {
 }
 
 * {
-  scrollbar-color: var(--border) var(--surface);
+  scrollbar-color: #00FF41 #0A0A0A;
   scrollbar-width: thin;
+}
+
+/* Scrollbar verde neon para WebKit */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #00FF41;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #39FF14;
+  box-shadow: 0 0 16px rgba(0, 255, 65, 0.5);
 }
 
 /* ── Typography ── */
@@ -101,14 +118,14 @@ h1, h2, h3 {
   font-size: 0.875rem;
   border-radius: var(--radius);
   padding: 0.75rem 1.5rem;
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   border: none;
   cursor: pointer;
 }
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 0 20px rgba(255,95,0,0.35), 0 0 40px rgba(255,95,0,0.1);
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.4), 0 0 48px rgba(0, 255, 65, 0.15);
 }
 .btn-primary:active {
   transform: translateY(0);
@@ -134,17 +151,62 @@ h1, h2, h3 {
   color: var(--background);
 }
 
+/* ── Botão Neon Verde ── */
+.btn-neon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #00FF41;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #00FF41;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3), 0 0 32px rgba(0, 255, 65, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.btn-neon:hover {
+  background: #00FF41;
+  color: #0A0A0A;
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.6), 0 0 48px rgba(0, 255, 65, 0.2);
+  transform: translateY(-2px);
+}
+.btn-neon:active {
+  transform: translateY(0);
+}
+
 /* ── Product Card ── */
 .product-card {
-  background: var(--background);
+  background: var(--surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s, transform 0.25s;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 .product-card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
+  border-color: rgba(0, 255, 65, 0.3);
+}
+
+/* ── Glow Card ── */
+.glow-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.05), 0 0 32px rgba(0, 255, 65, 0.02);
+  animation: neon-pulse 3s ease-in-out infinite;
+  transition: all 0.3s;
+}
+.glow-card:hover {
+  border-color: rgba(0, 255, 65, 0.5);
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.15), 0 0 48px rgba(0, 255, 65, 0.05);
 }
 
 /* ── Badge ── */
@@ -167,7 +229,88 @@ h1, h2, h3 {
   color: var(--background);
 }
 
-/* ── Animations ── */
+/* ── Progress Bar Verde Neon ── */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  z-index: 9999;
+  background: linear-gradient(90deg, #00FF41, #39FF14, #00FF41);
+  background-size: 200% 100%;
+  animation: progress-shimmer 2s linear infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2);
+}
+@keyframes progress-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Reveal Animations (via IntersectionObserver JS) ── */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Parallax Soccer (CSS scroll-driven fallback) ── */
+.parallax-soccer {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ── Keyframes ── */
+/* Neon Pulse */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1), 0 0 40px rgba(0, 255, 65, 0.03);
+    border-color: rgba(0, 255, 65, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(0, 255, 65, 0.5), 0 0 36px rgba(0, 255, 65, 0.2), 0 0 64px rgba(0, 255, 65, 0.08);
+    border-color: rgba(0, 255, 65, 0.5);
+  }
+}
+
+/* Ball Bounce */
+@keyframes ball-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  20%  { transform: translateY(-30px) rotate(72deg); }
+  40%  { transform: translateY(0) rotate(144deg); }
+  60%  { transform: translateY(-15px) rotate(216deg); }
+  80%  { transform: translateY(0) rotate(288deg); }
+}
+
+/* Goal Flash */
+@keyframes goal-flash {
+  0%   { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Float Particle */
+@keyframes float-particle {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+}
+
+/* ── Existing animations (preserved) ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -189,32 +332,32 @@ h1, h2, h3 {
   100% { background-position: 200% 0; }
 }
 .animate-shimmer {
-  background-image: linear-gradient(90deg, transparent, rgba(0,0,0,0.04), transparent);
+  background-image: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.04), transparent);
   background-size: 200% 100%;
   animation: shimmer 1.8s ease-in-out infinite;
 }
 
-/* ── Neon Glow (laranja Keeus) ── */
+/* ── Neon Glow (verde) ── */
 @keyframes neonPulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(255,95,0,0.4), 0 0 20px rgba(255,95,0,0.15), 0 0 40px rgba(255,95,0,0.05); }
-  50%      { box-shadow: 0 0 14px rgba(255,95,0,0.6), 0 0 32px rgba(255,95,0,0.25), 0 0 60px rgba(255,95,0,0.1); }
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 65, 0.4), 0 0 20px rgba(0, 255, 65, 0.15), 0 0 40px rgba(0, 255, 65, 0.05); }
+  50%      { box-shadow: 0 0 14px rgba(0, 255, 65, 0.6), 0 0 32px rgba(0, 255, 65, 0.25), 0 0 60px rgba(0, 255, 65, 0.1); }
 }
 .neon-glow {
   animation: neonPulse 2.5s ease-in-out infinite;
 }
 .neon-text {
-  text-shadow: 0 0 10px rgba(255,95,0,0.4), 0 0 30px rgba(255,95,0,0.15);
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2);
 }
 .neon-border {
-  box-shadow: 0 0 12px rgba(255,95,0,0.3), inset 0 0 12px rgba(255,95,0,0.05);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3), inset 0 0 12px rgba(0, 255, 65, 0.05);
 }
 
-/* ── Summer Wave Divider ── */
+/* ── Summer Wave Divider (adapted to green) ── */
 .summer-divider {
   position: relative;
   height: 80px;
   overflow: hidden;
-  background: linear-gradient(180deg, #FFF8F0 0%, #FFECD2 50%, #FFE0B2 100%);
+  background: linear-gradient(180deg, #0A1A0A 0%, #0D2A0D 50%, #0F3A0F 100%);
 }
 .summer-divider::before {
   content: '';
@@ -227,8 +370,8 @@ h1, h2, h3 {
     90deg,
     transparent,
     transparent 40px,
-    rgba(255,149,0,0.12) 40px,
-    rgba(255,149,0,0.12) 44px
+    rgba(0, 255, 65, 0.08) 40px,
+    rgba(0, 255, 65, 0.08) 44px
   );
   border-radius: 50%;
 }

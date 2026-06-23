@@ -27,13 +27,13 @@ export default function Header() {
     <>
       {/* ── Frete grátis bar ── */}
       <div className="free-shipping-bar">
-        🚚 Frete GRÁTIS em compras acima de R$ 299,90 · Parcelamos em até 3x sem juros
+        🚚 Frete GRÁTIS para todo Brasil · Parcelamos em até 6x sem juros
       </div>
 
       {/* ── Header principal ── */}
       <header
-        className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_2px_12px_rgba(0,0,0,0.08)]" : "border-b border-border"
+        className={`sticky top-0 z-50 bg-background transition-shadow duration-300 ${
+          scrolled ? "shadow-[0_2px_12px_rgba(0,255,65,0.06)]" : "border-b border-border"
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 md:px-8">
@@ -53,7 +53,7 @@ export default function Header() {
               alt={`${SITE.name} Logo`}
               width={90}
               height={72}
-              className="h-auto w-[72px] md:w-[90px]"
+              className="h-auto w-[72px] md:w-[90px] brightness-0 invert"
               priority
             />
           </Link>
@@ -91,7 +91,7 @@ export default function Header() {
             >
               <Heart size={19} />
               {wishlistCount > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-white">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-fore">
                   {wishlistCount}
                 </span>
               )}
@@ -105,7 +105,7 @@ export default function Header() {
             >
               <ShoppingBag size={19} />
               {count > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-white">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-accent-fore">
                   {count}
                 </span>
               )}
@@ -114,7 +114,7 @@ export default function Header() {
             {/* CTA desktop */}
             <Link
               href="/colecao"
-              className="hidden rounded-lg bg-accent px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-accent-hover lg:block"
+              className="hidden rounded-lg bg-accent px-5 py-2.5 text-xs font-bold text-accent-fore transition-colors hover:bg-accent-hover lg:block"
             >
               Ver Coleção
             </Link>
@@ -128,14 +128,14 @@ export default function Header() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden border-t border-border bg-white"
+              className="overflow-hidden border-t border-border bg-background"
             >
               <div className="mx-auto flex max-w-2xl items-center gap-3 px-4 py-3">
                 <Search size={16} className="text-muted flex-shrink-0" />
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Buscar chinelos, modelos, cores..."
+                  placeholder="Buscar chuteiras, marcas, modelos..."
                   className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
                 />
                 <button
@@ -154,7 +154,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-[80] flex flex-col bg-white"
+            className="fixed inset-0 z-[80] flex flex-col bg-background"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
@@ -167,7 +167,7 @@ export default function Header() {
                 alt={`${SITE.name} Logo`}
                 width={80}
                 height={64}
-                className="h-auto w-[72px]"
+                className="h-auto w-[72px] brightness-0 invert"
               />
               <button
                 onClick={() => setMenuOpen(false)}

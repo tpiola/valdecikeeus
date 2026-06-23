@@ -29,7 +29,8 @@ export interface Product {
   id: number;
   slug: string;
   name: string;
-  category: "masculino" | "feminino" | "unissex";
+  category: "campo" | "society" | "futsal";
+  brand: string;
   price: number;
   installmentPrice: number;
   installments: number;

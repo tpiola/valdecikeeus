@@ -1,15 +1,15 @@
 "use client";
 
-import { BookOpen, Clock, Award, Users } from "lucide-react";
+import { Truck, Shield, RefreshCw, Clock } from "lucide-react";
 
 const TRUST_BADGES = [
-  { label: "Acesso vitalício", detail: "Estude no seu ritmo, para sempre" },
-  { label: "Certificado incluso", detail: "Certificado digital em todos os cursos" },
-  { label: "Suporte individual", detail: "Tire dúvidas direto com o instrutor" },
-  { label: "7 dias de garantia", detail: "Não gostou? Devolvemos 100% do valor" },
+  { label: "Frete Grátis", detail: "Em compras acima de R$ 299" },
+  { label: "Troca em 30 dias", detail: "Não serviu? Troca gratuita" },
+  { label: "Original Garantido", detail: "Produtos 100% originais com NF" },
+  { label: "Suporte 24h", detail: "Atendimento por WhatsApp e e-mail" },
 ];
 
-const ICONS = [BookOpen, Clock, Users, Award];
+const ICONS = [Truck, RefreshCw, Shield, Clock];
 
 export default function TrustBar() {
   return (

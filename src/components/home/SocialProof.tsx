@@ -1,25 +1,25 @@
 "use client";
 
-import { Award } from "lucide-react";
+import { Star } from "lucide-react";
 
-const INSTRUCTORS = [
+const REVIEWS = [
   {
-    specialty: "Especialista em React e TypeScript",
-    description:
-      "Mais de 10 anos de experiência em desenvolvimento frontend. Criador de projetos open-source com milhares de estrelas no GitHub.",
-    highlight: "4.9 ★ · 3.840 alunos",
+    name: "Lucas M.",
+    role: "Jogador de society",
+    text: "Comprei a Predator e chegou em 4 dias. A chuteira é original, linda demais. Já fiz dois gols na estreia! O atendimento pelo WhatsApp foi rápido e tiraram todas as minhas dúvidas sobre tamanho.",
+    rating: 5,
   },
   {
-    specialty: "Especialista em Python e Data Science",
-    description:
-      "Cientista de dados sênior com passagem por big techs. Já treinou mais de 5.000 profissionais em análise de dados e machine learning.",
-    highlight: "4.9 ★ · 5.120 alunos",
+    name: "Rafael S.",
+    role: "Professor de futebol",
+    text: "Sempre comprei em loja física, mas resolvi arriscar na Keeus. A Mercurial veio certinha, na caixa original. Preço melhor que shopping e parcelei em 6x. Recomendo de olho fechado.",
+    rating: 5,
   },
   {
-    specialty: "Especialista em DevOps e Cloud",
-    description:
-      "Arquiteto de infraestrutura com certificações AWS, GCP e Azure. Experiência em migração de sistemas para escala global.",
-    highlight: "4.8 ★ · 960 alunos",
+    name: "André P.",
+    role: "Jogador amador de futsal",
+    text: "Precisava de uma Umbro Neo pro futsal e encontrei o meu tamanho (40) aqui, coisa que não achava em lugar nenhum. Entrega rápida e produto original. Virei cliente!",
+    rating: 5,
   },
 ];
 
@@ -28,31 +28,34 @@ export default function SocialProof() {
     <section className="mx-auto max-w-7xl px-4 py-20 md:px-8">
       <div className="mb-12 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
-          Instrutores
+          Quem compra aprova
         </p>
         <h2 className="mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl">
-          Aprenda com especialistas
+          Depoimentos reais
         </h2>
+        <p className="mt-2 text-sm text-muted">
+          Jogadores que confiam na Keeus Chuteiras
+        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {INSTRUCTORS.map((instructor) => (
+        {REVIEWS.map((review) => (
           <div
-            key={instructor.specialty}
+            key={review.name}
             className="rounded-xl border border-border bg-surface p-6"
           >
-            <div className="mb-3 flex gap-1 text-accent">
-              <Award size={18} />
+            <div className="mb-3 flex gap-0.5 text-accent">
+              {Array.from({ length: review.rating }).map((_, i) => (
+                <Star key={i} size={14} fill="currentColor" />
+              ))}
             </div>
-            <p className="text-sm font-bold text-foreground">
-              {instructor.specialty}
+            <p className="text-sm leading-relaxed text-foreground/80">
+              &ldquo;{review.text}&rdquo;
             </p>
-            <p className="mt-2 text-sm text-foreground/80">
-              {instructor.description}
-            </p>
-            <p className="mt-3 text-xs font-bold uppercase tracking-wide text-muted">
-              {instructor.highlight}
-            </p>
+            <div className="mt-4 border-t border-border pt-3">
+              <p className="text-sm font-bold text-foreground">{review.name}</p>
+              <p className="text-xs text-muted">{review.role}</p>
+            </div>
           </div>
         ))}
       </div>

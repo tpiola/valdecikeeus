@@ -29,11 +29,11 @@ export default function LeadCapture() {
           Fique por dentro
         </p>
         <h2 className="mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl">
-          Newsletter de cursos
+          Lançamentos e ofertas
         </h2>
         <p className="mt-3 text-sm text-muted">
-          Receba em primeira mão os lançamentos de cursos, promoções exclusivas
-          e conteúdos gratuitos direto no seu e-mail.
+          Receba em primeira mão os lançamentos de chuteiras, promoções exclusivas
+          e dicas de futebol direto no seu e-mail. Nada de spam — só conteúdo que interessa.
         </p>
 
         {status === "done" ? (
