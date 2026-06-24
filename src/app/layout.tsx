@@ -6,7 +6,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import CookieBanner from "@/components/ui/CookieBanner";
 import { SITE } from "@/lib/constants";
 import { PRODUCTS } from "@/lib/products";
 
@@ -213,7 +212,6 @@ export default function RootLayout({
         <Footer />
         <CartDrawer />
         <WhatsAppButton />
-        <CookieBanner />
       </body>
     </html>
   );
