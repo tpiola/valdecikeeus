@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/produtos",
+      "destination": "/colecao",
+      "permanent": true
+    },
+    {
+      "source": "/produtos/:path*",
+      "destination": "/colecao",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

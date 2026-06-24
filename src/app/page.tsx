@@ -1,4 +1,6 @@
+"use client";
 import Script from "next/script";
+import { ScrollReveal, TiltCard } from "@/components/motion/ScrollReveal";
 import ProductStrip from "@/components/home/ProductStrip";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
