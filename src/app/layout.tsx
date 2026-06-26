@@ -62,6 +62,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
+  alternates: { canonical: "https://valdecikeeus.vercel.app" },
 };
 
 export default function RootLayout({
@@ -203,6 +204,27 @@ export default function RootLayout({
           id="schema-breadcrumb"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+        <Script
+          id="schema-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Keeus",
+              alternateName: "Keeus Chinelos Premium",
+              url: SITE.url,
+              description:
+                "Keeus: loja oficial de chinelos premium. Design exclusivo, conforto superior e estilo de verão.",
+              inLanguage: "pt-BR",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: SITE.url + "/colecao?search={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
         />
         <Header />
         <main className="flex-1">{children}</main>
