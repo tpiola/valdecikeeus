@@ -19,22 +19,23 @@ const inter = Inter({
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus — Chinelos Premium",
+    default: "Keeus — Chinelos Premium de Verão",
     template: `%s | Keeus`,
   },
   description:
-    "Keeus: loja oficial de chinelos premium. Modelos exclusivos com design esportivo e conforto superior. Frete grátis Brasil e garantia de 7 dias.",
+    "Keeus: chinelos premium com design exclusivo e conforto superior. Slides e flip flops para o verão. Frete grátis Brasil e troca em 30 dias.",
   keywords: [
     "chinelos premium", "keeus chinelos", "chinelo slide",
-    "chinelo esportivo", "chinelo conforto", "chinelo masculino",
-    "chinelo frete grátis", "chinelo EVA", "chinelo memory foam",
+    "chinelo flip flop", "chinelo verão", "chinelo conforto",
+    "chinelo masculino", "chinelo feminino", "chinelo praia",
+    "chinelo EVA", "chinelo frete grátis",
   ],
   icons: {
     icon: [
@@ -45,10 +46,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon-32x32.png",
   },
   manifest: "/site.webmanifest",
-  themeColor: "#00FF41",
   openGraph: {
-    title: "Keeus — Chinelos Premium",
-    description: "Chinelos premium com design esportivo e conforto superior. Frete grátis Brasil.",
+    title: "Keeus — Chinelos Premium de Verão",
+    description: "Chinelos premium com design exclusivo. Slides e flip flops. Frete grátis Brasil.",
     url: SITE.url,
     siteName: "Keeus",
     locale: "pt_BR",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Keeus — Chinelos Premium",
-    description: "Chinelos premium. Do vestiário para a rua.",
+    description: "Chinelos premium. O verão começa aqui.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -75,7 +75,7 @@ export default function RootLayout({
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     description:
-      "Keeus: loja oficial de chinelos premium. Modelos exclusivos com design esportivo e conforto superior.",
+      "Keeus: loja oficial de chinelos premium. Design exclusivo, conforto superior e estilo de verão.",
     sameAs: [
       "https://instagram.com/keeus",
     ],
@@ -145,7 +145,6 @@ export default function RootLayout({
 
   const scrollObserverScript = `
     (function() {
-      // Scroll progress bar
       var bar = document.querySelector('.progress-bar');
       if (bar) {
         window.addEventListener('scroll', function() {
@@ -155,7 +154,6 @@ export default function RootLayout({
         }, { passive: true });
       }
 
-      // IntersectionObserver for reveal animations
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -180,11 +178,10 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <head>
-        <meta name="theme-color" content="#00FF41" />
-        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content="#FF5F1F" />
+        <meta name="color-scheme" content="light" />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        {/* Scroll progress bar */}
         <div className="progress-bar" style={{ width: "0%" }} />
 
         <Script

@@ -48,12 +48,12 @@ export default function ProductGrid({
   }, []);
 
   return (
-    <section className="bg-background px-4 py-16 md:px-8">
+    <section className="bg-white px-4 py-16 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="font-display text-2xl font-extrabold uppercase tracking-tight text-foreground md:text-3xl">
+            <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
               {title}
             </h2>
             {subtitle && (
@@ -63,7 +63,7 @@ export default function ProductGrid({
           {viewAllHref && (
             <Link
               href={viewAllHref}
-              className="flex items-center gap-1.5 text-sm font-bold text-accent transition-all hover:gap-2.5"
+              className="flex items-center gap-1.5 text-sm font-semibold text-accent transition-all hover:gap-2.5 hover:text-accent-hover"
             >
               Ver todos <ArrowRight size={15} />
             </Link>

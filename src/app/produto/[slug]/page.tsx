@@ -19,6 +19,11 @@ export async function generateMetadata({
   return {
     title: `${product.name} | ${SITE.name}`,
     description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: [{ url: product.image, width: 800, height: 800 }],
+    },
   };
 }
 
@@ -38,6 +43,10 @@ export default async function ProductPage({
     description: product.description,
     image: `${SITE.url}${product.image}`,
     sku: String(product.id),
+    brand: {
+      "@type": "Brand",
+      name: product.brand,
+    },
     offers: {
       "@type": "Offer",
       url: `${SITE.url}/produto/${product.slug}`,
@@ -47,6 +56,10 @@ export default async function ProductPage({
         product.stock > 0
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "Keeus",
+      },
     },
   };
 

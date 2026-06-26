@@ -2,20 +2,20 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Zap } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
 
 const TOP_PRODUCTS = PRODUCTS.slice(0, 6);
 
 export default function ProductStrip() {
   return (
-    <section className="border-b border-border bg-[#FAFAFA]">
+    <section className="border-b border-border bg-white">
       <div className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-6">
         {/* Label */}
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-border" />
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-foreground/20">
-            Destaques da semana
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted">
+            Destaques da Semana
           </span>
           <div className="h-px flex-1 bg-border" />
         </div>
@@ -34,9 +34,9 @@ export default function ProductStrip() {
                 className="group flex w-[160px] flex-shrink-0 flex-col md:w-auto"
               >
                 {/* Thumbnail */}
-                <div className="relative mb-2 aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-shadow group-hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)]">
+                <div className="relative mb-2 aspect-square overflow-hidden rounded-xl bg-surface border border-border shadow-sm transition-shadow group-hover:shadow-md">
                   <div className="flex h-full w-full items-center justify-center p-3 transition-transform duration-500 group-hover:scale-105">
-                    <span className="text-lg font-black uppercase tracking-tighter text-accent/30">
+                    <span className="text-lg font-black uppercase tracking-tighter text-accent/20">
                       {product.brand}
                     </span>
                   </div>
@@ -60,9 +60,9 @@ export default function ProductStrip() {
                   {product.name}
                 </h3>
                 <div className="mt-0.5 flex items-center gap-1.5">
-                  <Zap size={10} className="text-accent" />
+                  <Sparkles size={10} className="text-accent" />
                   <span className="text-[10px] font-semibold text-muted">
-                    {product.category === "campo" ? "Campo" : product.category === "society" ? "Society" : product.category === "futsal" ? "Futsal" : "Chinelo"}
+                    {product.category === "slides" ? "Slide" : product.category === "flipflops" ? "Flip Flop" : "Premium"}
                   </span>
                 </div>
                 <div className="mt-1 flex items-baseline gap-1.5">
@@ -70,7 +70,7 @@ export default function ProductStrip() {
                     R$ {product.price.toFixed(2).replace(".", ",")}
                   </span>
                 </div>
-                <span className="mt-1 text-[10px] font-bold text-success">
+                <span className="mt-1 text-[10px] font-bold text-accent">
                   até {product.installments}x sem juros
                 </span>
               </Link>
@@ -82,7 +82,7 @@ export default function ProductStrip() {
         <div className="mt-3 text-center">
           <Link
             href="/colecao"
-            className="text-xs font-bold text-foreground underline underline-offset-4 hover:text-accent"
+            className="text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
           >
             Ver todos os produtos →
           </Link>

@@ -2,13 +2,13 @@ import { Product } from "./types";
 
 export const PRODUCTS: Product[] = [
   // ══════════════════════════════════════════════════════════════════
-  // ── KEEUS CHINELOS PREMIUM ─────────────────────────────────────
+  // ── KEEUS CHINELOS PREMIUM — COLEÇÃO VERÃO ─────────────────────
   // ══════════════════════════════════════════════════════════════════
   {
     id: 13,
     slug: "keeus-slide-pro-laranja",
     name: "Keeus Slide Pro Laranja",
-    category: "chinelo",
+    category: "slides",
     brand: "Keeus",
     price: 149.9,
     installmentPrice: 37.48,
@@ -18,9 +18,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: false,
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
-    colors: ["#FF5F00", "#0a0a0b"],
+    colors: ["#FF5F1F", "#1A1A1A"],
     description:
-      "O chinelo que respira futebol. Slide Pro Laranja com palmilha em EVA de alta densidade, solado antiderrapante e design inspirado no universo das chuteiras. Conforto do vestiário para a rua.",
+      "O chinelo que define o verão. Slide Pro Laranja com palmilha em EVA de alta densidade, solado antiderrapante e design arrojado na icônica cor da Keeus. Conforto premium da praia ao pôr do sol.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
     id: 14,
     slug: "keeus-slide-pro-preto",
     name: "Keeus Slide Pro Preto",
-    category: "chinelo",
+    category: "slides",
     brand: "Keeus",
     price: 149.9,
     installmentPrice: 37.48,
@@ -40,9 +40,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: false,
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
-    colors: ["#0a0a0b", "#FF5F00"],
+    colors: ["#1A1A1A", "#FF5F1F"],
     description:
-      "Discrição e estilo no pós-jogo. Slide Pro Preto com faixa em laranja Keeus, palmilha ortopédica em EVA e solado em borracha premium. O parceiro ideal depois da partida.",
+      "Elegância encontra conforto. Slide Pro Preto com detalhes em laranja Keeus, palmilha anatômica em EVA premium e solado emborrachado. Do beach club ao jantar à beira-mar.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
     id: 15,
     slug: "keeus-flip-summer-laranja",
     name: "Keeus Flip Summer Laranja",
-    category: "chinelo",
+    category: "flipflops",
     brand: "Keeus",
     price: 99.9,
     installmentPrice: 24.98,
@@ -61,9 +61,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: false,
     sizes: [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
-    colors: ["#FF5F00", "#FFFFFF"],
+    colors: ["#FF5F1F", "#FFFFFF"],
     description:
-      "Verão é Keeus. Flip Summer com tiras em TPU flexível, palmilha anatômica que abraça o pé e estampa exclusiva com a identidade laranja. Leve como um drible, confortável como um gol.",
+      "Verão é sinônimo de Keeus. Flip Summer com tiras em TPU flexível, palmilha anatômica que abraça o pé e estampa exclusiva laranja. Leve como a brisa do mar, confortável como areia fofa.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -73,7 +73,7 @@ export const PRODUCTS: Product[] = [
     id: 16,
     slug: "keeus-flip-summer-branco",
     name: "Keeus Flip Summer Branco",
-    category: "chinelo",
+    category: "flipflops",
     brand: "Keeus",
     price: 99.9,
     installmentPrice: 24.98,
@@ -83,9 +83,9 @@ export const PRODUCTS: Product[] = [
     isNew: false,
     isLimitedEdition: false,
     sizes: [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
-    colors: ["#FFFFFF", "#FF5F00"],
+    colors: ["#FFFFFF", "#FF5F1F"],
     description:
-      "Clean, fresh, Keeus. Flip Summer Branco com detalhes laranja, tiras ergonômicas e sola em borracha natural. Para usar da praia ao churrasco pós-futebol.",
+      "Clean, fresh, atemporal. Flip Summer Branco com detalhes laranja minimalistas, tiras ergonômicas e sola em borracha natural. Para usar da praia ao rooftop no fim de tarde.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
     id: 17,
     slug: "keeus-cloud-laranja",
     name: "Keeus Cloud Laranja",
-    category: "chinelo",
+    category: "slides",
     brand: "Keeus",
     price: 179.9,
     installmentPrice: 44.98,
@@ -104,9 +104,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: true,
     sizes: [37, 38, 39, 40, 41, 42, 43, 44],
-    colors: ["#FF5F00"],
+    colors: ["#FF5F1F"],
     description:
-      "Edição limitada — sentir uma nuvem nos pés. Cloud Laranja com tecnologia memory foam em 3 camadas, solado ultra-amortecido e acabamento premium. Exclusivo Keeus, numerado na palmilha.",
+      "Edição limitada — a sensação de caminhar nas nuvens. Cloud Laranja com tecnologia memory foam em 3 camadas, solado ultra-amortecido e acabamento premium. Exclusivo Keeus, numerado na palmilha.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -115,7 +115,7 @@ export const PRODUCTS: Product[] = [
     id: 18,
     slug: "keeus-cloud-preto",
     name: "Keeus Cloud Preto",
-    category: "chinelo",
+    category: "slides",
     brand: "Keeus",
     price: 179.9,
     installmentPrice: 44.98,
@@ -125,9 +125,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: true,
     sizes: [37, 38, 39, 40, 41, 42, 43, 44],
-    colors: ["#0a0a0b", "#FF5F00"],
+    colors: ["#1A1A1A", "#FF5F1F"],
     description:
-      "Sofisticação encontra conforto. Cloud Preto com detalhes laranja fantasma, tecnologia memory foam tripla camada, e palmilha numerada. Edição limitadíssima — restam poucas unidades.",
+      "Sofisticação em cada passo. Cloud Preto com detalhes laranja fantasma, tecnologia memory foam tripla camada e palmilha numerada. Edição limitadíssima — restam poucas unidades.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     id: 19,
     slug: "keeus-sport-slide-mesh",
     name: "Keeus Sport Slide Mesh",
-    category: "chinelo",
+    category: "slides",
     brand: "Keeus",
     price: 129.9,
     installmentPrice: 32.48,
@@ -146,9 +146,9 @@ export const PRODUCTS: Product[] = [
     isNew: false,
     isLimitedEdition: false,
     sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-    colors: ["#0a0a0b", "#FF5F00"],
+    colors: ["#1A1A1A", "#FF5F1F"],
     description:
-      "Do vestiário direto pro rolê. Sport Slide com faixa em mesh respirável, palmilha antimicrobiana e solado de alta tração. Seca rápido, não escorrega, não deforma.",
+      "Performance e estilo. Sport Slide com faixa em mesh respirável, palmilha antimicrobiana e solado de alta tração. Seca rápido, não escorrega, não deforma — perfeito para o dia a dia ativo.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
     id: 20,
     slug: "keeus-street-laranja-neon",
     name: "Keeus Street Laranja Neon",
-    category: "chinelo",
+    category: "flipflops",
     brand: "Keeus",
     price: 89.9,
     installmentPrice: 22.48,
@@ -167,9 +167,9 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimitedEdition: false,
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
-    colors: ["#FF5F00", "#0a0a0b"],
+    colors: ["#FF5F1F", "#1A1A1A"],
     description:
-      "A rua é o campo. Street Laranja Neon — chinelo de dedo com solado robusto, tira larga em TPU e a cor que ninguém ignora. Para quem joga o dia a dia com atitude.",
+      "A rua é sua passarela. Street Laranja Neon — chinelo de dedo com solado robusto, tira larga em TPU e a cor que ninguém ignora. Para quem vive o verão com atitude e estilo.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -179,7 +179,7 @@ export const PRODUCTS: Product[] = [
     id: 21,
     slug: "keeus-street-preto-basico",
     name: "Keeus Street Preto Básico",
-    category: "chinelo",
+    category: "flipflops",
     brand: "Keeus",
     price: 79.9,
     installmentPrice: 19.98,
@@ -189,9 +189,9 @@ export const PRODUCTS: Product[] = [
     isNew: false,
     isLimitedEdition: false,
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-    colors: ["#0a0a0b"],
+    colors: ["#1A1A1A"],
     description:
-      "Básico só no nome. Street Preto com detalhes em laranja minimalista, solado em EVA de longa duração e tira em TPU resistente. O chinelo que acompanha toda jornada — do campo ao rolê.",
+      "Essencial e versátil. Street Preto com detalhes em laranja minimalista, solado em EVA de longa duração e tira em TPU resistente. O chinelo que acompanha cada momento do seu verão.",
     image: "/products/placeholder.svg",
     gallery: ["/products/placeholder.svg"],
     angleCount: 1,
@@ -208,4 +208,6 @@ export const getNewArrivals = () => PRODUCTS.filter((p) => p.isNew);
 export const getProductsByCategory = (category: Product["category"]) =>
   PRODUCTS.filter((p) => p.category === category);
 
-export const getChinelos = () => PRODUCTS.filter((p) => p.category === "chinelo");
+export const getSlides = () => PRODUCTS.filter((p) => p.category === "slides");
+
+export const getFlipFlops = () => PRODUCTS.filter((p) => p.category === "flipflops");

@@ -25,11 +25,13 @@ export interface Course {
   certificate: boolean;
 }
 
+export type ProductCategory = "slides" | "flipflops" | "premium";
+
 export interface Product {
   id: number;
   slug: string;
   name: string;
-  category: "campo" | "society" | "futsal" | "chinelo";
+  category: ProductCategory;
   brand: string;
   price: number;
   installmentPrice: number;

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 export default function SummerDivider() {
-  const emojis = ["🌴", "☀️", "🩴", "🌊", "🏖️", "🩴", "☀️", "🌴"];
+  const emojis = ["🌊", "☀️", "🩴", "🌴", "🧡", "🩴", "☀️", "🌊"];
 
   return (
     <div className="summer-divider" aria-hidden>
@@ -21,8 +21,8 @@ export default function SummerDivider() {
               delay: i * 0.2,
               ease: "easeInOut",
             }}
-            className="drop-shadow-lg"
-            style={{ filter: "drop-shadow(0 2px 4px rgba(255,149,0,0.3))" }}
+            className="select-none"
+            style={{ filter: "drop-shadow(0 2px 4px rgba(255,95,31,0.15))" }}
           >
             {emoji}
           </motion.span>
