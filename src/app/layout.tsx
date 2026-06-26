@@ -26,15 +26,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus — Chuteiras e Chinelos Premium",
+    default: "Keeus — Chinelos Premium",
     template: `%s | Keeus`,
   },
   description:
-    "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle. Frete grátis Brasil e garantia de 7 dias.",
+    "Keeus: loja oficial de chinelos premium. Modelos exclusivos com design esportivo e conforto superior. Frete grátis Brasil e garantia de 7 dias.",
   keywords: [
-    "chuteiras premium", "chinelos premium", "chuteiras campo", "chuteiras society", "chuteiras futsal",
-    "keeus chinelos", "keeus chuteiras", "loja de chuteiras", "chinelo slide",
-    "chinelo esportivo", "chuteiras frete grátis",
+    "chinelos premium", "keeus chinelos", "chinelo slide",
+    "chinelo esportivo", "chinelo conforto", "chinelo masculino",
+    "chinelo frete grátis", "chinelo EVA", "chinelo memory foam",
   ],
   icons: {
     icon: [
@@ -47,18 +47,18 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   themeColor: "#00FF41",
   openGraph: {
-    title: "Keeus — Chuteiras e Chinelos Premium",
-    description: "Chuteiras e chinelos premium para campo, society, futsal e lifestyle. Frete grátis Brasil.",
+    title: "Keeus — Chinelos Premium",
+    description: "Chinelos premium com design esportivo e conforto superior. Frete grátis Brasil.",
     url: SITE.url,
     siteName: "Keeus",
     locale: "pt_BR",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Chuteiras e Chinelos Premium" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Keeus Chinelos Premium" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keeus — Chuteiras e Chinelos Premium",
-    description: "Chuteiras e chinelos premium. Do campo ao rolê.",
+    title: "Keeus — Chinelos Premium",
+    description: "Chinelos premium. Do vestiário para a rua.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -71,11 +71,11 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Keeus",
-    alternateName: "Keeus Chuteiras e Chinelos Premium",
+    alternateName: "Keeus Chinelos Premium",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     description:
-      "Keeus: loja oficial de chuteiras e chinelos premium. Modelos exclusivos para campo, society, futsal e lifestyle.",
+      "Keeus: loja oficial de chinelos premium. Modelos exclusivos com design esportivo e conforto superior.",
     sameAs: [
       "https://instagram.com/keeus",
     ],
@@ -95,7 +95,7 @@ export default function RootLayout({
   const productCatalogJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Catálogo Keeus — Chuteiras e Chinelos Premium",
+    name: "Catálogo Keeus — Chinelos Premium",
     url: `${SITE.url}/colecao`,
     numberOfItems: PRODUCTS.length,
     itemListElement: PRODUCTS.slice(0, 12).map((p, i) => ({

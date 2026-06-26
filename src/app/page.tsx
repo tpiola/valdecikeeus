@@ -30,7 +30,7 @@ export default function Home() {
   const productListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Catálogo de Chuteiras",
+    name: "Catálogo de Chinelos Premium",
     itemListElement: PRODUCTS.slice(0, 6).map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -64,7 +64,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productListJsonLd) }}
       />
 
-      {/* Strip de chuteiras */}
+      {/* Strip de chinelos */}
       <ProductStrip />
 
       {/* Hero */}
@@ -78,7 +78,7 @@ export default function Home() {
       {/* Lançamentos */}
       <ProductGrid
         title="Lançamentos"
-        subtitle="As chuteiras mais recentes do mercado"
+        subtitle="Os chinelos mais recentes da Keeus"
         products={newArrivals}
         viewAllHref="/colecao?filtro=lancamentos"
       />
@@ -90,15 +90,15 @@ export default function Home() {
 
       {/* Destaques */}
       <ProductGrid
-        title="Mais Vendidas"
-        subtitle="As preferidas de quem joga bola todo fim de semana"
+        title="Mais Vendidos"
+        subtitle="Os chinelos preferidos do pós-jogo"
         products={featured}
         viewAllHref="/colecao"
       />
 
       <SummerDivider />
 
-      {/* Chinelos */}
+      {/* Chinelos Premium */}
       <ProductGrid
         title="Chinelos Premium"
         subtitle="Do vestiário para a rua — conforto que vai além do campo"

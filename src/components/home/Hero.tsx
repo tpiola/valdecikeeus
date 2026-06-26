@@ -11,7 +11,7 @@ const FLOATING_PARTICLES = Array.from({ length: 20 }, (_, i) => ({
   delay: Math.random() * 5,
   duration: 4 + Math.random() * 6,
   size: 6 + Math.random() * 14,
-  emoji: ["⚽", "⚽", "✨", "💚", "⚡"][Math.floor(Math.random() * 5)],
+  emoji: ["🩴", "🩴", "✨", "🧡", "☀️"][Math.floor(Math.random() * 5)],
 }));
 
 export default function Hero() {
@@ -75,7 +75,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display mt-5 text-[clamp(2.5rem,6vw,5rem)] font-extrabold uppercase leading-[0.95] tracking-tighter"
           >
-            <span className="block text-foreground">CHUTEIRAS</span>
+            <span className="block text-foreground">CHINELOS</span>
             <span className="block neon-text">PREMIUM</span>
           </motion.h1>
 
@@ -86,7 +86,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4 max-w-md text-base text-muted leading-relaxed"
           >
-            Domine o campo com estilo. As melhores chuteiras para campo, society e futsal. Tecnologia de ponta para o seu futebol.
+            Do vestiário para a rua. Chinelos Keeus com design esportivo, conforto premium e a identidade laranja que todo mundo reconhece.
           </motion.p>
 
           {/* CTAs */}
@@ -127,12 +127,12 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── Right: Boot mockup visual ── */}
+        {/* ── Right: Chinelo mockup visual ── */}
         <div className="relative w-full md:w-1/2 md:min-h-[86vh]">
           {/* Background shape */}
           <div className="absolute inset-0 -right-8 rounded-3xl bg-surface md:rounded-none md:rounded-l-[48px]" />
 
-          {/* Glow circle behind boot */}
+          {/* Glow circle behind */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
               animate={{
@@ -144,7 +144,7 @@ export default function Hero() {
             />
           </div>
 
-          {/* Spinning boot mockup */}
+          {/* Floating chinelo mockup */}
           <div className="relative z-10 flex items-center justify-center py-12 md:min-h-[86vh]">
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
@@ -152,22 +152,22 @@ export default function Hero() {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative"
             >
-              {/* Boot SVG / Emoji representation */}
+              {/* Main chinelo emoji */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="text-[140px] leading-none select-none filter drop-shadow-[0_0_40px_rgba(0,255,65,0.3)]"
               >
-                ⚽
+                🩴
               </motion.div>
 
-              {/* Boot image placeholder */}
+              {/* Side chinelos */}
               <motion.div
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -left-12 top-0 text-[80px] leading-none select-none filter drop-shadow-[0_0_30px_rgba(0,255,65,0.25)]"
               >
-                👟
+                🩴
               </motion.div>
 
               <motion.div
@@ -175,7 +175,7 @@ export default function Hero() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                 className="absolute -right-10 top-4 text-[72px] leading-none select-none filter drop-shadow-[0_0_25px_rgba(0,255,65,0.2)]"
               >
-                👟
+                🩴
               </motion.div>
             </motion.div>
           </div>
