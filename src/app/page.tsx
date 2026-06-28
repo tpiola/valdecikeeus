@@ -9,6 +9,8 @@ import Hero from "@/components/home/Hero";
 import ProductGrid from "@/components/home/ProductGrid";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
+import CinematicScrollSection from "@/components/home/CinematicScrollSection";
+import CinematicQuote from "@/components/home/CinematicQuote";
 import { PRODUCTS, getFeaturedProducts, getNewArrivals, getSlides, getFlipFlops } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
 
@@ -121,6 +123,14 @@ export default function Home() {
           </div>
         </section>
       </CinematicSection>
+
+      <CinematicScrollSection />
+      <CinematicQuote
+        quote="O Keeus mudou minha relação com chinelo. Parece que tô pisando em nuvem o dia inteiro. Conforto que realmente faz diferença."
+        author="Marina L."
+        role="Cliente Keeus · Franca/SP"
+        accent="#FF5F1F"
+      />
 
       {/* Mais Vendidos */}
       <CinematicSection>
