@@ -4,7 +4,6 @@ import ProductStrip from "@/components/home/ProductStrip";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import ProductGrid from "@/components/home/ProductGrid";
-import SocialProof from "@/components/home/SocialProof";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
 import SummerDivider from "@/components/ui/SummerDivider";
@@ -98,11 +97,6 @@ export default function Home() {
         products={flipflops}
         viewAllHref="/colecao?categoria=flipflops"
       />
-
-      {/* Depoimentos */}
-      <SocialProof />
-
-      <SummerDivider />
 
       {/* Por que Keeus — seção de diferenciais */}
       <section className="bg-white px-4 py-20 md:px-8">

@@ -2,7 +2,7 @@ export const SITE = {
   name: "Keeus",
   tagline: "Chinelos Premium",
   description:
-    "Keeus: loja oficial de chinelos premium. Design exclusivo, conforto superior e estilo de verão. Frete grátis para todo Brasil e troca em 30 dias.",
+    "Keeus — chinelos premium com design contemporâneo e conforto superior. Frete grátis para todo o Brasil e troca em 30 dias.",
   url: "https://valdecikeeus.vercel.app",
 };
 
