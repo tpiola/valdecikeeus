@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Truck, Star, Shield } from "lucide-react";
 
 export default function Hero() {
@@ -9,7 +10,7 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-white">
       {/* Premium gradient background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-stone-50 to-stone-100" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50 to-orange-100/60" />
         <div className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage: "radial-gradient(circle at 25% 60%, #FF5F1F 0%, transparent 55%), radial-gradient(circle at 75% 30%, #FF5F1F 0%, transparent 50%)",
@@ -17,7 +18,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col-reverse items-center px-4 py-10 md:flex-row md:min-h-[85vh] md:px-8 md:py-0 relative z-10">
+      <div className="mx-auto flex max-w-7xl flex-col-reverse items-center px-4 py-8 md:flex-row md:min-h-[85vh] md:px-8 md:py-0 relative z-10">
         {/* ── Left: Text content ── */}
         <div className="w-full pb-6 pt-4 md:w-1/2 md:py-24 md:pr-16">
           {/* Badge */}
@@ -26,8 +27,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-stone-500">
-              Coleção Verão 2026
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#FF5F1F]">
+              Coleção Verão 2026 — Frete Grátis
             </span>
           </motion.div>
 
@@ -38,8 +39,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display mt-6 text-[clamp(2.8rem,7vw,5.5rem)] font-bold leading-[0.92] tracking-tight text-stone-900"
           >
-            <span className="block">O Verão</span>
-            <span className="block text-accent">Começa Aqui</span>
+            <span className="block">O Conforto Que</span>
+            <span className="block text-[#FF5F1F]">Seus Pés Merecem</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -49,7 +50,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-5 max-w-md text-base leading-relaxed text-stone-500"
           >
-            Chinelos premium com design contemporâneo, conforto superior e o estilo que define seus dias de sol.
+            Chinelos premium com design exclusivo, palmilha anatômica e o estilo que transforma seus dias de sol. Da praia ao seu dia a dia.
           </motion.p>
 
           {/* CTAs */}
@@ -61,9 +62,9 @@ export default function Hero() {
           >
             <Link
               href="/colecao"
-              className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-stone-900/20 transition-all hover:bg-stone-800"
+              className="inline-flex items-center gap-2 rounded-full bg-[#FF5F1F] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:bg-orange-600 hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.97]"
             >
-              Ver Coleção <ArrowRight size={16} />
+              Comprar Agora <ArrowRight size={16} />
             </Link>
             <Link
               href="/sobre"
@@ -86,7 +87,7 @@ export default function Hero() {
               { value: "30 Dias", label: "Garantia", icon: Shield },
             ].map(({ value, label, icon: Icon }) => (
               <div key={label} className="flex items-start gap-2.5">
-                <Icon size={18} className="mt-0.5 shrink-0 text-accent" />
+                <Icon size={18} className="mt-0.5 shrink-0 text-[#FF5F1F]" />
                 <div>
                   <p className="text-sm font-bold text-stone-900">{value}</p>
                   <p className="text-[11px] text-stone-400">{label}</p>
@@ -96,21 +97,21 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── Right: Premium product visual ── */}
+        {/* ── Right: Real product image ── */}
         <div className="relative w-full md:w-1/2 md:min-h-[85vh] md:pl-8">
           {/* Background shape */}
-          <div className="absolute -inset-4 -right-8 rounded-[48px] bg-stone-100" />
+          <div className="absolute -inset-4 -right-8 rounded-[48px] bg-orange-50/80" />
 
           {/* Glow */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              animate={{ scale: [1, 1.05, 1], opacity: [0.06, 0.1, 0.06] }}
+              animate={{ scale: [1, 1.05, 1], opacity: [0.08, 0.12, 0.08] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="h-80 w-80 rounded-full bg-accent opacity-[0.06] blur-3xl"
+              className="h-80 w-80 rounded-full bg-[#FF5F1F] opacity-[0.06] blur-3xl"
             />
           </div>
 
-          {/* Product showcase */}
+          {/* Real Product Image */}
           <div className="relative z-10 flex items-center justify-center py-12 md:min-h-[85vh]">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -118,20 +119,20 @@ export default function Hero() {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative"
             >
-              {/* Product silhouette - minimalist design representation */}
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="relative"
               >
-                <div className="flex items-center justify-center">
-                  <svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
-                    {/* Slide silhouette */}
-                    <path d="M40 120 C40 100, 60 70, 160 70 C260 70, 280 100, 280 120 C280 145, 260 160, 160 160 C60 160, 40 145, 40 120Z" fill="#FF5F1F" opacity="0.15"/>
-                    <path d="M60 115 C60 100, 80 80, 160 80 C240 80, 260 100, 260 115 C260 135, 240 145, 160 145 C80 145, 60 135, 60 115Z" fill="#1A1A1A"/>
-                    <path d="M160 40 L160 70" stroke="#FF5F1F" strokeWidth="3" strokeLinecap="round"/>
-                    <path d="M120 50 Q160 70 200 50" stroke="#FF5F1F" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                  </svg>
+                <div className="relative mx-auto w-[350px] h-[350px] md:w-[450px] md:h-[450px]">
+                  <Image
+                    src="/assets/real/produtos/toledo-preto-laranja/2k/1.png"
+                    alt="Keeus Toledo Preto Laranja"
+                    fill
+                    className="object-contain drop-shadow-[0_12px_40px_rgba(255,95,31,0.15)]"
+                    priority
+                    sizes="(max-width: 768px) 350px, 450px"
+                  />
                 </div>
               </motion.div>
             </motion.div>
@@ -141,14 +142,25 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="absolute bottom-12 left-6 z-20 hidden rounded-2xl border border-stone-100 bg-white/90 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-sm md:block"
+            className="absolute bottom-12 left-6 z-20 hidden rounded-2xl border border-orange-100 bg-white/90 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-sm md:block"
           >
             <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-stone-400">
-              <Truck size={14} className="text-accent" />
+              <Truck size={14} className="text-[#FF5F1F]" />
               Entrega Expressa
             </p>
             <p className="mt-0.5 text-lg font-bold text-stone-900">Brasil Todo</p>
-            <p className="text-[10px] font-bold text-accent">Frete Grátis</p>
+            <p className="text-[10px] font-bold text-[#FF5F1F]">Frete Grátis</p>
+          </motion.div>
+
+          {/* Price card */}
+          <motion.div
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+            className="absolute top-16 right-4 z-20 hidden rounded-2xl border border-orange-100 bg-white/90 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-sm md:block"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400">A partir de</p>
+            <p className="mt-0.5 text-xl font-black text-stone-900">R$ 139</p>
+            <p className="text-[10px] font-bold text-[#FF5F1F]">ou 4x sem juros</p>
           </motion.div>
         </div>
       </div>
