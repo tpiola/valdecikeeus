@@ -1,64 +1,72 @@
 @import "tailwindcss";
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   KEEUS CHINELOS PREMIUM — TEMA CORAL / ROSE
-   bg=#FFFFFF branco · accent=#f43f5e rose coral · surface=#FFF1F2 creme rosé
-   foreground=#1A1A1A cinza escuro · muted=#888888
-   UI/UX nível Allbirds / Nike — limpo, arejado, premium
-───────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   KEEUS — SISTEMA DE DESIGN PREMIUM
+   Marca: #FF5F1F (Laranja Keeus)
+   Inspiração: Hermès, Loewe, Fear of God, Aesop, Allbirds
+   Princípios: Tipografia elegante, espaçamento generoso, cor como identidade
+═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
+  /* Cores da marca */
+  --brand-orange:      #FF5F1F;
+  --brand-orange-dark: #E04E0E;
+  --brand-orange-light:#FFF0E8;
+
   /* Fundo / Superfícies */
-  --background:     #FFFFFF;
-  --surface:        #FFF1F2;
-  --surface-mid:    #FFE4E6;
-  --surface-dark:   #FECDD3;
+  --background:        #FFFFFF;
+  --surface:           #FAF8F6;
+  --surface-mid:       #F5F0EB;
+  --surface-dark:      #EDE6DD;
 
   /* Texto / Estrutura */
-  --foreground:     #1A1A1A;
-  --foreground-mid: #555555;
-  --muted:          #999999;
-  --border:         #E8E3DF;
-  --border-mid:     #D4CECA;
+  --foreground:        #1A1A1A;
+  --foreground-mid:    #4A4A4A;
+  --muted:             #8A8A8A;
+  --muted-light:       #B0B0B0;
+  --border:            #E6E0D8;
+  --border-mid:        #D4CDC5;
 
-  /* Destaque — Coral / Rose Vibrante */
-  --accent:         #f43f5e;
-  --accent-hover:   #e11d48;
-  --accent-light:   #fff1f2;
-  --accent-fore:    #FFFFFF;
+  /* Destaque — Laranja Keeus */
+  --accent:            var(--brand-orange);
+  --accent-hover:      var(--brand-orange-dark);
+  --accent-light:      var(--brand-orange-light);
+  --accent-fore:       #FFFFFF;
 
   /* Utilitários */
-  --success:        #16A34A;
-  --signal:         #F59E0B;
-  --radius:         12px;
-  --radius-lg:      16px;
-  --radius-xl:      24px;
-  --shadow-card:    0 2px 16px rgba(0, 0, 0, 0.06);
-  --shadow-hover:   0 8px 32px rgba(244, 63, 94, 0.12);
+  --success:           #16A34A;
+  --signal:            #F59E0B;
+  --radius:            8px;
+  --radius-lg:         16px;
+  --radius-xl:         24px;
+  --shadow-sm:         0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg:         0 12px 40px rgba(0, 0, 0, 0.08);
+  --shadow-orange:     0 8px 32px rgba(255, 95, 31, 0.12);
 
-  /* Font settings */
-  --font-display:   var(--font-plus-jakarta);
-  --font-sans:      var(--font-inter);
+  /* Tipografia */
+  --font-display:      var(--font-plus-jakarta);
+  --font-sans:         var(--font-inter);
 }
 
 @theme inline {
-  --color-background:    var(--background);
-  --color-surface:       var(--surface);
-  --color-surface-mid:   var(--surface-mid);
-  --color-surface-dark:  var(--surface-dark);
-  --color-foreground:    var(--foreground);
+  --color-background:     var(--background);
+  --color-surface:        var(--surface);
+  --color-surface-mid:    var(--surface-mid);
+  --color-surface-dark:   var(--surface-dark);
+  --color-foreground:     var(--foreground);
   --color-foreground-mid: var(--foreground-mid);
-  --color-muted:         var(--muted);
-  --color-border:        var(--border);
-  --color-border-mid:    var(--border-mid);
-  --color-accent:        var(--accent);
-  --color-accent-hover:  var(--accent-hover);
-  --color-accent-light:  var(--accent-light);
-  --color-accent-fore:   var(--accent-fore);
-  --color-success:       var(--success);
-  --color-signal:        var(--signal);
-  --font-display:        var(--font-plus-jakarta);
-  --font-sans:           var(--font-inter);
+  --color-muted:          var(--muted);
+  --color-border:         var(--border);
+  --color-border-mid:     var(--border-mid);
+  --color-accent:         var(--accent);
+  --color-accent-hover:   var(--accent-hover);
+  --color-accent-light:   var(--accent-light);
+  --color-accent-fore:    var(--accent-fore);
+  --color-success:        var(--success);
+  --color-signal:         var(--signal);
+  --font-display:         var(--font-plus-jakarta);
+  --font-sans:            var(--font-inter);
 }
 
 /* ── Base ── */
@@ -78,25 +86,14 @@ body {
 }
 
 * {
-  scrollbar-color: #f43f5e #FFF;
+  scrollbar-color: var(--brand-orange) var(--surface);
   scrollbar-width: thin;
 }
 
-/* Scrollbar coral para WebKit */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #FFF1F2;
-}
-::-webkit-scrollbar-thumb {
-  background: #f43f5e;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #e11d48;
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--brand-orange); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-orange-dark); }
 
 /* ── Typography ── */
 .font-display {
@@ -106,8 +103,13 @@ body {
 h1, h2, h3 {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   color: var(--foreground);
+}
+
+/* ── Ott / Tondo — letter-spacing utility para títulos premium ── */
+.tracking-premium {
+  letter-spacing: 0.08em;
 }
 
 /* ── Buttons ── */
@@ -122,14 +124,14 @@ h1, h2, h3 {
   font-size: 0.875rem;
   border-radius: var(--radius);
   padding: 0.75rem 1.75rem;
-  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
 }
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(255, 95, 31, 0.3);
+  box-shadow: var(--shadow-orange);
 }
 .btn-primary:active {
   transform: translateY(0);
@@ -156,45 +158,19 @@ h1, h2, h3 {
   color: var(--background);
 }
 
-/* ── Botão Outline Laranja ── */
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: 9999px;
-  padding: 0.75rem 1.75rem;
-  border: 1.5px solid var(--accent);
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-outline:hover {
-  background: var(--accent);
-  color: #FFFFFF;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(255, 95, 31, 0.25);
-}
-.btn-outline:active {
-  transform: translateY(0);
-}
-
 /* ── Product Card ── */
 .product-card {
   background: var(--background);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
   border: 1px solid var(--border);
 }
 .product-card:hover {
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
-  border-color: rgba(255, 95, 31, 0.2);
+  border-color: rgba(255, 95, 31, 0.15);
 }
 
 /* ── Badge ── */
@@ -206,7 +182,7 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding: 3px 10px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 .badge-new {
   background: var(--foreground);
@@ -217,14 +193,14 @@ h1, h2, h3 {
   color: #1A1A1A;
 }
 
-/* ── Progress Bar Coral ── */
+/* ── Progress Bar ── */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
   z-index: 9999;
-  background: linear-gradient(90deg, #f43f5e, #fb7185, #f43f5e);
+  background: linear-gradient(90deg, var(--brand-orange), #FF8A4F, var(--brand-orange));
   background-size: 200% 100%;
   animation: progress-shimmer 2s linear infinite;
 }
@@ -271,100 +247,48 @@ h1, h2, h3 {
   animation: pulse-soft 2s ease-in-out infinite;
 }
 
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.animate-shimmer {
-  background-image: linear-gradient(90deg, transparent, rgba(244,63,94,0.04), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 1.8s ease-in-out infinite;
-}
-
 /* ── Ken Burns ── */
 @keyframes kenBurns {
   0%   { transform: scale(1.0); }
-  100% { transform: scale(1.08); }
+  100% { transform: scale(1.06); }
 }
 .animate-ken-burns {
-  animation: kenBurns 8s ease-out infinite alternate;
+  animation: kenBurns 10s ease-out infinite alternate;
 }
 
-/* ── Divider ── */
+/* ── Section Divider ── */
 .section-divider {
   border: none;
   border-top: 1px solid var(--border);
   margin: 0;
 }
 
-/* ── Summer Wave Divider ── */
-.summer-divider {
-  position: relative;
-  height: 60px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #FFF 0%, #FFF1F2 50%, #FECDD3 100%);
-}
-.summer-divider::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 40px,
-    rgba(244, 63, 94, 0.06) 40px,
-    rgba(244, 63, 94, 0.06) 44px
-  );
-  border-radius: 50%;
-}
-.summer-divider-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  height: 100%;
-  font-size: 24px;
-  position: relative;
-  z-index: 1;
-}
-
 /* ── Free shipping bar ── */
 .free-shipping-bar {
-  background: linear-gradient(90deg, #f43f5e, #fb7185, #f43f5e);
+  background: var(--foreground);
   color: #FFFFFF;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   text-align: center;
   padding: 8px 16px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-/* ── Premium card hover glow ── */
+/* ── Premium card hover ── */
 .glow-card {
   background: var(--background);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s;
 }
 .glow-card:hover {
-  border-color: rgba(244, 63, 94, 0.25);
-  box-shadow: 0 8px 32px rgba(244, 63, 94, 0.08);
+  border-color: rgba(255, 95, 31, 0.2);
+  box-shadow: var(--shadow-orange);
 }
 
-/* ── Sunset gradient utility ── */
-.sunset-gradient {
-  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 25%, #fda4af 50%, #f43f5e 75%, #e11d48 100%);
-}
-
-.sunset-gradient-subtle {
-  background: linear-gradient(135deg, #FFF1F2 0%, #FFFFFF 50%, #FFE4E6 100%);
-}
-
-/* ── Breadcrumb styling ── */
+/* ── Breadcrumb ── */
 .breadcrumb {
   display: flex;
   align-items: center;
