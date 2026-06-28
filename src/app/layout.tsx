@@ -179,7 +179,7 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <head>
-        <meta name="theme-color" content="#FF5F1F" />
+        <meta name="theme-color" content="#f43f5e" />
         <meta name="color-scheme" content="light" />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">

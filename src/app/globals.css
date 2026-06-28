@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   KEEUS CHINELOS PREMIUM — TEMA VERÃO / LARANJA
-   bg=#FFFFFF branco · accent=#FF5F1F laranja vibrante · surface=#FEF9F5 creme
+   KEEUS CHINELOS PREMIUM — TEMA CORAL / ROSE
+   bg=#FFFFFF branco · accent=#f43f5e rose coral · surface=#FFF1F2 creme rosé
    foreground=#1A1A1A cinza escuro · muted=#888888
    UI/UX nível Allbirds / Nike — limpo, arejado, premium
 ───────────────────────────────────────────────────────────────────────────── */
@@ -10,9 +10,9 @@
 :root {
   /* Fundo / Superfícies */
   --background:     #FFFFFF;
-  --surface:        #FEF9F5;
-  --surface-mid:    #FFF3EA;
-  --surface-dark:   #FDE8D8;
+  --surface:        #FFF1F2;
+  --surface-mid:    #FFE4E6;
+  --surface-dark:   #FECDD3;
 
   /* Texto / Estrutura */
   --foreground:     #1A1A1A;
@@ -21,10 +21,10 @@
   --border:         #E8E3DF;
   --border-mid:     #D4CECA;
 
-  /* Destaque — Laranja Vibrante Verão */
-  --accent:         #FF5F1F;
-  --accent-hover:   #E8520E;
-  --accent-light:   #FFF0E8;
+  /* Destaque — Coral / Rose Vibrante */
+  --accent:         #f43f5e;
+  --accent-hover:   #e11d48;
+  --accent-light:   #fff1f2;
   --accent-fore:    #FFFFFF;
 
   /* Utilitários */
@@ -34,7 +34,7 @@
   --radius-lg:      16px;
   --radius-xl:      24px;
   --shadow-card:    0 2px 16px rgba(0, 0, 0, 0.06);
-  --shadow-hover:   0 8px 32px rgba(255, 95, 31, 0.12);
+  --shadow-hover:   0 8px 32px rgba(244, 63, 94, 0.12);
 
   /* Font settings */
   --font-display:   var(--font-plus-jakarta);
@@ -78,24 +78,24 @@ body {
 }
 
 * {
-  scrollbar-color: #FF5F1F #FFF;
+  scrollbar-color: #f43f5e #FFF;
   scrollbar-width: thin;
 }
 
-/* Scrollbar laranja para WebKit */
+/* Scrollbar coral para WebKit */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FEF9F5;
+  background: #FFF1F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FF5F1F;
+  background: #f43f5e;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E8520E;
+  background: #e11d48;
 }
 
 /* ── Typography ── */
@@ -217,14 +217,14 @@ h1, h2, h3 {
   color: #1A1A1A;
 }
 
-/* ── Progress Bar Laranja ── */
+/* ── Progress Bar Coral ── */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
   z-index: 9999;
-  background: linear-gradient(90deg, #FF5F1F, #FF7B3D, #FF5F1F);
+  background: linear-gradient(90deg, #f43f5e, #fb7185, #f43f5e);
   background-size: 200% 100%;
   animation: progress-shimmer 2s linear infinite;
 }
@@ -276,7 +276,7 @@ h1, h2, h3 {
   100% { background-position: 200% 0; }
 }
 .animate-shimmer {
-  background-image: linear-gradient(90deg, transparent, rgba(255,95,31,0.04), transparent);
+  background-image: linear-gradient(90deg, transparent, rgba(244,63,94,0.04), transparent);
   background-size: 200% 100%;
   animation: shimmer 1.8s ease-in-out infinite;
 }
@@ -302,7 +302,7 @@ h1, h2, h3 {
   position: relative;
   height: 60px;
   overflow: hidden;
-  background: linear-gradient(180deg, #FFF 0%, #FFF3EA 50%, #FDE8D8 100%);
+  background: linear-gradient(180deg, #FFF 0%, #FFF1F2 50%, #FECDD3 100%);
 }
 .summer-divider::before {
   content: '';
@@ -315,8 +315,8 @@ h1, h2, h3 {
     90deg,
     transparent,
     transparent 40px,
-    rgba(255, 95, 31, 0.06) 40px,
-    rgba(255, 95, 31, 0.06) 44px
+    rgba(244, 63, 94, 0.06) 40px,
+    rgba(244, 63, 94, 0.06) 44px
   );
   border-radius: 50%;
 }
@@ -333,7 +333,7 @@ h1, h2, h3 {
 
 /* ── Free shipping bar ── */
 .free-shipping-bar {
-  background: linear-gradient(90deg, #FF5F1F, #FF7B3D, #FF5F1F);
+  background: linear-gradient(90deg, #f43f5e, #fb7185, #f43f5e);
   color: #FFFFFF;
   font-size: 12px;
   font-weight: 600;
@@ -351,17 +351,17 @@ h1, h2, h3 {
   transition: all 0.3s;
 }
 .glow-card:hover {
-  border-color: rgba(255, 95, 31, 0.25);
-  box-shadow: 0 8px 32px rgba(255, 95, 31, 0.08);
+  border-color: rgba(244, 63, 94, 0.25);
+  box-shadow: 0 8px 32px rgba(244, 63, 94, 0.08);
 }
 
 /* ── Sunset gradient utility ── */
 .sunset-gradient {
-  background: linear-gradient(135deg, #FF5F1F 0%, #FF7B3D 25%, #F59E0B 50%, #FF5F1F 75%, #E8520E 100%);
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 25%, #fda4af 50%, #f43f5e 75%, #e11d48 100%);
 }
 
 .sunset-gradient-subtle {
-  background: linear-gradient(135deg, #FFF3EA 0%, #FFFFFF 50%, #FFF0E8 100%);
+  background: linear-gradient(135deg, #FFF1F2 0%, #FFFFFF 50%, #FFE4E6 100%);
 }
 
 /* ── Breadcrumb styling ── */
