@@ -61,11 +61,10 @@ export default function FaqPage() {
       <div className="mt-12 rounded-2xl bg-accent-light border border-accent/20 p-6 text-center">
         <p className="font-bold text-foreground">Não encontrou sua dúvida?</p>
         <p className="mt-1 text-sm text-foreground-mid">
-          Fale com a gente no{" "}
-          <a href="https://wa.me/5511999999999" className="text-accent font-semibold hover:underline">
-            WhatsApp
-          </a>{" "}
-          — respondemos rapidinho!
+          Envie sua pergunta pela{" "}
+          <a href="/contato" className="text-accent font-semibold hover:underline">
+            página de contato
+          </a>.
         </p>
       </div>
     </main>
