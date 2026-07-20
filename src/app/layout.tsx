@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
-import WhatsAppChat from "@/components/ui/WhatsAppChat";
 import { SITE } from "@/lib/constants";
 import { PRODUCTS } from "@/lib/products";
 
@@ -220,7 +219,6 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CartDrawer />
-        <WhatsAppChat />
       </body>
     </html>
   );
