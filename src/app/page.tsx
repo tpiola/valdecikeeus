@@ -10,8 +10,7 @@ import ProductGrid from "@/components/home/ProductGrid";
 import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
 import CinematicScrollSection from "@/components/home/CinematicScrollSection";
-import CinematicQuote from "@/components/home/CinematicQuote";
-import { PRODUCTS, getFeaturedProducts, getNewArrivals, getSlides, getFlipFlops } from "@/lib/products";
+import { PRODUCTS, getFeaturedProducts } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,10 +32,7 @@ function CinematicSection({ children, className = "" }: { children: React.ReactN
 }
 
 export default function Home() {
-  const newArrivals = getNewArrivals().slice(0, 6);
   const featured = getFeaturedProducts();
-  const slides = getSlides();
-  const flipflops = getFlipFlops();
   const allProducts = PRODUCTS;
 
   return (
@@ -106,8 +102,8 @@ export default function Home() {
               },
               {
                 svg: <svg key="3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7"><path d="M12 22c4.2 0 7-1.7 7-5 0-3.3-3.1-5-7-5s-7 1.7-7 5c0 3.3 2.8 5 7 5z"/><path d="M12 17c-2.2 0-4-.7-4-2 0-1.3 1.8-2 4-2s4 .7 4 2c0 1.3-1.8 2-4 2z"/><path d="M12 7V2"/><path d="M10 4l2-2 2 2"/><path d="M6 10c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"/></svg>,
-                title: "Sustentabilidade",
-                desc: "Materiais recicláveis, processos de baixo impacto e embalagem ecológica. Cuidamos do planeta enquanto cuidamos de você.",
+                title: "Escolha sem dúvida",
+                desc: "Fotos reais em vários ângulos, numerações visíveis e informações objetivas para comparar cada modelo.",
               },
             ].map((item) => (
               <div key={item.title}
@@ -125,18 +121,11 @@ export default function Home() {
       </CinematicSection>
 
       <CinematicScrollSection />
-      <CinematicQuote
-        quote="O Keeus mudou minha relação com chinelo. Parece que tô pisando em nuvem o dia inteiro. Conforto que realmente faz diferença."
-        author="Marina L."
-        role="Cliente Keeus · Franca/SP"
-        accent="#FF5F1F"
-      />
-
       {/* Mais Vendidos */}
       <CinematicSection>
         <ProductGrid
-          title="Mais Vendidos"
-          subtitle="Os preferidos da comunidade Keeus"
+          title="Seleção Keeus"
+          subtitle="Modelos em destaque para você conhecer"
           products={featured}
           viewAllHref="/colecao"
         />
