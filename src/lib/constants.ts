@@ -2,7 +2,7 @@ export const SITE = {
   name: "Keeus",
   tagline: "Chinelos Premium",
   description:
-    "Keeus — chinelos premium com design contemporâneo e conforto superior. Frete grátis para todo o Brasil e troca em 30 dias.",
+    "Keeus — slides e chinelos de dedo com design contemporâneo, fotos reais e informações claras para escolher seu modelo.",
   url: "https://valdecikeeus.vercel.app",
 };
 
@@ -14,10 +14,10 @@ export const NAV_LINKS = [
 ];
 
 export const TRUST_BADGES = [
-  { label: "Frete Grátis", detail: "Entregamos para todo o Brasil sem custo" },
-  { label: "Original", detail: "Chinelos premium com garantia de fábrica" },
-  { label: "Troca Fácil", detail: "Primeira troca grátis em até 30 dias" },
-  { label: "Suporte", detail: "Atendimento rápido via WhatsApp" },
+  { label: "Fotos reais", detail: "Veja o produto em diferentes ângulos" },
+  { label: "Tamanhos claros", detail: "Escolha a numeração antes da sacola" },
+  { label: "Catálogo objetivo", detail: "Compare modelo, cor e preço" },
+  { label: "Ajuda disponível", detail: "Consulte dúvidas e políticas da loja" },
 ];
 
 export const FAQ_ITEMS = [
@@ -29,17 +29,17 @@ export const FAQ_ITEMS = [
   {
     question: "Quais formas de pagamento são aceitas?",
     answer:
-      "Aceitamos Pix com 5% de desconto, cartão de crédito em até 12x sem juros (Visa, Mastercard, Elo, Amex, Hipercard) e boleto bancário. A liberação do pedido é imediata para Pix e cartão de crédito.",
+      "As condições de pagamento disponíveis devem ser confirmadas na etapa de atendimento antes da finalização do pedido.",
   },
   {
     question: "Qual o prazo de entrega?",
     answer:
-      "O frete é grátis para todo o Brasil! O prazo de entrega varia de 5 a 15 dias úteis dependendo da sua região. Enviamos o código de rastreio por e-mail assim que seu pedido é despachado.",
+      "Prazo, modalidade e valor de entrega dependem do CEP e são confirmados antes do fechamento do pedido.",
   },
   {
     question: "Posso trocar ou devolver meu chinelo?",
     answer:
-      "Sim! Você tem até 30 dias após o recebimento para solicitar a troca ou devolução. A primeira troca é grátis. Basta entrar em contato pelo WhatsApp ou e-mail que nossa equipe orienta todo o processo.",
+      "Consulte a página de Trocas e Devoluções para conhecer as condições aplicáveis e os canais de atendimento antes de comprar.",
   },
   {
     question: "Os chinelos Keeus são resistentes à água?",
@@ -59,6 +59,6 @@ export const FAQ_ITEMS = [
   {
     question: "A Keeus tem loja física?",
     answer:
-      "No momento, somos 100% online — e por isso conseguimos oferecer preços melhores com frete grátis. Atendemos todo o Brasil com segurança e suporte via WhatsApp.",
+      "A coleção disponível neste site pode ser consultada online. Para informações comerciais e disponibilidade, use a página de contato.",
   },
 ];
