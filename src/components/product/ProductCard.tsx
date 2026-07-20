@@ -2,15 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { Product } from "@/lib/types";
 import { useWishlistStore } from "@/lib/store/wishlist";
-import { useCartStore } from "@/lib/store/cart";
 
 export default function ProductCard({ product }: { product: Product }) {
   const isFav = useWishlistStore((s) => s.has(product.slug));
   const toggleFav = useWishlistStore((s) => s.toggle);
-  const addItem = useCartStore((s) => s.addItem);
 
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -75,14 +73,6 @@ export default function ProductCard({ product }: { product: Product }) {
           </h3>
         </Link>
 
-        {/* Rating stars placeholder */}
-        <div className="mt-1.5 flex items-center gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={11} className={i < 4 ? "fill-amber-400 text-amber-400" : "text-border"} />
-          ))}
-          <span className="text-[10px] text-muted ml-1">(28)</span>
-        </div>
-
         {/* Color dots */}
         {product.colors && product.colors.length > 0 && (
           <div className="mt-2 flex gap-1.5">
@@ -132,14 +122,15 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* CTA */}
-        <button
-          onClick={() => addItem(product, product.sizes[0] ?? 0)}
+        {/* CTA: tamanho deve ser escolhido antes de adicionar */}
+        <Link
+          href={`/produto/${product.slug}`}
           className="btn-primary mt-4 w-full gap-2 rounded-full py-3 text-xs font-semibold"
+          aria-label={`Ver detalhes e escolher tamanho de ${product.name}`}
         >
-          <ShoppingCart size={14} />
-          Adicionar
-        </button>
+          Escolher tamanho
+          <ArrowRight size={14} />
+        </Link>
       </div>
     </div>
   );
