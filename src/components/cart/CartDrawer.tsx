@@ -55,7 +55,7 @@ export default function CartDrawer() {
                           src={item.product.image}
                           alt={item.product.name}
                           fill
-                          className="object-cover"
+                          className="object-contain p-2"
                         />
                       </div>
                       <div className="flex flex-1 flex-col justify-between">
@@ -98,7 +98,7 @@ export default function CartDrawer() {
                             </button>
                           </div>
                           <p className="text-sm font-bold text-accent">
-                            R$ {(item.product.price * item.quantity).toFixed(2)}
+                            R$ {(item.product.price * item.quantity).toFixed(2).replace(".", ",")}
                           </p>
                         </div>
                       </div>
@@ -122,7 +122,7 @@ export default function CartDrawer() {
                 <div className="mb-4 flex items-center justify-between">
                   <span className="text-sm text-muted">Subtotal</span>
                   <span className="font-display text-lg">
-                    R$ {total().toFixed(2)}
+                    R$ {total().toFixed(2).replace(".", ",")}
                   </span>
                 </div>
                 <Link
@@ -130,7 +130,7 @@ export default function CartDrawer() {
                   onClick={close}
                   className="flex w-full items-center justify-center rounded-full bg-accent py-4 text-xs font-bold uppercase tracking-widest text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  Finalizar Compra
+                  Revisar pedido
                 </Link>
               </div>
             )}
