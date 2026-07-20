@@ -16,7 +16,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-2 lg:gap-16">
-      <Product360Viewer slug={product.slug} totalImages={product.angleCount} />
+      <Product360Viewer slug={product.slug} gallery={product.gallery} totalImages={product.angleCount} />
       <div>
         <div className="flex items-start justify-between gap-4">
           <div>
