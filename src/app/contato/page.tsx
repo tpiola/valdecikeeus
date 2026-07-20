@@ -1,168 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Send, MessageCircle, Mail, Phone } from "lucide-react";
-import { Metadata } from "next";
-import { SITE } from "@/lib/constants";
+import Link from "next/link";
+import { Loader2, Send } from "lucide-react";
 
 export default function ContatoPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
     setStatus("loading");
     try {
-      await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-    } finally {
+      const response = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+      if (!response.ok) throw new Error("Falha no envio");
       setStatus("done");
+    } catch {
+      setStatus("error");
     }
-  };
+  }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-16 md:px-8">
-      {/* Breadcrumb */}
-      <nav className="breadcrumb mb-8">
-        <a href="/">Home</a>
-        <span>/</span>
-        <span className="text-foreground">Contato</span>
-      </nav>
-
-      <h1 className="font-display text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-        Fale com a Keeus
-      </h1>
-      <p className="mt-2 text-foreground-mid">
-        Dúvidas sobre chinelos, tamanhos ou pedidos? Estamos aqui para ajudar.
-      </p>
-
-      <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2">
-        {/* Form */}
+    <main className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-20">
+      <nav className="breadcrumb mb-8"><Link href="/">Home</Link><span>/</span><span>Contato</span></nav>
+      <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Atendimento</p>
+          <h1 className="mt-2 text-3xl font-bold md:text-5xl">Fale com a Keeus</h1>
+          <p className="mt-4 leading-7 text-muted">Envie sua dúvida sobre modelos, tamanhos, disponibilidade ou revisão do pedido. Não exibimos telefone, prazo de resposta ou redes sociais que ainda não foram confirmados.</p>
+        </div>
+        <div className="rounded-3xl border border-border bg-surface p-6 md:p-8">
           {status === "done" ? (
-            <div className="rounded-2xl border border-border bg-surface p-8 text-center">
-              <div className="text-3xl mb-3">🧡</div>
-              <p className="font-display text-lg font-bold text-foreground">
-                Mensagem enviada com sucesso!
-              </p>
-              <p className="mt-2 text-sm text-foreground-mid">
-                Responderemos em até 24 horas no e-mail informado.
-              </p>
-            </div>
+            <div role="status" className="py-12 text-center"><p className="text-xl font-bold">Mensagem recebida</p><p className="mt-2 text-sm text-muted">A equipe poderá responder pelo e-mail informado.</p><Link href="/colecao" className="btn-primary mt-7 rounded-full">Voltar à coleção</Link></div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted">
-                  Nome
-                </label>
-                <input
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Seu nome completo"
-                  className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted">
-                  E-mail
-                </label>
-                <input
-                  required
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Seu melhor e-mail"
-                  className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-muted">
-                  Mensagem
-                </label>
-                <textarea
-                  required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  rows={5}
-                  placeholder="Como podemos ajudar? Conte sua dúvida sobre chinelos, tamanhos, pedidos..."
-                  className="w-full resize-none rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/10 transition-all"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="btn-primary gap-2 rounded-full px-8 py-4 text-sm font-semibold w-full sm:w-auto disabled:opacity-60"
-              >
-                {status === "loading" ? (
-                  <Loader2 size={16} className="animate-spin" />
-                ) : (
-                  <Send size={16} />
-                )}
-                Enviar mensagem
-              </button>
+              {status === "error" && <p role="alert" className="rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-700">Não foi possível enviar agora. Tente novamente em instantes.</p>}
+              <div><label htmlFor="contact-name" className="mb-2 block text-xs font-bold uppercase tracking-wider">Nome</label><input id="contact-name" required autoComplete="name" value={form.name} onChange={(event) => setForm({...form,name:event.target.value})} className="w-full rounded-xl border border-border bg-white px-4 py-3 outline-none focus:border-accent" /></div>
+              <div><label htmlFor="contact-email" className="mb-2 block text-xs font-bold uppercase tracking-wider">E-mail</label><input id="contact-email" required type="email" autoComplete="email" value={form.email} onChange={(event) => setForm({...form,email:event.target.value})} className="w-full rounded-xl border border-border bg-white px-4 py-3 outline-none focus:border-accent" /></div>
+              <div><label htmlFor="contact-message" className="mb-2 block text-xs font-bold uppercase tracking-wider">Mensagem</label><textarea id="contact-message" required rows={6} value={form.message} onChange={(event) => setForm({...form,message:event.target.value})} placeholder="Informe também o modelo e tamanho, se já souber." className="w-full resize-none rounded-xl border border-border bg-white px-4 py-3 outline-none focus:border-accent" /></div>
+              <button disabled={status === "loading"} className="btn-primary w-full rounded-full py-4">{status === "loading" ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />} Enviar mensagem</button>
             </form>
           )}
-        </div>
-
-        {/* Contact info */}
-        <div className="space-y-6">
-          <div className="rounded-2xl border border-border bg-surface p-6">
-            <h2 className="font-bold text-foreground mb-4">Canais de Atendimento</h2>
-            <div className="space-y-4">
-              <a
-                href="https://wa.me/5511999999999"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl bg-[#25D366]/10 p-4 transition-all hover:bg-[#25D366]/20"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white">
-                  <MessageCircle size={20} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-foreground">WhatsApp</p>
-                  <p className="text-xs text-foreground-mid">Resposta em até 5 minutos</p>
-                </div>
-              </a>
-
-              <a
-                href="mailto:contato@keeus.com.br"
-                className="flex items-center gap-3 rounded-xl bg-accent-light p-4 transition-all hover:bg-accent/10"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-foreground">E-mail</p>
-                  <p className="text-xs text-foreground-mid">contato@keeus.com.br</p>
-                </div>
-              </a>
-
-              <div className="flex items-center gap-3 rounded-xl bg-surface-mid p-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-white">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-foreground">Telefone</p>
-                  <p className="text-xs text-foreground-mid">(11) 99999-9999</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-surface p-6">
-            <h2 className="font-bold text-foreground mb-2">Horário de Atendimento</h2>
-            <p className="text-sm text-foreground-mid leading-relaxed">
-              Segunda a Sexta: 9h às 18h<br />
-              Sábado: 9h às 13h<br />
-              Domingo e feriados: retornamos no próximo dia útil.
-            </p>
-          </div>
         </div>
       </div>
     </main>

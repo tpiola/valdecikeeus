@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Truck, Shield } from "lucide-react";
+import { ArrowRight, Ruler, ShieldCheck } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,8 +92,8 @@ export default function Hero() {
         <div className="w-full pb-8 pt-4 md:w-1/2 md:pb-24 md:pt-20 md:pr-16">
           <div ref={badgeRef}>
             <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#FF5F1F] shadow-sm backdrop-blur-sm">
-              <Truck size={12} />
-              Frete Grátis para todo Brasil
+              <Ruler size={12} />
+              11 modelos · tamanhos do 34 ao 45
             </span>
           </div>
 
@@ -105,7 +105,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 max-w-md text-base leading-relaxed text-stone-500">
-              Chinelos premium com design contemporâneo, palmilha anatômica e a qualidade que seus pés merecem. Coleção Verão 2026.
+              Explore slides e chinelos de dedo com fotos reais, detalhes de cada modelo e escolha de tamanho antes de adicionar à sacola.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -127,9 +127,9 @@ export default function Hero() {
 
           <div ref={statsRef} className="mt-14 flex gap-8 border-t border-stone-100 pt-8">
             {[
-              { value: "+5.000", label: "Clientes" },
-              { value: "30 Dias", label: "Garantia" },
-              { value: "Grátis", label: "Frete BR" },
+              { value: "11", label: "Modelos" },
+              { value: "34–45", label: "Numerações" },
+              { value: "2", label: "Estilos" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="text-lg font-black text-stone-900">{stat.value}</p>
@@ -165,24 +165,14 @@ export default function Hero() {
             <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400">A partir de</p>
             <p className="text-xl font-black text-stone-900">R$ 139</p>
             <p className="flex items-center gap-1 text-[10px] font-bold text-[#FF5F1F]">
-              <Shield size={11} />
+              <ShieldCheck size={11} />
               até 4x sem juros
             </p>
           </div>
 
-          {/* Floating trust badge */}
-          <div className="absolute right-4 top-20 z-20 hidden rounded-2xl border border-orange-100 bg-white/90 p-3 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-sm md:block">
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-5 w-5 rounded-full border-2 border-white bg-stone-200" />
-                ))}
-              </div>
-              <div>
-                <p className="text-[10px] font-bold text-stone-900">Joia!</p>
-                <p className="text-[9px] text-stone-400">+500 avaliações</p>
-              </div>
-            </div>
+          <div className="absolute right-4 top-20 z-20 hidden rounded-2xl border border-orange-100 bg-white/90 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.04)] backdrop-blur-sm md:block">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Compra consciente</p>
+            <p className="mt-1 text-xs font-semibold text-stone-900">Escolha o tamanho na página do produto</p>
           </div>
         </div>
       </div>

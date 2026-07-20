@@ -5,7 +5,7 @@ import ProductGrid from "@/components/home/ProductGrid";
 
 export const metadata: Metadata = {
   title: `Coleção | ${SITE.name}`,
-  description: "Explore toda a coleção Keeus de chinelos premium. Slides, flip flops e lançamentos exclusivos. Frete grátis Brasil.",
+  description: "Explore a coleção Keeus de slides e chinelos de dedo. Compare modelos, cores, tamanhos e preços.",
   openGraph: {
     title: "Coleção Keeus — Chinelos Premium",
     description: "Slides, flip flops e lançamentos exclusivos.",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 export default async function ColecaoPage({
   searchParams,
 }: {
-  searchParams: Promise<{ categoria?: string; filtro?: string }>;
+  searchParams: Promise<{ categoria?: string; filtro?: string; busca?: string }>;
 }) {
-  const { categoria, filtro } = await searchParams;
+  const { categoria, filtro, busca } = await searchParams;
 
   let products = PRODUCTS;
   let title = "Coleção Completa";
@@ -44,7 +44,15 @@ export default async function ColecaoPage({
   if (filtro === "edicao-limitada") {
     products = products.filter((p) => p.isLimitedEdition);
     title = "Edições Limitadas";
-    subtitle = "Exclusividade em cada par";
+    subtitle = "Modelos sinalizados como edição limitada";
+  }
+  if (busca?.trim()) {
+    const term = busca.trim().toLocaleLowerCase("pt-BR");
+    products = products.filter((product) =>
+      [product.name, product.category, product.description].join(" ").toLocaleLowerCase("pt-BR").includes(term)
+    );
+    title = `Resultados para “${busca.trim()}”`;
+    subtitle = products.length ? `${products.length} modelo(s) encontrado(s)` : "Nenhum modelo encontrado. Tente outra cor ou nome.";
   }
 
   return (

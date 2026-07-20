@@ -6,19 +6,21 @@ import { Loader2, Send } from "lucide-react";
 export default function LeadCapture() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
     try {
-      await fetch("/api/leads", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
       });
-    } finally {
+      if (!response.ok) throw new Error("Não foi possível concluir a inscrição.");
       setStatus("done");
+    } catch {
+      setStatus("error");
     }
   };
 
@@ -32,8 +34,7 @@ export default function LeadCapture() {
           Lançamentos e ofertas
         </h2>
         <p className="mt-3 text-sm text-muted">
-          Receba em primeira mão os lançamentos de chuteiras, promoções exclusivas
-          e dicas de futebol direto no seu e-mail. Nada de spam — só conteúdo que interessa.
+          Receba novidades sobre novos modelos, cores e disponibilidade da coleção Keeus. Nada de conteúdo de futebol ou mensagens fora desse assunto.
         </p>
 
         {status === "done" ? (
@@ -41,6 +42,12 @@ export default function LeadCapture() {
             Inscrição confirmada! Fique de olho na sua caixa de entrada.
           </p>
         ) : (
+          <>
+          {status === "error" && (
+            <p role="alert" className="mt-6 text-sm font-semibold text-red-700">
+              Não foi possível concluir agora. Confira os dados e tente novamente.
+            </p>
+          )}
           <form
             onSubmit={handleSubmit}
             className="mt-8 flex flex-col gap-3 sm:flex-row"
@@ -73,6 +80,7 @@ export default function LeadCapture() {
               Inscrever
             </button>
           </form>
+          </>
         )}
       </div>
     </section>

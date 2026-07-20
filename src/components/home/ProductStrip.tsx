@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
 
@@ -35,11 +36,13 @@ export default function ProductStrip() {
               >
                 {/* Thumbnail */}
                 <div className="relative mb-2 aspect-square overflow-hidden rounded-xl bg-surface border border-border shadow-sm transition-shadow group-hover:shadow-md">
-                  <div className="flex h-full w-full items-center justify-center p-3 transition-transform duration-500 group-hover:scale-105">
-                    <span className="text-lg font-black uppercase tracking-tighter text-accent/20">
-                      {product.brand}
-                    </span>
-                  </div>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 160px, 190px"
+                  />
                   {/* Badges */}
                   <div className="absolute left-2 top-2 flex flex-col gap-1">
                     {product.isNew && (
