@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: `%s | Keeus`,
   },
   description:
-    "Keeus: chinelos premium com design exclusivo e conforto superior. Slides e flip flops para o verão. Frete grátis Brasil e troca em 30 dias.",
+    "Conheça a coleção Keeus de slides e chinelos de dedo, com fotos reais, cores, tamanhos e detalhes de cada modelo.",
   keywords: [
     "chinelos premium", "keeus chinelos", "chinelo slide",
     "chinelo flip flop", "chinelo verão", "chinelo conforto",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   openGraph: {
     title: "Keeus — Chinelos Premium de Verão",
-    description: "Chinelos premium com design exclusivo. Slides e flip flops. Frete grátis Brasil.",
+    description: "Slides e chinelos de dedo Keeus com fotos reais e escolha de tamanho.",
     url: SITE.url,
     siteName: "Keeus",
     locale: "pt_BR",
@@ -76,17 +76,7 @@ export default function RootLayout({
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     description:
-      "Keeus: loja oficial de chinelos premium. Design exclusivo, conforto superior e estilo de verão.",
-    sameAs: [
-      "https://instagram.com/keeus",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      telephone: "+55-11-99999-9999",
-      availableLanguage: "Portuguese",
-      areaServed: "BR",
-    },
+      "Catálogo Keeus de slides e chinelos de dedo com fotos reais e informações de produto.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "BR",
@@ -216,7 +206,7 @@ export default function RootLayout({
               alternateName: "Keeus Chinelos Premium",
               url: SITE.url,
               description:
-                "Keeus: loja oficial de chinelos premium. Design exclusivo, conforto superior e estilo de verão.",
+                "Catálogo Keeus de slides e chinelos de dedo com fotos reais e informações de produto.",
               inLanguage: "pt-BR",
               potentialAction: {
                 "@type": "SearchAction",
