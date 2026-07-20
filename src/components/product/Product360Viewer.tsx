@@ -61,7 +61,7 @@ export default function Product360Viewer({
   };
 
   return (
-    <div className="group relative select-none overflow-hidden rounded-2xl bg-[#0e0e12]">
+    <div className="group relative select-none overflow-hidden rounded-2xl border border-border bg-[#f7f4ef]">
       {/* Main image */}
       <div
         className={`relative aspect-square ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
@@ -99,7 +99,7 @@ export default function Product360Viewer({
 
         {/* 360 badge */}
         <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 backdrop-blur-sm">
-          <RotateCw size={11} className={`text-[#d8ff4f] ${isPlaying ? "animate-spin" : ""}`} />
+          <RotateCw size={11} className={`text-[#FF8A55] ${isPlaying ? "animate-spin" : ""}`} />
           <span className="text-[10px] font-black uppercase tracking-widest text-[#d8ff4f]">360°</span>
         </div>
 
@@ -118,14 +118,14 @@ export default function Product360Viewer({
           animate={{ opacity: isDragging ? 0 : 1 }}
           className="absolute inset-x-0 bottom-14 flex justify-center"
         >
-          <span className="rounded-full bg-black/50 px-3 py-1 text-[10px] text-white/50 backdrop-blur-sm">
+          <span className="rounded-full bg-white/90 px-3 py-1 text-[10px] text-stone-500 shadow-sm backdrop-blur-sm">
             ← Arraste para girar →
           </span>
         </motion.div>
       </div>
 
       {/* Controls bar */}
-      <div className="flex items-center justify-between border-t border-white/5 bg-[#0a0a0d] px-4 py-3">
+      <div className="flex items-center justify-between border-t border-border bg-white px-4 py-3">
         {/* Thumbnail strip */}
         <div className="flex gap-1.5">
           {Array.from({ length: count }).map((_, i) => (
@@ -134,13 +134,13 @@ export default function Product360Viewer({
               onClick={() => { setIndex(i); setIsPlaying(false); }}
               className="relative h-8 w-8 overflow-hidden rounded-md border transition-all"
               style={{
-                borderColor: i === index ? "#d8ff4f" : "rgba(255,255,255,0.08)",
+                borderColor: i === index ? "#FF5F1F" : "rgba(0,0,0,0.10)",
               }}
             >
               {images[i] ? (
                 <Image src={images[i]} alt="" fill className="object-contain" sizes="32px" />
               ) : (
-                <div className="h-full w-full bg-white/5" />
+                <div className="h-full w-full bg-stone-100" />
               )}
             </button>
           ))}
@@ -149,7 +149,7 @@ export default function Product360Viewer({
         {/* Play/Pause */}
         <button
           onClick={() => setIsPlaying((p) => !p)}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#d8ff4f] text-[#050506] transition-transform hover:scale-110"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF5F1F] text-white transition-transform hover:scale-110"
           aria-label={isPlaying ? "Pausar rotação" : "Girar automaticamente"}
         >
           {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
