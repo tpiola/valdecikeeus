@@ -4,6 +4,7 @@ import { Ruler, Camera, RefreshCcw, MessageCircle } from "lucide-react";
 import Hero from "@/components/home/Hero";
 import ProductGrid from "@/components/home/ProductGrid";
 import FaqSection from "@/components/home/FaqSection";
+import Reveal from "@/components/ui/Reveal";
 import { PRODUCTS } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
 
@@ -42,6 +43,7 @@ export default function Home() {
       <Hero />
 
       {/* Compra sem surpresa — o que a loja garante de verdade */}
+      <Reveal>
       <section className="border-y border-stone-200 bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-8 sm:grid-cols-2 md:px-8 lg:grid-cols-4">
           <div className="flex items-start gap-3">
@@ -82,6 +84,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Catálogo — uma grade só, sem repetição */}
       <ProductGrid
@@ -93,30 +96,32 @@ export default function Home() {
 
       {/* Navegar por tipo — como loja de calçado de verdade */}
       <section className="border-t border-stone-100 bg-white">
+        <Reveal>
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-14 sm:grid-cols-2 md:px-8">
           <Link
             href="/colecao?categoria=slides"
-            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#1a1a1a] p-6"
+            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#1a1a1a] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.35)]"
           >
             <div className="relative z-10">
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">Slide</p>
               <h2 className="font-display mt-1 text-2xl font-extrabold text-white">Faixa larga, pé firme</h2>
               <p className="mt-1 text-sm text-white/70">Do dia a dia ao pós-banho.</p>
             </div>
-            <span className="absolute bottom-6 right-6 text-4xl text-white/25 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            <span className="absolute bottom-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/60 backdrop-blur-sm transition-all duration-300 group-hover:bg-[#ff5f1f] group-hover:text-white group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </Link>
           <Link
             href="/colecao?categoria=flipflops"
-            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#ff5f1f] p-6"
+            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#ff5f1f] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(255,95,31,0.4)]"
           >
             <div className="relative z-10">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Chinelo de dedo</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/80">Chinelo de dedo</p>
               <h2 className="font-display mt-1 text-2xl font-extrabold text-white">O clássico do verão</h2>
-              <p className="mt-1 text-sm text-white/80">Leve, seca rápido, vai pra tudo.</p>
+              <p className="mt-1 text-sm text-white/90">Leve, seca rápido, vai pra tudo.</p>
             </div>
-            <span className="absolute bottom-6 right-6 text-4xl text-white/30 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            <span className="absolute bottom-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-black/10 text-white/80 backdrop-blur-sm transition-all duration-300 group-hover:bg-white group-hover:text-[#ff5f1f] group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </Link>
         </div>
+        </Reveal>
       </section>
 
       {/* Como funciona — curto e direto */}
@@ -124,6 +129,7 @@ export default function Home() {
         <h2 className="font-display text-center text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
           Como comprar na Keeus
         </h2>
+        <Reveal>
         <div className="mt-8 grid gap-8 sm:grid-cols-3">
           {[
             ["1", "Escolha o modelo e o tamanho", "Use o guia com as medidas do seu pé. Na dúvida entre dois números, vai no maior."],
@@ -137,6 +143,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        </Reveal>
       </section>
 
       <FaqSection />

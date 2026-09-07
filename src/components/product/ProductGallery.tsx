@@ -25,17 +25,18 @@ export default function ProductGallery({
 
   return (
     <div>
-      {/* Foto principal */}
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface">
+      {/* Foto principal — fade entre fotos, zoom suave no hover */}
+      <div className="group relative aspect-square overflow-hidden rounded-2xl bg-surface">
         <Image
+          key={active}
           src={images[active]}
           alt={`${alt} — foto ${active + 1} de ${images.length}`}
           fill
           priority={active === 0}
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="object-contain p-6 md:p-10"
+          className="keeus-photo-fade object-contain p-6 transition-transform duration-700 ease-out group-hover:scale-[1.04] md:p-10"
         />
-        <span className="absolute bottom-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white">
+        <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white">
           {active + 1}/{images.length}
         </span>
       </div>
@@ -51,13 +52,19 @@ export default function ProductGallery({
               aria-selected={active === i}
               aria-label={`Ver foto ${i + 1}`}
               onClick={() => setActive(i)}
-              className={`relative aspect-square overflow-hidden rounded-xl bg-surface transition-all ${
+              className={`relative aspect-square overflow-hidden rounded-xl bg-surface transition-all duration-200 ${
                 active === i
                   ? "ring-2 ring-accent ring-offset-2"
-                  : "opacity-80 hover:opacity-100"
+                  : "opacity-70 ring-1 ring-transparent hover:opacity-100 hover:ring-stone-300"
               }`}
             >
-              <Image src={src} alt="" fill sizes="160px" className="object-contain p-2" />
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="160px"
+                className="object-contain p-2 transition-transform duration-300 hover:scale-110"
+              />
             </button>
           ))}
         </div>

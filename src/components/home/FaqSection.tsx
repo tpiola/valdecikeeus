@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FAQ_ITEMS } from "@/lib/constants";
 
@@ -16,25 +17,37 @@ export default function FaqSection() {
       </div>
 
       <div className="divide-y divide-border border-y border-border">
-        {FAQ_ITEMS.map((item, i) => (
-          <div key={item.question}>
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              className="flex w-full items-center justify-between py-5 text-left"
-            >
-              <span className="text-sm font-medium md:text-base">
-                {item.question}
-              </span>
-              <ChevronDown
-                size={18}
-                className={`shrink-0 transition-transform ${open === i ? "rotate-180 text-accent" : ""}`}
-              />
-            </button>
-            {open === i && (
-              <p className="pb-5 text-sm text-muted">{item.answer}</p>
-            )}
-          </div>
-        ))}
+        {FAQ_ITEMS.map((item, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={item.question}>
+              <button
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className={`flex w-full items-center justify-between gap-4 py-5 text-left transition-colors ${isOpen ? "text-accent" : "hover:text-accent"}`}
+              >
+                <span className="text-sm font-medium md:text-base">{item.question}</span>
+                <ChevronDown
+                  size={18}
+                  className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-accent" : ""}`}
+                />
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pb-5 text-sm leading-6 text-muted">{item.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

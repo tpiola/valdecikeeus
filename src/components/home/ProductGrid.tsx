@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/lib/types";
 import ProductCard from "@/components/product/ProductCard";
+import Reveal from "@/components/ui/Reveal";
 
 export default function ProductGrid({
   title,
@@ -18,31 +19,37 @@ export default function ProductGrid({
     <section className="bg-white px-4 py-16 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-              {title}
-            </h2>
-            {subtitle && (
-              <p className="mt-1.5 text-sm text-muted">{subtitle}</p>
+        <Reveal>
+          <div className="mb-10 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+                {title}
+              </h2>
+              {subtitle && (
+                <p className="mt-1.5 text-sm text-muted">{subtitle}</p>
+              )}
+            </div>
+            {viewAllHref && (
+              <Link
+                href={viewAllHref}
+                className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
+              >
+                Ver todos{" "}
+                <ArrowRight
+                  size={15}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
             )}
           </div>
-          {viewAllHref && (
-            <Link
-              href={viewAllHref}
-              className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
-            >
-              Ver todos <ArrowRight size={15} />
-            </Link>
-          )}
-        </div>
+        </Reveal>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <div key={product.id}>
+        {/* Grid — cards entram em cascata leve */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+          {products.map((product, i) => (
+            <Reveal key={product.id} delay={Math.min(i % 4, 3) * 70}>
               <ProductCard product={product} />
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

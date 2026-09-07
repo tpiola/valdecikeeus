@@ -56,8 +56,9 @@ export default function Header() {
 
           <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex" aria-label="Navegação principal">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm font-semibold text-foreground-mid transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+              <Link key={link.href} href={link.href} className="group relative text-sm font-semibold text-foreground-mid transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 {link.label}
+                <span className="absolute -bottom-1.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" aria-hidden="true" />
               </Link>
             ))}
           </nav>
@@ -70,9 +71,19 @@ export default function Header() {
               <Heart size={19} />
               {wishlistCount > 0 && <span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-white">{wishlistCount}</span>}
             </Link>
-            <button onClick={openCart} className="relative flex h-11 w-11 items-center justify-center rounded-full text-foreground-mid hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent" aria-label={`Sacola: ${count} item(ns)`}>
+            <button onClick={openCart} className="relative flex h-11 w-11 items-center justify-center rounded-full text-foreground-mid transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-accent" aria-label={`Sacola: ${count} item(ns)`}>
               <ShoppingBag size={19} />
-              {count > 0 && <span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-white">{count}</span>}
+              {count > 0 && (
+                <motion.span
+                  key={count}
+                  initial={{ scale: 0.4 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 18 }}
+                  className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-white"
+                >
+                  {count}
+                </motion.span>
+              )}
             </button>
             <Link href="/colecao" className="ml-2 hidden rounded-full bg-accent px-5 py-3 text-xs font-bold text-white hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:block">
               Ver coleção
