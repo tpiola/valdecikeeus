@@ -34,7 +34,7 @@ export default function LeadCapture() {
           Lançamentos e ofertas
         </h2>
         <p className="mt-3 text-sm text-muted">
-          Receba novidades sobre novos modelos, cores e disponibilidade da coleção Keeus. Nada de conteúdo de futebol ou mensagens fora desse assunto.
+          Novos modelos e reposições da coleção, direto no seu e-mail. Sem spam, sem empurrar outra coisa.
         </p>
 
         {status === "done" ? (

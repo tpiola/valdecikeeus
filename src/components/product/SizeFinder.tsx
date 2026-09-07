@@ -1,42 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Ruler } from "lucide-react";
+
+// Tabela brasileira padrão de calçados: número ≈ (comprimento do pé + folga) ÷ 0,667
+function numeroParaCm(cm: number): number {
+  return Math.round((cm + 1.5) / 0.667);
+}
 
 export default function SizeFinder({ sizes }: { sizes: number[] }) {
   const [footLength, setFootLength] = useState("");
-  const [usualSize, setUsualSize] = useState("");
   const [recommended, setRecommended] = useState<number | null>(null);
 
   const calculate = () => {
-    const length = parseFloat(footLength.replace(",", "."));
-    const usual = parseFloat(usualSize.replace(",", "."));
-
-    let target: number;
-    if (!isNaN(length)) {
-      target = Math.round(length * 1.5 + 18);
-    } else if (!isNaN(usual)) {
-      target = Math.round(usual);
-    } else {
-      return;
-    }
-
-    const closest = sizes.reduce((best, size) =>
-      Math.abs(size - target) < Math.abs(best - target) ? size : best
+    const cm = parseFloat(footLength.replace(",", "."));
+    if (isNaN(cm) || cm <= 0) return;
+    const alvo = numeroParaCm(cm);
+    const maisProximo = sizes.reduce((best, size) =>
+      Math.abs(size - alvo) < Math.abs(best - alvo) ? size : best
     );
-    setRecommended(closest);
+    setRecommended(maisProximo);
   };
 
   return (
     <div className="rounded-xl border border-accent/30 bg-accent-soft p-5">
       <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent">
-        <Sparkles size={14} />
-        Keeus Size AI
+        <Ruler size={14} />
+        Não sabe seu número?
       </div>
-      <p className="mb-4 text-xs text-muted">
-        Informe o comprimento do seu pé (cm) ou o tamanho que você costuma
-        usar em outras marcas — nosso sistema recomenda o tamanho ideal neste
-        modelo.
+      <p className="mb-4 text-xs leading-5 text-muted">
+        Meça do calcanhar à ponta do dedão, com o pé no chão. Digite a medida
+        em centímetros e a gente indica o tamanho certo deste modelo.
       </p>
 
       <div className="flex flex-col gap-3 sm:flex-row">
@@ -45,27 +39,22 @@ export default function SizeFinder({ sizes }: { sizes: number[] }) {
           onChange={(e) => setFootLength(e.target.value)}
           placeholder="Comprimento do pé (cm)"
           inputMode="decimal"
-          className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
-        />
-        <input
-          value={usualSize}
-          onChange={(e) => setUsualSize(e.target.value)}
-          placeholder="ou tamanho usual"
-          inputMode="decimal"
+          aria-label="Comprimento do pé em centímetros"
           className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
         />
         <button
           onClick={calculate}
-          className="rounded-md bg-accent px-5 py-2 text-xs font-bold uppercase text-accent-foreground"
+          className="rounded-md bg-accent px-5 py-2 text-xs font-bold uppercase text-accent-foreground hover:bg-accent-hover"
         >
-          Recomendar
+          Ver tamanho
         </button>
       </div>
 
       {recommended && (
-        <p className="mt-4 text-sm">
-          Tamanho recomendado para você:{" "}
-          <span className="font-display text-lg text-accent">{recommended}</span>
+        <p className="mt-4 text-sm text-foreground/80">
+          Pelo comprimento que você informou, o número deste modelo é{" "}
+          <span className="font-display text-lg text-accent">{recommended}</span>.
+          Entre dois números, prefira o maior.
         </p>
       )}
     </div>

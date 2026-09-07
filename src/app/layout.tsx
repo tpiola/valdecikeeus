@@ -25,11 +25,11 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Keeus — Chinelos Premium de Verão",
+    default: "Keeus — Slide e Chinelo de Dedo | Loja Oficial",
     template: `%s | Keeus`,
   },
   description:
-    "Conheça a coleção Keeus de slides e chinelos de dedo, com fotos reais, cores, tamanhos e detalhes de cada modelo.",
+    "Slide e chinelo de dedo Keeus, do 34 ao 45. Foto real de cada modelo e tabela de tamanho para escolher antes de comprar.",
   keywords: [
     "chinelos premium", "keeus chinelos", "chinelo slide",
     "chinelo flip flop", "chinelo verão", "chinelo conforto",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Keeus — Chinelos Premium",
-    description: "Chinelos premium. O verão começa aqui.",
+    description: "Slide e chinelo de dedo Keeus, com foto real e escolha de tamanho antes de comprar.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -71,7 +71,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Keeus",
-    alternateName: "Keeus Chinelos Premium",
+    alternateName: "Keeus Chinelos",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
     description:
@@ -85,7 +85,7 @@ export default function RootLayout({
   const productCatalogJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Catálogo Keeus — Chinelos Premium",
+    name: "Catálogo Keeus — Slide e Chinelo de Dedo",
     url: `${SITE.url}/colecao`,
     numberOfItems: PRODUCTS.length,
     itemListElement: PRODUCTS.slice(0, 12).map((p, i) => ({
@@ -202,7 +202,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Keeus",
-              alternateName: "Keeus Chinelos Premium",
+              alternateName: "Keeus Chinelos",
               url: SITE.url,
               description:
                 "Catálogo Keeus de slides e chinelos de dedo com fotos reais e informações de produto.",

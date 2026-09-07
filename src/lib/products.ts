@@ -24,7 +24,7 @@ export const PRODUCTS: Product[] = [
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#8B7355", "#1A1A1A"],
     description:
-      "O Bahamas Café combina elegância terrosa com conforto premium. Palmilha anatômica em EVA de alta densidade, solado antiderrapante e design sofisticado na cor café que combina com tudo. Perfeito para o dia a dia.",
+      "Slide de faixa larga na cor café. Palmilha anatômica de EVA, solado que não derrapa. Usa no dia a dia, no trabalho e em casa — combina com roupa clara e escura.",
     image: IMG("bahamas-cafe-cafe/2k/1.png"),
     gallery: [
       IMG("bahamas-cafe-cafe/2k/1.png"),
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#1A1A1A", "#003399"],
     description:
-      "Estilo esportivo com acabamento premium. Bahamas Preto Azul com detalhes em azul royal, palmilha anatômica e solado de alta tração. Do beach club ao dia a dia.",
+      "Slide de faixa larga preto com detalhe azul. Mesma palmilha anatômica dos outros Bahamas, solado de boa aderência. Vai bem na rua e no pós-banho.",
     image: IMG("bahamas-preto-azul/2k/keeus-4511-bahamas-preto-azul-bco-pto-1.png"),
     gallery: [
       IMG("bahamas-preto-azul/2k/keeus-4511-bahamas-preto-azul-bco-pto-1.png"),
@@ -78,7 +78,7 @@ export const PRODUCTS: Product[] = [
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
     colors: ["#1A1A1A"],
     description:
-      "O clássico essencial. Bahamas Preto total — a escolha certa para quem busca versatilidade e conforto. Palmilha em EVA premium, solado antiderrapante e design minimalista que combina com tudo.",
+      "O Bahamas todo preto. Faixa larga, palmilha anatômica de EVA, solado antiderrapante. É o modelo mais discreto da linha — serve pra tudo, sem chamar atenção.",
     image: IMG("bahamas-preto-preto/2k/1.png"),
     gallery: [
       IMG("bahamas-preto-preto/2k/1.png"),
@@ -106,7 +106,7 @@ export const PRODUCTS: Product[] = [
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     colors: ["#8B7355", "#1A1A1A"],
     description:
-      "O conforto despojado do Malibu em tom café. Chinelo de dedo com tiras em TPU flexível, palmilha anatômica que abraça o pé e solado macio. Ideal para praia, lazer e dias quentes.",
+      "Chinelo de dedo com tira na cor café. Tira de TPU flexível, palmilha anatômica e solado macio. Feito pra praia, piscina e dia quente.",
     image: IMG("malibu-cafe-cafe/2k/1.png"),
     gallery: [
       IMG("malibu-cafe-cafe/2k/1.png"),
@@ -133,7 +133,7 @@ export const PRODUCTS: Product[] = [
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#1A1A1A"],
     description:
-      "Chinelo de dedo preto clássico, agora com a qualidade Keeus. Tiras anatômicas em TPU, palmilha em EVA macio e solado antiderrapante. Leve, confortável e estiloso.",
+      "O chinelo de dedo preto da linha. Tira anatômica de TPU, palmilha de EVA macia, solado antiderrapante. Leve, seca rápido e não faz barulho no pé.",
     image: IMG("malibu-preto-preto/2k/1.png"),
     gallery: [
       IMG("malibu-preto-preto/2k/1.png"),
@@ -159,7 +159,7 @@ export const PRODUCTS: Product[] = [
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     colors: ["#D4A574", "#8B7355"],
     description:
-      "A combinação perfeita entre mel e café. Malibu Mel Café com tiras em TPU na cor mel e base café. Palmilha anatômica e solado flexível para máximo conforto.",
+      "Chinelo de dedo com tira mel e base café. Tira de TPU flexível, palmilha anatômica e solado macio. A combinação mais vendida da linha Malibu.",
     image: IMG("malibu-mel-cafe/2k/1.png"),
     gallery: [
       IMG("malibu-mel-cafe/2k/1.png"),
@@ -186,7 +186,7 @@ export const PRODUCTS: Product[] = [
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     colors: ["#8B7355", "#C4956A"],
     description:
-      "Edição especial Malibu Café Meli com detalhes em laranja Keeus. Tiras em TPU premium, palmilha anatômica e acabamento exclusivo. Um toque de cor para o seu verão.",
+      "O Malibu com detalhe laranja Keeus. Mesmo caimento e mesma palmilha dos outros Malibu, com um toque de cor na tira. Edição especial da coleção.",
     image: IMG("malibu-cafe-cafe-meli/2k/1.png"),
     gallery: [
       IMG("malibu-cafe-cafe-meli/2k/1.png"),
@@ -213,7 +213,7 @@ export const PRODUCTS: Product[] = [
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     colors: ["#D4A574", "#FF5F1F"],
     description:
-      "Mel encontrou Meli. A combinação mais pedida da coleção: tiras mel com detalhes em laranja vibrante. Palmilha em EVA de alta densidade, solado antiderrapante e estilo que chama atenção.",
+      "Tira mel com detalhe laranja. Chinelo de dedo com palmilha anatômica e solado antiderrapante. Se você quer um chinelo que dá pra achar num churrasco, é esse.",
     image: IMG("malibu-mel-cafe-meli/2k/1.png"),
     gallery: [
       IMG("malibu-mel-cafe-meli/2k/1.png"),
@@ -242,7 +242,7 @@ export const PRODUCTS: Product[] = [
     sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#8B7355", "#1A1A1A"],
     description:
-      "Slide premium com design arrojado. Toledo Café apresenta faixa larga texturizada em TPU, palmilha anatômica em EVA dupla densidade e solado robusto. Conforto e estilo para qualquer ocasião.",
+      "Slide de faixa larga texturizada na cor café. Palmilha de EVA de dupla densidade, solado mais robusto. Pra quem usa o dia inteiro e quer um chinelo que aguenta.",
     image: IMG("toledo-cafe-cafe/2k/1.png"),
     gallery: [
       IMG("toledo-cafe-cafe/2k/1.png"),
@@ -269,7 +269,7 @@ export const PRODUCTS: Product[] = [
     sizes: [37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#1A1A1A", "#FF5F1F"],
     description:
-      "O slide mais ousado da coleção. Toledo Preto Laranja combine o clássico preto com a icônica cor laranja Keeus. Faixa larga em TPU premium, palmilha anatômica e solado de alta performance. Edição limitada.",
+      "Slide preto com a cor laranja da casa. Faixa larga de TPU, palmilha anatômica, solado com boa aderência. É o modelo que mais chama atenção da coleção.",
     image: IMG("toledo-preto-laranja/2k/1.png"),
     gallery: [
       IMG("toledo-preto-laranja/2k/1.png"),
@@ -296,7 +296,7 @@ export const PRODUCTS: Product[] = [
     sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
     colors: ["#1A1A1A"],
     description:
-      "O Toledo na versão total black. Sofisticação e conforto em cada detalhe: faixa larga em TPU premium, palmilha anatômica com memória, solado antiderrapante. Para quem valoriza o design minimalista.",
+      "O Toledo na versão toda preta. Faixa larga de TPU, palmilha anatômica, solado antiderrapante. Sem estampa, sem firula — só o chinelo.",
     image: IMG("toledo-preto-preto/2k/1.png"),
     gallery: [
       IMG("toledo-preto-preto/2k/1.png"),

@@ -3,85 +3,79 @@ import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `Sobre | ${SITE.name}`,
-  description: "Conheça a história da Keeus — chinelos premium com design exclusivo, conforto superior e o espírito do verão brasileiro.",
+  description:
+    "Como a Keeus vende chinelo: modelos com foto real, tamanho pra conferir antes de comprar e atendimento direto pra tirar dúvida.",
   openGraph: {
-    title: "Sobre a Keeus — Nossa História",
-    description: "Chinelos premium com design exclusivo e espírito de verão.",
+    title: "Sobre a Keeus",
+    description: "A Keeus vende chinelo do jeito que loja de verdade vende: com foto real, tamanho certo e atendimento direto.",
   },
 };
 
 export default function SobrePage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16 md:px-8">
-      {/* Breadcrumb */}
-      <nav className="breadcrumb mb-8">
+    <main className="mx-auto max-w-3xl px-4 py-14 md:px-8">
+      <nav className="breadcrumb mb-8" aria-label="Trilha de navegação">
         <a href="/">Home</a>
         <span>/</span>
         <span className="text-foreground">Sobre</span>
       </nav>
 
       <h1 className="font-display text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-        Nossa História
+        Sobre a Keeus
       </h1>
-      <p className="mt-2 text-accent font-semibold">Keeus — O Verão Começa Aqui</p>
+      <p className="mt-3 text-base leading-7 text-foreground-mid">
+        A Keeus vende slide e chinelo de dedo. Parece simples, e é — a gente
+        acha que comprar chinelo online não devia ser loteria.
+      </p>
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-foreground-mid">
         <p>
-          A <strong className="text-foreground">Keeus</strong> nasceu de um sentimento simples e poderoso: o amor pelo verão brasileiro. 
-          Somos uma marca de chinelos premium que acredita que cada passo deve ser leve, confortável e cheio de estilo — 
-          da areia da praia ao rooftop no fim de tarde.
+          Por isso, cada modelo desta loja tem <strong className="text-foreground">foto real do produto</strong>,
+          numeração do 34 ao 45 e uma tabela de tamanho com medida em
+          centímetros. Você confere o que vai receber antes de fechar o pedido.
         </p>
 
         <p>
-          Nossa história começou em 2023, quando percebemos que o mercado de chinelos tratava o produto como 
-          algo descartável. A gente via diferente — o chinelo é o calçado mais democrático do Brasil, 
-          e merecia o mesmo cuidado e qualidade de um tênis premium.
+          A sacola é montada no atendimento: a gente confirma o modelo, o
+          número, o prazo e a forma de pagamento com você antes de qualquer
+          cobrança. Se algo não servir, as condições de troca estão escritas na
+          página de trocas — sem letra miúda.
         </p>
 
-        <p>
-          Investimos em materiais de alta performance: EVA de densidade premium, TPU flexível e resistente, 
-          tecnologia memory foam em 3 camadas. Cada Keeus é projetado para durar, sem perder o conforto 
-          e o estilo — temporada após temporada.
-        </p>
-
-        <h2 className="font-display text-xl font-bold text-foreground mt-10">Nossos Pilares</h2>
+        <h2 className="font-display mt-10 text-xl font-bold text-foreground">
+          O que você encontra aqui
+        </h2>
 
         <ul className="list-disc space-y-3 pl-5">
           <li>
-            <strong className="text-foreground">Conforto Premium</strong> — Palmilhas anatômicas, 
-            solados amortecidos e materiais que abraçam seus pés como ninguém.
+            <strong className="text-foreground">Slide de faixa larga</strong>{" "}
+            — modelos Bahamas e Toledo, pro dia a dia e pós-banho.
           </li>
           <li>
-            <strong className="text-foreground">Design Exclusivo</strong> — Cada coleção é pensada 
-            nos mínimos detalhes. Cores vibrantes, acabamento impecável e a icônica identidade laranja que 
-            todo mundo reconhece.
+            <strong className="text-foreground">Chinelo de dedo</strong> —
+            modelos Malibu, pra praia, piscina e dia quente.
           </li>
           <li>
-            <strong className="text-foreground">Sustentabilidade</strong> — Materiais recicláveis, 
-            processos de baixo impacto ambiental e embalagem ecológica. Cuidamos do planeta enquanto 
-            cuidamos de você.
+            <strong className="text-foreground">Numeração do 34 ao 45</strong>{" "}
+            — com guia de tamanho em cada página de produto.
           </li>
           <li>
-            <strong className="text-foreground">Atendimento Humano</strong> — Somos gente que ama 
-            o que faz. Tem dúvida? Chama no WhatsApp. Resposta rápida, sem robô.
+            <strong className="text-foreground">Atendimento direto</strong> —
+            dúvida de número, de pedido ou de troca, é só chamar pelo WhatsApp.
           </li>
         </ul>
 
-        <h2 className="font-display text-xl font-bold text-foreground mt-10">O time Keeus</h2>
+        <h2 className="font-display mt-10 text-xl font-bold text-foreground">
+          Dúvida antes de comprar?
+        </h2>
         <p>
-          Somos uma equipe pequena, apaixonada e 100% focada em criar os melhores chinelos do Brasil. 
-          Do design à entrega, cada etapa é pensada para você ter a melhor experiência — do primeiro 
-          clique ao último passo.
+          A página de perguntas frequentes cobre tamanho, pagamento, entrega,
+          troca e limpeza. Se a sua dúvida não estiver lá, o{" "}
+          <a href="/contato" className="font-semibold text-accent underline underline-offset-2">
+            contato
+          </a>{" "}
+          responde — sem robô, sem enrolação.
         </p>
-
-        <div className="mt-10 rounded-2xl bg-surface border border-border p-8 text-center">
-          <p className="text-lg font-bold text-foreground">
-            Obrigado por escolher a Keeus.
-          </p>
-          <p className="mt-2 text-foreground-mid">
-            O verão começa aqui — e a gente vai junto com você. 🧡
-          </p>
-        </div>
       </div>
     </main>
   );

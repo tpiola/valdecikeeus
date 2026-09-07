@@ -1,38 +1,13 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Script from "next/script";
-import ProductStrip from "@/components/home/ProductStrip";
+import Link from "next/link";
+import { Ruler, Camera, RefreshCcw, MessageCircle } from "lucide-react";
 import Hero from "@/components/home/Hero";
 import ProductGrid from "@/components/home/ProductGrid";
-import LeadCapture from "@/components/home/LeadCapture";
 import FaqSection from "@/components/home/FaqSection";
-import CinematicScrollSection from "@/components/home/CinematicScrollSection";
-import { PRODUCTS, getFeaturedProducts } from "@/lib/products";
+import { PRODUCTS } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
 
-gsap.registerPlugin(ScrollTrigger);
-
-function CinematicSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    gsap.fromTo(el,
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1, y: 0, duration: 1, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
-      }
-    );
-  }, []);
-  return <div ref={ref} className={className}>{children}</div>;
-}
-
 export default function Home() {
-  const featured = getFeaturedProducts();
   const allProducts = PRODUCTS;
 
   return (
@@ -49,7 +24,7 @@ export default function Home() {
       <Script id="product-list-schema" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org", "@type": "ItemList",
-          name: "Chinelos Premium Keeus — Coleção Verão",
+          name: "Chinelos Keeus — Catálogo",
           itemListElement: allProducts.slice(0, 6).map((p, i) => ({
             "@type": "ListItem", position: i + 1,
             item: {
@@ -64,83 +39,107 @@ export default function Home() {
         }),
       }} />
 
-      <ProductStrip />
       <Hero />
 
-      {/* Seção única de produtos — cinematográfica */}
-      <CinematicSection>
-        <ProductGrid
-          title="Coleção Verão 2026"
-          subtitle="Slides e flip flops premium para todos os momentos"
-          products={allProducts}
-          viewAllHref="/colecao"
-        />
-      </CinematicSection>
-
-      {/* Diferenciais — estilo Apple */}
-      <CinematicSection className="bg-stone-50">
-        <section className="mx-auto max-w-7xl px-4 py-24 md:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF5F1F]">
-              Por que Keeus
-            </span>
-            <h2 className="font-display mt-3 text-3xl font-bold text-stone-900 md:text-5xl">
-              Feito para quem não abre mão do conforto
-            </h2>
+      {/* Compra sem surpresa — o que a loja garante de verdade */}
+      <section className="border-y border-stone-200 bg-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-8 sm:grid-cols-2 md:px-8 lg:grid-cols-4">
+          <div className="flex items-start gap-3">
+            <Ruler className="mt-0.5 h-5 w-5 shrink-0 text-[#ff5f1f]" />
+            <div>
+              <p className="text-sm font-bold text-stone-900">Tamanho antes da compra</p>
+              <p className="mt-0.5 text-[13px] leading-5 text-stone-500">
+                Guia com medidas em centímetros em cada produto.
+              </p>
+            </div>
           </div>
-          <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              {
-                svg: <svg key="1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7"><path d="M12 4v16"/><path d="M8 10l4-4 4 4"/><circle cx="12" cy="18" r="2"/><path d="M6 14c-1 2-1 4 2 6"/><path d="M18 14c1 2 1 4-2 6"/></svg>,
-                title: "Conforto Premium",
-                desc: "Palmilha anatômica em EVA de alta densidade com tecnologia memory foam. Seus pés merecem o melhor.",
-              },
-              {
-                svg: <svg key="2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7"><path d="M12 3c.5 0 1 .4 1 1v2c0 .6-.5 1-1 1s-1-.4-1-1V4c0-.6.5-1 1-1z"/><path d="M8 7c.5 0 1 .4 1 1v2c0 .6-.5 1-1 1s-1-.4-1-1V8c0-.6.5-1 1-1z"/><path d="M16 7c.5 0 1 .4 1 1v2c0 .6-.5 1-1 1s-1-.4-1-1V8c0-.6.5-1 1-1z"/><path d="M6 13c.5 0 1 .4 1 1v2c0 .6-.5 1-1 1s-1-.4-1-1v-2c0-.6.5-1 1-1z"/><path d="M18 13c.5 0 1 .4 1 1v2c0 .6-.5 1-1 1s-1-.4-1-1v-2c0-.6.5-1 1-1z"/><path d="M10 18c.5 0 1 .4 1 1v1c0 .6-.5 1-1 1s-1-.4-1-1v-1c0-.6.5-1 1-1z"/><path d="M14 18c.5 0 1 .4 1 1v1c0 .6-.5 1-1 1s-1-.4-1-1v-1c0-.6.5-1 1-1z"/></svg>,
-                title: "Design Exclusivo",
-                desc: "Cada Keeus é pensado nos mínimos detalhes. Cores vibrantes, acabamento impecável e a icônica identidade laranja.",
-              },
-              {
-                svg: <svg key="3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7"><path d="M12 22c4.2 0 7-1.7 7-5 0-3.3-3.1-5-7-5s-7 1.7-7 5c0 3.3 2.8 5 7 5z"/><path d="M12 17c-2.2 0-4-.7-4-2 0-1.3 1.8-2 4-2s4 .7 4 2c0 1.3-1.8 2-4 2z"/><path d="M12 7V2"/><path d="M10 4l2-2 2 2"/><path d="M6 10c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2"/></svg>,
-                title: "Escolha sem dúvida",
-                desc: "Fotos reais em vários ângulos, numerações visíveis e informações objetivas para comparar cada modelo.",
-              },
-            ].map((item) => (
-              <div key={item.title}
-                className="group rounded-2xl bg-white p-8 text-center transition-all hover:shadow-[0_12px_48px_rgba(255,95,31,0.06)] hover:-translate-y-1"
-              >
-                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#FF5F1F]/5 text-[#FF5F1F] transition-colors group-hover:bg-[#FF5F1F] group-hover:text-white">
-                  {item.svg}
-                </div>
-                <h3 className="font-display text-lg font-bold text-stone-900">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-500">{item.desc}</p>
-              </div>
-            ))}
+          <div className="flex items-start gap-3">
+            <Camera className="mt-0.5 h-5 w-5 shrink-0 text-[#ff5f1f]" />
+            <div>
+              <p className="text-sm font-bold text-stone-900">Foto real do modelo</p>
+              <p className="mt-0.5 text-[13px] leading-5 text-stone-500">
+                O par que você vê é o par que chega.
+              </p>
+            </div>
           </div>
-        </section>
-      </CinematicSection>
-
-      <CinematicScrollSection />
-      {/* Mais Vendidos */}
-      <CinematicSection>
-        <ProductGrid
-          title="Seleção Keeus"
-          subtitle="Modelos em destaque para você conhecer"
-          products={featured}
-          viewAllHref="/colecao"
-        />
-      </CinematicSection>
-
-      {/* Newsletter + FAQ combinados */}
-      <CinematicSection>
-        <div className="border-t border-stone-100">
-          <LeadCapture />
+          <div className="flex items-start gap-3">
+            <RefreshCcw className="mt-0.5 h-5 w-5 shrink-0 text-[#ff5f1f]" />
+            <div>
+              <p className="text-sm font-bold text-stone-900">Troca explicada</p>
+              <p className="mt-0.5 text-[13px] leading-5 text-stone-500">
+                Regras claras na página de trocas, antes de fechar.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#ff5f1f]" />
+            <div>
+              <p className="text-sm font-bold text-stone-900">Atendimento direto</p>
+              <p className="mt-0.5 text-[13px] leading-5 text-stone-500">
+                Dúvida de número ou de pedido, a gente responde.
+              </p>
+            </div>
+          </div>
         </div>
-      </CinematicSection>
+      </section>
 
-      <CinematicSection>
-        <FaqSection />
-      </CinematicSection>
+      {/* Catálogo — uma grade só, sem repetição */}
+      <ProductGrid
+        title="A coleção"
+        subtitle={`${allProducts.length} modelos de slide e chinelo de dedo, do 34 ao 45`}
+        products={allProducts}
+        viewAllHref="/colecao"
+      />
+
+      {/* Navegar por tipo — como loja de calçado de verdade */}
+      <section className="border-t border-stone-100 bg-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-14 sm:grid-cols-2 md:px-8">
+          <Link
+            href="/colecao?categoria=slides"
+            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#1a1a1a] p-6"
+          >
+            <div className="relative z-10">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">Slide</p>
+              <h2 className="font-display mt-1 text-2xl font-extrabold text-white">Faixa larga, pé firme</h2>
+              <p className="mt-1 text-sm text-white/70">Do dia a dia ao pós-banho.</p>
+            </div>
+            <span className="absolute bottom-6 right-6 text-4xl text-white/25 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </Link>
+          <Link
+            href="/colecao?categoria=flipflops"
+            className="group relative flex min-h-44 items-end overflow-hidden rounded-2xl bg-[#ff5f1f] p-6"
+          >
+            <div className="relative z-10">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">Chinelo de dedo</p>
+              <h2 className="font-display mt-1 text-2xl font-extrabold text-white">O clássico do verão</h2>
+              <p className="mt-1 text-sm text-white/80">Leve, seca rápido, vai pra tudo.</p>
+            </div>
+            <span className="absolute bottom-6 right-6 text-4xl text-white/30 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* Como funciona — curto e direto */}
+      <section className="mx-auto max-w-4xl px-4 py-14 md:px-8">
+        <h2 className="font-display text-center text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
+          Como comprar na Keeus
+        </h2>
+        <div className="mt-8 grid gap-8 sm:grid-cols-3">
+          {[
+            ["1", "Escolha o modelo e o tamanho", "Use o guia com as medidas do seu pé. Na dúvida entre dois números, vai no maior."],
+            ["2", "Fale com a gente", "O pedido é confirmado no atendimento, com prazo e forma de pagamento antes de fechar."],
+            ["3", "Receba e confira", "Chegou, conferiu e algo não serviu? Veja as condições de troca e a gente resolve."],
+          ].map(([num, title, text]) => (
+            <div key={num} className="text-center sm:text-left">
+              <span className="font-display text-3xl font-extrabold text-[#ff5f1f]">{num}</span>
+              <h3 className="mt-2 text-sm font-bold text-stone-900">{title}</h3>
+              <p className="mt-1.5 text-[13px] leading-6 text-stone-500">{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <FaqSection />
     </>
   );
 }

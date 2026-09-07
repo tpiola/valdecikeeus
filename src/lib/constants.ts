@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Keeus",
-  tagline: "Chinelos Premium",
+  tagline: "Slide e Chinelo de Dedo",
   description:
     "Keeus — slides e chinelos de dedo com design contemporâneo, fotos reais e informações claras para escolher seu modelo.",
   url: "https://valdecikeeus.vercel.app",

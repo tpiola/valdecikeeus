@@ -263,8 +263,8 @@ h1, h2, h3 {
   margin: 0;
 }
 
-/* ── Free shipping bar ── */
-.free-shipping-bar {
+/* ── Barra de aviso do topo ── */
+.store-notice-bar {
   background: var(--foreground);
   color: #FFFFFF;
   font-size: 11px;

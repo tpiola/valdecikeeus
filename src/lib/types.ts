@@ -1,30 +1,3 @@
-export type CourseCategory =
-  | "farmacia"
-  | "negocios"
-  | "tecnologia"
-  | "marketing"
-  | "gastronomia"
-  | "design";
-
-export type CourseLevel = "Iniciante" | "Intermediário" | "Avançado";
-
-export interface Course {
-  id: number;
-  slug: string;
-  name: string;
-  category: CourseCategory;
-  price: number;
-  instructor: string;
-  duration: string;
-  level: CourseLevel;
-  students: number;
-  rating: number;
-  description: string;
-  image: string;
-  modules: string[];
-  certificate: boolean;
-}
-
 export type ProductCategory = "slides" | "flipflops" | "premium";
 
 export interface Product {

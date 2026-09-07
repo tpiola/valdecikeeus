@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: `Coleção | ${SITE.name}`,
   description: "Explore a coleção Keeus de slides e chinelos de dedo. Compare modelos, cores, tamanhos e preços.",
   openGraph: {
-    title: "Coleção Keeus — Chinelos Premium",
+    title: "Coleção Keeus — Slide e Chinelo de Dedo",
     description: "Slides, flip flops e lançamentos exclusivos.",
   },
 };
