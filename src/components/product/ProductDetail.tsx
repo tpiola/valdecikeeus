@@ -8,6 +8,7 @@ import { useCartStore } from "@/lib/store/cart";
 import { useWishlistStore } from "@/lib/store/wishlist";
 import ProductGallery from "./ProductGallery";
 import SizeFinder from "./SizeFinder";
+import ShippingCalculator from "./ShippingCalculator";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const [size, setSize] = useState<number | null>(null);
@@ -128,6 +129,8 @@ export default function ProductDetail({ product }: { product: Product }) {
             Escolha um tamanho acima primeiro
           </p>
         )}
+
+        <ShippingCalculator productPrice={product.price} />
 
         {/* Garantias reais da loja */}
         <div className="mt-7 grid gap-3 sm:grid-cols-2">

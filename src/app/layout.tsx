@@ -209,7 +209,7 @@ export default function RootLayout({
               inLanguage: "pt-BR",
               potentialAction: {
                 "@type": "SearchAction",
-                target: SITE.url + "/colecao?search={search_term_string}",
+                target: SITE.url + "/colecao?busca={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),

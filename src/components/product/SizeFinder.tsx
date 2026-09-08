@@ -23,7 +23,7 @@ export default function SizeFinder({ sizes }: { sizes: number[] }) {
   };
 
   return (
-    <div className="rounded-xl border border-accent/30 bg-accent-soft p-5">
+    <div className="rounded-xl border border-accent/30 bg-accent-light p-5">
       <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent">
         <Ruler size={14} />
         Não sabe seu número?
@@ -44,7 +44,7 @@ export default function SizeFinder({ sizes }: { sizes: number[] }) {
         />
         <button
           onClick={calculate}
-          className="rounded-md bg-accent px-5 py-2 text-xs font-bold uppercase text-accent-foreground hover:bg-accent-hover"
+          className="rounded-md bg-accent px-5 py-2 text-xs font-bold uppercase text-accent-fore hover:bg-accent-hover"
         >
           Ver tamanho
         </button>

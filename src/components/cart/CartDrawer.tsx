@@ -128,7 +128,7 @@ export default function CartDrawer() {
                 <Link
                   href="/checkout"
                   onClick={close}
-                  className="flex w-full items-center justify-center rounded-full bg-accent py-4 text-xs font-bold uppercase tracking-widest text-accent-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="flex w-full items-center justify-center rounded-full bg-accent py-4 text-xs font-bold uppercase tracking-widest text-accent-fore transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Revisar pedido
                 </Link>
