@@ -257,6 +257,16 @@ h1, h2, h3 {
   animation: pulse-soft 2s ease-in-out infinite;
 }
 
+/* ── Hero cinematic ── */
+.hero-cinematic {
+  /* Reserve space above sticky header / notice without clipping CTA */
+  --hero-pad-top: calc(var(--header-offset) + 0.5rem);
+}
+.hero-cinematic .animate-ken-burns {
+  animation-duration: 18s;
+  transform-origin: 55% 40%;
+}
+
 /* ── Ken Burns ── */
 @keyframes kenBurns {
   0%   { transform: scale(1.0); }
