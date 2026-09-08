@@ -206,10 +206,11 @@ export const PRODUCTS: Product[] = [
     price: 139.9,
     installmentPrice: 34.98,
     installments: 4,
-    stock: 20,
-    isLowStock: false,
+    stock: 12,
+    isLowStock: true,
     isNew: true,
     isLimitedEdition: false,
+    flashSaleEndsAt: "2026-09-13T02:59:59.000Z",
     sizes: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43],
     colors: ["#D4A574", "#FF5F1F"],
     description:
@@ -262,10 +263,11 @@ export const PRODUCTS: Product[] = [
     price: 179.9,
     installmentPrice: 44.98,
     installments: 4,
-    stock: 25,
-    isLowStock: false,
+    stock: 18,
+    isLowStock: true,
     isNew: true,
     isLimitedEdition: true,
+    flashSaleEndsAt: "2026-09-13T02:59:59.000Z",
     sizes: [37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#1A1A1A", "#FF5F1F"],
     description:
@@ -317,10 +319,11 @@ export const PRODUCTS: Product[] = [
     price: 269.9,
     installmentPrice: 67.48,
     installments: 4,
-    stock: 20,
-    isLowStock: false,
+    stock: 14,
+    isLowStock: true,
     isNew: true,
     isLimitedEdition: false,
+    flashSaleEndsAt: "2026-09-13T02:59:59.000Z",
     sizes: [37, 38, 39, 40, 41, 42, 43],
     colors: ["#1A1A1A", "#FF5F1F", "#D4A574"],
     description:
@@ -388,3 +391,12 @@ export const getKitContents = (product: Product) =>
   (product.kitItems ?? [])
     .map((slug) => PRODUCTS.find((p) => p.slug === slug))
     .filter((p): p is Product => Boolean(p));
+
+export const getFlashSaleProducts = () =>
+  PRODUCTS.filter(
+    (p) =>
+      Boolean(p.flashSaleEndsAt) &&
+      Boolean(p.originalPrice) &&
+      new Date(p.flashSaleEndsAt!).getTime() > Date.now()
+  );
+

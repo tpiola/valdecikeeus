@@ -7,6 +7,8 @@ import FaqSection from "@/components/home/FaqSection";
 import LeadCapture from "@/components/home/LeadCapture";
 import ScrollStory from "@/components/home/ScrollStory";
 import ProductMarquee from "@/components/home/ProductMarquee";
+import FlashSaleBanner from "@/components/conversion/FlashSaleBanner";
+import TrustStrip from "@/components/conversion/TrustStrip";
 import Reveal from "@/components/ui/Reveal";
 import { PRODUCTS, getKits } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
@@ -45,6 +47,8 @@ export default function Home() {
       }} />
 
       <Hero />
+
+      <FlashSaleBanner />
 
       <ProductMarquee />
 
@@ -90,6 +94,19 @@ export default function Home() {
         </div>
       </section>
       </Reveal>
+
+      <section className="bg-[#f6f3ef]">
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
+          <TrustStrip />
+          <p className="mt-4 text-center text-xs text-stone-500">
+            Dúvidas? Veja o{" "}
+            <a href="/faq" className="font-semibold text-stone-800 underline underline-offset-2">FAQ</a>,{" "}
+            <a href="/trocas" className="font-semibold text-stone-800 underline underline-offset-2">trocas</a>
+            {" "}ou{" "}
+            <a href="/contato" className="font-semibold text-stone-800 underline underline-offset-2">fale conosco</a>.
+          </p>
+        </div>
+      </section>
 
       <ScrollStory />
 

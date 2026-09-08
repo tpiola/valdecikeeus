@@ -6,19 +6,40 @@ export const SITE = {
   url: "https://valdecikeeus.vercel.app",
 };
 
+/** Oferta relâmpago da loja — deadline real (America/Sao_Paulo). */
+export const FLASH_SALE = {
+  enabled: true,
+  /** Fim: 12/09/2026 23:59 BRT */
+  endsAt: "2026-09-13T02:59:59.000Z",
+  label: "Oferta com data",
+  href: "/colecao?filtro=oferta",
+  /** Corta frete do dia útil até este horário local (BRT). */
+  sameDayCutoffHour: 15,
+  /** Reserva do pedido no checkout, em minutos. */
+  checkoutHoldMinutes: 10,
+} as const;
+
+export const CHECKOUT_TRUST = [
+  { label: "Pix", detail: "Pagamento instantâneo" },
+  { label: "Cartão", detail: "Processado pelo Mercado Pago" },
+  { label: "Trocas", detail: "Condições na página de trocas" },
+  { label: "Transparência", detail: "Total e frete antes de pagar" },
+] as const;
+
 export const NAV_LINKS = [
   { label: "Chinelos", href: "/colecao" },
   { label: "Kits", href: "/colecao?categoria=kits" },
   { label: "Lançamentos", href: "/colecao?filtro=novos" },
+  { label: "Trocas", href: "/trocas" },
   { label: "Sobre", href: "/sobre" },
   { label: "Contato", href: "/contato" },
 ];
 
 export const TRUST_BADGES = [
-  { label: "Fotos reais", detail: "Veja o produto em diferentes ângulos" },
-  { label: "Tamanhos claros", detail: "Escolha a numeração antes da sacola" },
-  { label: "Catálogo objetivo", detail: "Compare modelo, cor e preço" },
-  { label: "Ajuda disponível", detail: "Consulte dúvidas e políticas da loja" },
+  { label: "Fotos reais", detail: "O par que você vê é o modelo anunciado" },
+  { label: "Pix e cartão", detail: "Sem boleto · checkout via Mercado Pago" },
+  { label: "Tamanho antes da compra", detail: "Escolha a numeração com guia em cm" },
+  { label: "Trocas com regras claras", detail: "Leia a política antes de fechar" },
 ];
 
 export const FAQ_ITEMS = [
@@ -30,7 +51,7 @@ export const FAQ_ITEMS = [
   {
     question: "Quais formas de pagamento são aceitas?",
     answer:
-      "As condições de pagamento disponíveis devem ser confirmadas na etapa de atendimento antes da finalização do pedido.",
+      "Aceitamos Pix e cartão de crédito via Mercado Pago. Sem boleto. Se o pagamento online estiver indisponível, finalizamos pelo atendimento.",
   },
   {
     question: "Qual o prazo de entrega?",

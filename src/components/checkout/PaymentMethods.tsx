@@ -62,8 +62,9 @@ export default function PaymentMethods({
     <div className="mt-8 rounded-2xl bg-[#171512] p-6 text-white">
       <h2 className="text-lg font-bold">Forma de pagamento</h2>
       <p className="mt-1 text-sm text-white/55">
-        Escolha como prefere pagar. O pedido só é marcado como pago depois da
-        confirmação do Mercado Pago.
+        Escolha Pix ou cartão. O total acima é o que você paga — sem taxa
+        escondida nesta etapa. O pedido só fica como pago após a confirmação do
+        gateway.
       </p>
 
       <div
@@ -151,8 +152,8 @@ export default function PaymentMethods({
 
       <div className="mt-5 flex gap-2 text-xs text-white/50">
         <CheckCircle2 size={16} className="shrink-0 text-[#ff8a55]" />
-        Pix e cartão apenas. Sem boleto. Nenhuma cobrança sem confirmação do
-        gateway.
+        Aceitamos Pix e cartão. O status só muda para pago após confirmação do
+        Mercado Pago — nada é marcado como pago nesta página.
       </div>
 
       <Link

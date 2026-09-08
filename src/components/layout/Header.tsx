@@ -41,7 +41,7 @@ export default function Header() {
   return (
     <>
       <div className="store-notice-bar">
-        Slide e chinelo de dedo · Foto real em cada anúncio · Escolha o tamanho antes de comprar
+        Keeus — slide e chinelo de dedo · Pix e cartão · Trocas com regras claras
       </div>
 
       <header className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-shadow duration-300 ${scrolled ? "shadow-[0_1px_20px_rgba(0,0,0,0.06)]" : "border-b border-border"}`}>

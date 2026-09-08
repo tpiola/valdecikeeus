@@ -17,6 +17,9 @@ import ShippingCalculator, {
   type SelectedShippingQuote,
 } from "@/components/product/ShippingCalculator";
 import PaymentMethods, { type PayMethod } from "@/components/checkout/PaymentMethods";
+import CheckoutHoldTimer from "@/components/conversion/CheckoutHoldTimer";
+import ShippingCutoff from "@/components/conversion/ShippingCutoff";
+import TrustStrip from "@/components/conversion/TrustStrip";
 
 type CreatedOrder = {
   id: string;
@@ -173,6 +176,8 @@ export default function CheckoutPage() {
           Status: <strong className="text-foreground">aguardando pagamento</strong>. Nada foi cobrado ainda.
         </p>
 
+        <CheckoutHoldTimer orderId={order.id} />
+
         <div className="mt-8 rounded-2xl border border-border bg-white p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
@@ -203,6 +208,13 @@ export default function CheckoutPage() {
               <strong>R$ {order.total.toFixed(2).replace(".", ",")}</strong>
             </div>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <TrustStrip />
+        </div>
+        <div className="mt-4">
+          <ShippingCutoff />
         </div>
 
         <PaymentMethods

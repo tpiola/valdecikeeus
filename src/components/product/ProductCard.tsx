@@ -52,6 +52,13 @@ export default function ProductCard({ product }: { product: Product }) {
               -{discount}% OFF
             </span>
           )}
+          {product.flashSaleEndsAt &&
+            product.originalPrice &&
+            new Date(product.flashSaleEndsAt).getTime() > Date.now() && (
+            <span className="rounded-full bg-[#FF5F1F] px-2.5 py-1 text-[10px] font-bold text-white">
+              Oferta
+            </span>
+          )}
           {product.category === "kits" && (
             <span className="rounded-full bg-[#1a1a1a] px-2.5 py-1 text-[10px] font-bold text-white">
               Kit

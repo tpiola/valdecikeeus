@@ -11,6 +11,9 @@ import { useWishlistStore } from "@/lib/store/wishlist";
 import ProductGallery from "./ProductGallery";
 import SizeFinder from "./SizeFinder";
 import ShippingCalculator from "./ShippingCalculator";
+import ScarcityNote from "@/components/conversion/ScarcityNote";
+import ShippingCutoff from "@/components/conversion/ShippingCutoff";
+import Countdown from "@/components/conversion/Countdown";
 
 export type SizeAvailability = Record<number, number>;
 
@@ -94,13 +97,29 @@ export default function ProductDetail({
               R$ {product.originalPrice.toFixed(2).replace(".", ",")}
             </p>
           )}
-          <p className="text-3xl font-extrabold">
-            R$ {product.price.toFixed(2).replace(".", ",")}
-          </p>
+          <div className="flex flex-wrap items-end gap-3">
+            <p className="text-3xl font-extrabold">
+              R$ {product.price.toFixed(2).replace(".", ",")}
+            </p>
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="mb-1 rounded-full bg-[#FF5F1F] px-2.5 py-1 text-[11px] font-bold text-white">
+                -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+              </span>
+            )}
+          </div>
           <p className="mt-1 text-sm text-muted">
             em até {product.installments}x de R${" "}
             {product.installmentPrice.toFixed(2).replace(".", ",")} sem juros
           </p>
+          {product.flashSaleEndsAt &&
+            new Date(product.flashSaleEndsAt).getTime() > Date.now() && (
+            <div className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-stone-600">
+                Preço promocional até
+              </span>
+              <Countdown endsAt={product.flashSaleEndsAt} compact className="text-sm font-semibold text-stone-900" />
+            </div>
+          )}
         </div>
 
         <p className="mt-6 text-base leading-7 text-foreground/75">{product.description}</p>
@@ -172,6 +191,12 @@ export default function ProductDetail({
           <div className="mt-4">
             <SizeFinder sizes={product.sizes} />
           </div>
+          {size != null && (
+            <ScarcityNote
+              available={availableFor(size)}
+              isLowStock={product.isLowStock}
+            />
+          )}
         </div>
 
         <button
@@ -205,6 +230,10 @@ export default function ProductDetail({
             Escolha um tamanho acima primeiro
           </p>
         )}
+
+        <div className="mt-4">
+          <ShippingCutoff />
+        </div>
 
         <ShippingCalculator productPrice={product.price} />
 

@@ -22,4 +22,6 @@ export interface Product {
   originalPrice?: number;
   /** Slugs dos pares inclusos quando category === "kits" */
   kitItems?: string[];
+  /** ISO deadline da oferta relâmpago deste SKU (opcional) */
+  flashSaleEndsAt?: string;
 }
