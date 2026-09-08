@@ -16,7 +16,7 @@ export default function ProductGrid({
   viewAllHref?: string;
 }) {
   return (
-    <section className="bg-white px-4 py-16 md:px-8">
+    <section className="bg-white px-4 py-14 md:px-8 md:py-16">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <Reveal>
@@ -45,7 +45,7 @@ export default function ProductGrid({
         </Reveal>
 
         {/* Grid — cards entram em cascata leve */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product, i) => (
             <Reveal key={product.id} delay={Math.min(i % 4, 3) * 70}>
               <ProductCard product={product} />

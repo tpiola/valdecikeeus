@@ -103,8 +103,8 @@ body {
 h1, h2, h3 {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--foreground);
+  letter-spacing: -0.025em;
+  /* Intentionally no forced color — inherit so dark heroes stay readable */
 }
 
 /* ── Ott / Tondo — letter-spacing utility para títulos premium ── */
@@ -198,15 +198,10 @@ h1, h2, h3 {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 2px;
   z-index: 9999;
-  background: linear-gradient(90deg, var(--brand-orange), #FF8A4F, var(--brand-orange));
-  background-size: 200% 100%;
-  animation: progress-shimmer 2s linear infinite;
-}
-@keyframes progress-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  background: var(--brand-orange);
+  transform-origin: left center;
 }
 
 /* ── Reveal Animations ── */
@@ -346,3 +341,73 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   .keeus-marquee { animation: none !important; }
 }
+
+/* ── Focus rings (a11y) ── */
+:focus-visible {
+  outline: 2px solid var(--brand-orange);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Type / spacing scale helpers ── */
+.section-y {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+.container-x {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+}
+@media (min-width: 768px) {
+  .container-x { padding-inline: 2rem; }
+}
+
+/* ── Skeleton preload (avoid empty-card flash) ── */
+@keyframes keeus-skeleton {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.keeus-skeleton {
+  background: linear-gradient(90deg, #f0ebe4 0%, #f7f4f0 40%, #f0ebe4 80%);
+  background-size: 200% 100%;
+  animation: keeus-skeleton 1.2s ease-in-out infinite;
+  border-radius: var(--radius-lg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .keeus-skeleton { animation: none; background: #f0ebe4; }
+}
+
+/* ── Sticky mobile buy bar ── */
+.pdp-sticky-bar {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+.cart-drawer-footer {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/* ── Image hover zoom (premium, subtle) ── */
+.keeus-img-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .keeus-img-zoom {
+    transform: scale(1.04);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .keeus-img-zoom { transition: none; }
+  .group:hover .keeus-img-zoom { transform: none; }
+  .animate-ken-burns { animation: none !important; }
+  .progress-bar { transition: none; }
+  html { scroll-behavior: auto; }
+  .reveal-fade, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .product-card:hover { transform: none; }
+}
+

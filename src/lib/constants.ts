@@ -6,6 +6,17 @@ export const SITE = {
   url: "https://valdecikeeus.vercel.app",
 };
 
+/** Dados institucionais — só o que for real. CNPJ fica vazio até a loja informar. */
+export const COMPANY = {
+  legalName: "Keeus",
+  /** Preencha com CNPJ real quando disponível; string vazia = não exibir. */
+  cnpj: "",
+  email: "contato@keeus.com.br",
+  city: "Brasil",
+  policiesNote:
+    "Razão social e CNPJ constam nos documentos do pedido e no atendimento quando disponíveis.",
+} as const;
+
 /** Oferta relâmpago da loja — deadline real (America/Sao_Paulo). */
 export const FLASH_SALE = {
   enabled: true,
@@ -56,7 +67,7 @@ export const FAQ_ITEMS = [
   {
     question: "Qual o prazo de entrega?",
     answer:
-      "Prazo, modalidade e valor de entrega dependem do CEP e são confirmados antes do fechamento do pedido.",
+      "Informe seu CEP na página do produto ou no checkout para ver SEDEX e PAC com preço e prazo em dias úteis. O prazo conta após a confirmação do pagamento.",
   },
   {
     question: "Posso trocar ou devolver meu chinelo?",

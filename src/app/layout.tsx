@@ -5,7 +5,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
-import { SITE } from "@/lib/constants";
+import { COMPANY, SITE } from "@/lib/constants";
 import { PRODUCTS } from "@/lib/products";
 
 const inter = Inter({
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   openGraph: {
     title: "Keeus — Chinelos Premium de Verão",
-    description: "Slides e chinelos de dedo Keeus com fotos reais e escolha de tamanho.",
+    description: "Slides e chinelos Keeus com fotos reais, frete pelo CEP e Pix ou cartão.",
     url: SITE.url,
     siteName: "Keeus",
     locale: "pt_BR",
@@ -70,16 +70,20 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Keeus",
+    name: COMPANY.legalName || "Keeus",
     alternateName: "Keeus Chinelos",
     url: SITE.url,
     logo: `${SITE.url}/assets/real/logo.png`,
+    email: COMPANY.email || undefined,
     description:
-      "Catálogo Keeus de slides e chinelos de dedo com fotos reais e informações de produto.",
+      "Keeus — slides e chinelos de dedo com fotos reais, frete cotado pelo CEP e pagamento via Pix ou cartão.",
     address: {
       "@type": "PostalAddress",
       addressCountry: "BR",
     },
+    ...(COMPANY.cnpj
+      ? { taxID: COMPANY.cnpj, identifier: COMPANY.cnpj }
+      : {}),
   };
 
   const productCatalogJsonLd = {
@@ -123,12 +127,6 @@ export default function RootLayout({
         position: 2,
         name: "Coleção",
         item: `${SITE.url}/colecao`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Contato",
-        item: `${SITE.url}/contato`,
       },
     ],
   };
@@ -216,7 +214,7 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1" id="conteudo">{children}</main>
         <Footer />
         <CartDrawer />
       </body>

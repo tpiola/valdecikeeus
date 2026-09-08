@@ -17,13 +17,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return {};
+  const tipo =
+    product.category === "slides"
+      ? "Slide"
+      : product.category === "flipflops"
+        ? "Chinelo de dedo"
+        : product.category === "kits"
+          ? "Kit"
+          : "Produto";
   return {
-    title: `${product.name} | ${SITE.name}`,
-    description: product.description,
+    title: `${product.name}`,
+    description: `${tipo} Keeus — ${product.description.slice(0, 140)}`,
+    alternates: { canonical: `${SITE.url}/produto/${product.slug}` },
     openGraph: {
-      title: product.name,
+      title: `${product.name} | Keeus`,
       description: product.description,
-      images: [{ url: product.image, width: 800, height: 800 }],
+      url: `${SITE.url}/produto/${product.slug}`,
+      images: [{ url: product.image, width: 800, height: 800, alt: product.name }],
+      type: "website",
     },
   };
 }
@@ -49,7 +60,7 @@ export default async function ProductPage({
     sizeStock = undefined;
   }
 
-  const jsonLd = {
+  const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
@@ -76,11 +87,35 @@ export default async function ProductPage({
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Coleção",
+        item: `${SITE.url}/colecao`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `${SITE.url}/produto/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <ProductDetail product={product} sizeStock={sizeStock} />
     </>
