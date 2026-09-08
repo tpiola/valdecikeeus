@@ -54,7 +54,7 @@ export default function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-tight !text-white md:text-6xl"
+            className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight !text-white md:text-6xl"
             style={{ color: "#ffffff" }}
           >
             Chinelo Keeus.
@@ -67,7 +67,7 @@ export default function Hero() {
             transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 max-w-md text-base leading-relaxed text-white/70"
           >
-            Fotos reais, numeração do 34 ao 45 e frete cotado pelo CEP. Pix ou cartão no checkout.
+            Fotos reais, numeração conforme o modelo e frete cotado pelo CEP. Pix ou cartão no checkout.
           </motion.p>
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
@@ -94,7 +94,7 @@ export default function Hero() {
               <strong className="font-semibold text-white">13</strong> itens
             </li>
             <li>
-              <strong className="font-semibold text-white">34–45</strong> numerações
+              <strong className="font-semibold text-white">Por modelo</strong> numeração
             </li>
             <li>
               <strong className="font-semibold text-white">Pix e cartão</strong>
@@ -119,14 +119,6 @@ export default function Hero() {
                 poster={heroProduct.image}
                 lazy={false}
                 className="absolute inset-0 h-full w-full object-cover"
-              />
-              <Image
-                src={heroProduct.image}
-                alt={heroProduct.name}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="pointer-events-none object-contain p-10 opacity-0"
               />
               <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-stone-800">
                 {heroProduct.name}

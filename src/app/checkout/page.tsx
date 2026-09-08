@@ -94,7 +94,7 @@ export default function CheckoutPage() {
     return (
       <section className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-6 py-20 text-center">
         <ShoppingBag size={40} className="text-accent" />
-        <h1 className="mt-5 text-3xl font-bold text-stone-900">Sua sacola está vazia</h1>
+        <h1 className="mt-5 text-3xl font-semibold text-stone-900">Sua sacola está vazia</h1>
         <p className="mt-3 max-w-md text-muted">
           Adicione um modelo e escolha o tamanho para continuar.
         </p>
@@ -201,8 +201,8 @@ export default function CheckoutPage() {
   if (step === "summary" && order) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-12 md:px-8 md:py-20">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Pedido reservado</p>
-        <h1 className="mt-2 text-3xl font-bold text-stone-900 md:text-4xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Pedido reservado</p>
+        <h1 className="mt-2 text-3xl font-semibold text-stone-900 md:text-4xl">
           Quase lá — finalize o pagamento
         </h1>
         <p className="mt-3 text-muted">
@@ -216,7 +216,7 @@ export default function CheckoutPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs text-muted">Número do pedido</p>
-              <p className="font-mono text-sm font-bold">{order.id}</p>
+              <p className="font-mono text-sm font-semibold">{order.id}</p>
             </div>
             <Link
               href={`/pedido/${order.id}?token=${order.accessToken}`}
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
                 {order.shipping.days === 1 ? "dia útil" : "dias úteis"}
               </p>
             )}
-            <div className="flex justify-between font-bold">
+            <div className="flex justify-between font-semibold">
               <span>Total</span>
               <strong>R$ {order.total.toFixed(2).replace(".", ",")}</strong>
             </div>
@@ -284,8 +284,15 @@ export default function CheckoutPage() {
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_360px]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Checkout</p>
-          <h1 className="mt-2 text-3xl font-bold text-stone-900 md:text-4xl">Finalize sua compra</h1>
+          <div className="checkout-progress -mx-4 mb-6 border-b border-border bg-white/95 px-4 py-3 md:-mx-0 md:rounded-xl md:border md:px-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">Checkout</p>
+            <p className="mt-1 text-xs text-stone-600">
+              {missingHints.length
+                ? `Passo atual — falta: ${missingHints.slice(0, 3).join(", ")}`
+                : "Pronto para criar o pedido · Pix ou cartão na próxima etapa"}
+            </p>
+          </div>
+          <h1 className="mt-2 text-3xl font-semibold text-stone-900 md:text-4xl">Finalize sua compra</h1>
           <p className="mt-2 text-sm text-muted">
             Dados → frete com prazo real → Pix ou cartão. Sem boleto.
           </p>
@@ -309,7 +316,7 @@ export default function CheckoutPage() {
                   <p className="mt-1 text-sm text-muted">
                     Tamanho {item.size} · Qtd {item.quantity}
                   </p>
-                  <p className="mt-2 font-bold">
+                  <p className="mt-2 font-semibold">
                     R$ {(item.product.price * item.quantity).toFixed(2).replace(".", ",")}
                   </p>
                 </div>
@@ -320,7 +327,7 @@ export default function CheckoutPage() {
           <form id="checkout-form" onSubmit={createOrder} className="mt-8 space-y-6">
             {/* 1. Contato — minimal first */}
             <div className="rounded-2xl border border-border bg-white p-5 md:p-6">
-              <h2 className="text-lg font-bold text-stone-900">1. Seus dados</h2>
+              <h2 className="text-lg font-semibold text-stone-900">1. Seus dados</h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <label className="block text-sm sm:col-span-2">
                   <span className="font-semibold">Nome completo</span>
@@ -360,7 +367,7 @@ export default function CheckoutPage() {
 
             {/* 2. Frete early — CEP first */}
             <div className="rounded-2xl border border-border bg-white p-5 md:p-6">
-              <h2 className="text-lg font-bold text-stone-900">2. Frete e prazo</h2>
+              <h2 className="text-lg font-semibold text-stone-900">2. Frete e prazo</h2>
               <p className="mt-1 text-xs text-muted">
                 Informe o CEP para ver SEDEX e PAC com prazo em dias úteis.
               </p>
@@ -412,7 +419,7 @@ export default function CheckoutPage() {
 
             {/* 3. Endereço restante */}
             <div className="rounded-2xl border border-border bg-white p-5 md:p-6">
-              <h2 className="text-lg font-bold text-stone-900">3. Endereço de entrega</h2>
+              <h2 className="text-lg font-semibold text-stone-900">3. Endereço de entrega</h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <label className="block text-sm sm:col-span-2">
                   <span className="font-semibold">Rua</span>
@@ -523,10 +530,14 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={!canSubmit}
-              className="hidden w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-bold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50 md:flex"
+              className="hidden w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-semibold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50 md:flex"
             >
               {busy ? <Loader2 className="animate-spin" size={18} /> : null}
-              Continuar para pagamento
+              {canSubmit
+                ? "Continuar para pagamento"
+                : missingHints[0]
+                  ? ("Falta: " + missingHints[0])
+                  : "Preencha os dados"}
             </button>
             <p className="hidden text-xs text-muted md:block">
               Criar o pedido não cobra nada. Você escolhe Pix ou cartão na próxima etapa.
@@ -535,7 +546,7 @@ export default function CheckoutPage() {
         </div>
 
         <aside className="hidden h-fit rounded-2xl border border-border bg-stone-50 p-6 lg:sticky lg:top-28 lg:block">
-          <h2 className="text-lg font-bold text-stone-900">Resumo</h2>
+          <h2 className="text-lg font-semibold text-stone-900">Resumo</h2>
           <div className="mt-5 space-y-3 border-b border-border pb-5 text-sm">
             <div className="flex justify-between">
               <span className="text-muted">Subtotal</span>
@@ -586,7 +597,7 @@ export default function CheckoutPage() {
         <div className="mx-auto flex max-w-lg flex-col gap-2">
           <div className="flex items-baseline justify-between text-sm">
             <span className="text-muted">Total</span>
-            <span className="text-base font-extrabold text-stone-900">
+            <span className="text-base font-semibold text-stone-900">
               R$ {orderTotal.toFixed(2).replace(".", ",")}
             </span>
           </div>
@@ -595,11 +606,12 @@ export default function CheckoutPage() {
               Chega em {shipping.days} dias úteis · {shipping.service}
             </p>
           )}
+          <p className="text-center text-[11px] text-muted">Pix ou cartão · frete pelo CEP · sem boleto</p>
           <button
             type="submit"
             form="checkout-form"
             disabled={!canSubmit}
-            className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-accent text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-accent text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
           >
             {busy ? <Loader2 className="animate-spin" size={18} /> : null}
             {canSubmit

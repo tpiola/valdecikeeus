@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   KEEUS — SISTEMA DE DESIGN PREMIUM
-   Marca: #FF5F1F (Laranja Keeus)
-   Inspiração: Hermès, Loewe, Fear of God, Aesop, Allbirds
-   Princípios: Tipografia elegante, espaçamento generoso, cor como identidade
-═══════════════════════════════════════════════════════════════════════════ */
+/* Keeus design tokens — Nike/Apple quiet craft. Accent #FF5F1F. */
 
 :root {
   /* Cores da marca */
@@ -44,9 +39,20 @@
   --shadow-lg:         0 12px 40px rgba(0, 0, 0, 0.08);
   --shadow-orange:     0 8px 32px rgba(255, 95, 31, 0.12);
 
-  /* Tipografia */
-  --font-display:      var(--font-plus-jakarta);
+  /* Tipografia — scale 12/14/16/20/28/40/56 */
   --font-sans:         var(--font-inter);
+  --font-display:      var(--font-inter);
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-20: 1.25rem;
+  --text-28: 1.75rem;
+  --text-40: 2.5rem;
+  --text-56: 3.5rem;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-body: 1.55;
+  --header-offset: 7.5rem;
 }
 
 @theme inline {
@@ -65,13 +71,14 @@
   --color-accent-fore:    var(--accent-fore);
   --color-success:        var(--success);
   --color-signal:         var(--signal);
-  --font-display:         var(--font-plus-jakarta);
+  --font-display:         var(--font-inter);
   --font-sans:            var(--font-inter);
 }
 
 /* ── Base ── */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -97,15 +104,24 @@ body {
 
 /* ── Typography ── */
 .font-display {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.022em;
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  /* Intentionally no forced color — inherit so dark heroes stay readable */
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.022em;
 }
+
+.text-12 { font-size: var(--text-12); line-height: var(--leading-snug); }
+.text-14 { font-size: var(--text-14); line-height: var(--leading-snug); }
+.text-16 { font-size: var(--text-16); line-height: var(--leading-body); }
+.text-20 { font-size: var(--text-20); line-height: var(--leading-tight); }
+.text-28 { font-size: var(--text-28); line-height: var(--leading-tight); }
+.text-40 { font-size: var(--text-40); line-height: var(--leading-tight); }
+.text-56 { font-size: var(--text-56); line-height: 1.05; }
+
 
 /* ── Ott / Tondo — letter-spacing utility para títulos premium ── */
 .tracking-premium {
@@ -119,22 +135,21 @@ h1, h2, h3 {
   justify-content: center;
   gap: 0.5rem;
   background: var(--accent);
-  color: var(--accent-fore);
+  color: #fff;
   font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: var(--radius);
-  padding: 0.75rem 1.75rem;
-  transition: all 0.3s ease;
+  font-size: var(--text-14);
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  min-height: 3rem;
+  transition: background 0.2s ease;
   border: none;
   cursor: pointer;
 }
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-orange);
-}
-.btn-primary:active {
-  transform: translateY(0);
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:disabled {
+  background: color-mix(in srgb, var(--accent) 45%, white);
+  color: #fff;
+  cursor: not-allowed;
 }
 
 .btn-secondary {
@@ -411,3 +426,23 @@ a:focus:not(:focus-visible) {
   .product-card:hover { transform: none; }
 }
 
+
+/* Frete CALCULAR — AA contrast on orange */
+.btn-calc {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  min-height: 3rem;
+  border-radius: 0.75rem;
+}
+.btn-calc:disabled {
+  background: color-mix(in srgb, var(--accent) 40%, #f5f2ee);
+  color: #fff;
+  opacity: 1;
+}
+.checkout-progress {
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 30;
+  backdrop-filter: blur(8px);
+}

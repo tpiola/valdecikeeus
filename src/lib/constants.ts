@@ -57,7 +57,7 @@ export const FAQ_ITEMS = [
   {
     question: "Como escolher o tamanho certo do chinelo Keeus?",
     answer:
-      "Os chinelos Keeus seguem a tabela de medidas brasileira padrão. Disponibilizamos um guia de tamanhos em cada produto com medidas em centímetros. Se estiver entre dois tamanhos, recomendamos escolher o maior para máximo conforto.",
+      "A numeração Keeus segue a tabela brasileira. Em cada produto há um guia com medidas em centímetros. Se estiver entre dois tamanhos, escolha o maior.",
   },
   {
     question: "Quais formas de pagamento são aceitas?",
@@ -77,7 +77,7 @@ export const FAQ_ITEMS = [
   {
     question: "Os chinelos Keeus são resistentes à água?",
     answer:
-      "Sim! Todos os chinelos Keeus são fabricados com materiais resistentes à água — ideais para praia, piscina, banho e verão. O EVA premium e o TPU não absorvem água e secam rapidamente.",
+      "Todos os chinelos Keeus usam materiais resistentes à água (EVA e TPU): adequados para praia, piscina e uso no dia a dia. Não absorvem água e secam rápido.",
   },
   {
     question: "Qual a diferença entre os modelos Slide e Flip Flop?",
@@ -87,7 +87,7 @@ export const FAQ_ITEMS = [
   {
     question: "Como limpar e conservar meus chinelos Keeus?",
     answer:
-      "A limpeza é simples: use água, sabão neutro e uma esponja macia. Evite produtos abrasivos. Deixe secar à sombra — não exponha ao sol por longos períodos. Armazene em local arejado.",
+      "Limpe com água, sabão neutro e esponja macia. Evite abrasivos. Seque à sombra e guarde em local arejado.",
   },
   {
     question: "A Keeus tem loja física?",

@@ -8,4 +8,13 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default {
+  ...nextConfig,
+  async redirects() {
+    return [
+      { source: "/carrinho", destination: "/checkout", permanent: false },
+      { source: "/cart", destination: "/checkout", permanent: false },
+    ];
+  },
+};
+

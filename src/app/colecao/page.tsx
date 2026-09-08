@@ -76,11 +76,40 @@ export default async function ColecaoPage({
     subtitle = products.length ? `${products.length} modelo(s) encontrado(s)` : "Nenhum modelo encontrado. Tente outra cor ou nome.";
   }
 
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: title,
+    url: `${SITE.url}/colecao`,
+    numberOfItems: products.length,
+    itemListElement: products.slice(0, 24).map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE.url}/produto/${p.slug}`,
+      name: p.name,
+    })),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      { "@type": "ListItem", position: 2, name: "Coleção", item: `${SITE.url}/colecao` },
+    ],
+  };
+
   return (
-    <ProductGrid
-      title={title}
-      subtitle={subtitle}
-      products={products}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <ProductGrid title={title} subtitle={subtitle} products={products} headingAs="h1" />
+    </>
   );
 }

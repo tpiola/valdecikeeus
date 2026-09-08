@@ -77,7 +77,10 @@ export default function ShippingCalculator({
 
   const calculate = async (cepOverride?: string) => {
     const raw = (cepOverride ?? cep).replace(/\D/g, "");
-    if (raw.length < 8) return;
+    if (raw.length < 8) {
+      setError("Informe o CEP completo (00000-000) para calcular.");
+      return;
+    }
     setLoading(true);
     setError("");
     setResult(null);
@@ -108,9 +111,8 @@ export default function ShippingCalculator({
   }, [initialCep]);
 
   useEffect(() => {
-    if (!autoCalculate) return;
     const raw = cep.replace(/\D/g, "");
-    if (raw.length === 8) {
+    if (raw.length === 8 && (autoCalculate || !onSelect)) {
       void calculate(raw);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -165,8 +167,8 @@ export default function ShippingCalculator({
         <button
           type="button"
           onClick={() => void calculate()}
-          disabled={loading || cep.replace(/\D/g, "").length < 8}
-          className="flex min-h-12 min-w-[108px] items-center justify-center gap-2 rounded-lg bg-accent px-5 text-xs font-bold uppercase tracking-wider text-accent-fore transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
+          disabled={loading}
+          className="btn-calc flex min-h-12 min-w-[108px] items-center justify-center gap-2 px-5 text-xs font-semibold uppercase tracking-wider transition-colors hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed"
         >
           {loading ? <Loader2 size={14} className="animate-spin" /> : "Calcular"}
         </button>

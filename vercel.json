@@ -9,6 +9,16 @@
       "source": "/produtos/:path*",
       "destination": "/colecao",
       "permanent": true
+    },
+    {
+      "source": "/carrinho",
+      "destination": "/checkout",
+      "permanent": false
+    },
+    {
+      "source": "/cart",
+      "destination": "/checkout",
+      "permanent": false
     }
   ],
   "headers": [
@@ -38,7 +48,21 @@
         {
           "key": "X-DNS-Prefetch-Control",
           "value": "on"
-        },
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/((?!api/).*)",
+      "headers": [
         {
           "key": "Cache-Control",
           "value": "public, s-maxage=3600, stale-while-revalidate=86400"

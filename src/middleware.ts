@@ -1,47 +1,73 @@
+import { createHash, timingSafeEqual } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
+const ADMIN_COOKIE = "keeus_admin_session";
+
+function sha256(value: string): string {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+function safeEqualHex(a: string, b: string): boolean {
+  try {
+    const ba = Buffer.from(a, "hex");
+    const bb = Buffer.from(b, "hex");
+    if (ba.length !== bb.length) return false;
+    return timingSafeEqual(ba, bb);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Admin auth — fail-closed.
+ * - No ?token= / ?admin= query auth (URL tokens leak via logs/Referer).
+ * - HTTP Basic issues an opaque HttpOnly session cookie (hash, not the secret).
+ */
 export function middleware(req: NextRequest) {
   if (!req.nextUrl.pathname.startsWith("/admin")) {
     return NextResponse.next();
   }
 
   const password = process.env.ADMIN_PASSWORD;
-  const token = process.env.ADMIN_TOKEN || password;
-
-  if (!password && !process.env.ADMIN_TOKEN) {
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (!password && !adminToken) {
     return new NextResponse(
-      "Admin não configurado. Defina ADMIN_PASSWORD ou ADMIN_TOKEN.",
+      "Admin não configurado. Defina ADMIN_PASSWORD (recomendado) no ambiente.",
       { status: 503, headers: { "Cache-Control": "no-store" } }
     );
   }
 
+  const expectedSession = sha256(
+    password ? `keeus-admin:${password}` : `keeus-admin-token:${adminToken}`
+  );
+
+  const cookie = req.cookies.get(ADMIN_COOKIE)?.value;
+  if (cookie && safeEqualHex(cookie, expectedSession)) {
+    return NextResponse.next();
+  }
+
   const auth = req.headers.get("authorization");
-  if (auth?.startsWith("Basic ") && password) {
+  if (auth?.startsWith("Basic ")) {
     try {
       const decoded = atob(auth.slice(6));
       const sep = decoded.indexOf(":");
       const pass = sep >= 0 ? decoded.slice(sep + 1) : decoded;
-      if (pass === password) return NextResponse.next();
+      const ok =
+        (password && pass === password) || (adminToken && pass === adminToken);
+      if (ok) {
+        const res = NextResponse.next();
+        res.cookies.set(ADMIN_COOKIE, expectedSession, {
+          httpOnly: true,
+          sameSite: "strict",
+          path: "/admin",
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 60 * 60 * 12,
+        });
+        return res;
+      }
     } catch {
       /* fall through */
     }
-  }
-
-  const q = req.nextUrl.searchParams.get("token") || req.nextUrl.searchParams.get("admin");
-  if (token && q && q === token) {
-    const res = NextResponse.next();
-    res.cookies.set("keeus_admin", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/admin",
-      secure: process.env.NODE_ENV === "production",
-    });
-    return res;
-  }
-
-  const cookie = req.cookies.get("keeus_admin")?.value;
-  if (token && cookie && cookie === token) {
-    return NextResponse.next();
   }
 
   return new NextResponse("Auth required", {

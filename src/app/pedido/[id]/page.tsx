@@ -62,12 +62,15 @@ function PedidoInner() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!params.id || !token) return;
+    if (!params.id) return;
     let cancelled = false;
     async function load() {
       setLoading(true);
       try {
-        const res = await fetch(`/api/orders/${params.id}?token=${encodeURIComponent(token)}`);
+        const url = token
+          ? `/api/orders/${params.id}?token=${encodeURIComponent(token)}`
+          : `/api/orders/${params.id}`;
+        const res = await fetch(url, { credentials: "include" });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || data.message || "Pedido não encontrado");
         if (!cancelled) setOrder(data);

@@ -56,4 +56,12 @@ With `NODE_ENV=development` and no Supabase env vars, orders persist under `data
 
 ## Admin
 
-Visit `/admin` with HTTP Basic (`ADMIN_PASSWORD`) or `?token=` matching `ADMIN_TOKEN` / `ADMIN_PASSWORD`. Optionally set cookie `keeus_admin`.
+Visit `/admin` with HTTP Basic (`ADMIN_PASSWORD` or `ADMIN_TOKEN` as password). An opaque HttpOnly session cookie is set after success. Query-string `?token=` auth was removed.
+
+
+## TODO (gold-pass / ops)
+
+- **CNPJ**: manter `COMPANY.cnpj` vazio em `src/lib/constants.ts` até a loja informar o CNPJ real. Não inventar.
+- **Mercado Pago**: configurar `MERCADOPAGO_ACCESS_TOKEN`, `MERCADOPAGO_WEBHOOK_SECRET` (e opcionalmente `MERCADOPAGO_PUBLIC_KEY` / `MERCADOPAGO_WEBHOOK_URL`) no Vercel. Sem token, checkout falha com graça e oferece atendimento.
+- **Admin**: use HTTP Basic com `ADMIN_PASSWORD`. Auth por `?token=` na URL foi removida (leak em logs/Referer). Sessão HttpOnly opaca após Basic.
+- **Frete**: `POST /api/orders` recalcula preço/prazo server-side via `src/lib/shipping/quote.ts` — nunca persiste `shipping.price` do client.
