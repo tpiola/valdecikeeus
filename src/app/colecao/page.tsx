@@ -35,6 +35,10 @@ export default async function ColecaoPage({
     products = products.filter((p) => p.category === "premium");
     title = "Premium";
     subtitle = "Edições exclusivas e limitadas";
+  } else if (categoria === "kits") {
+    products = products.filter((p) => p.category === "kits");
+    title = "Kits Keeus";
+    subtitle = "Dois pares com preço de kit — viagem ou presente";
   }
   if (filtro === "novos") {
     products = products.filter((p) => p.isNew);

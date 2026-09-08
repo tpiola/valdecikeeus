@@ -9,13 +9,14 @@ import {
   Loader2,
   ShoppingBag,
   MessageCircle,
+  QrCode,
   CreditCard,
-  AlertTriangle,
 } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart";
 import ShippingCalculator, {
   type SelectedShippingQuote,
 } from "@/components/product/ShippingCalculator";
+import PaymentMethods, { type PayMethod } from "@/components/checkout/PaymentMethods";
 
 type CreatedOrder = {
   id: string;
@@ -74,9 +75,11 @@ export default function CheckoutPage() {
       <section className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-6 py-20 text-center">
         <ShoppingBag size={40} className="text-accent" />
         <h1 className="mt-5 text-3xl font-bold">Sua sacola está vazia</h1>
-        <p className="mt-3 text-muted">Escolha um modelo e o tamanho para revisar o pedido.</p>
+        <p className="mt-3 max-w-md text-muted">
+          Adicione um modelo e escolha o tamanho para continuar com a compra.
+        </p>
         <Link href="/colecao" className="btn-primary mt-8 rounded-full">
-          Explorar coleção
+          Ver coleção
         </Link>
       </section>
     );
@@ -122,13 +125,13 @@ export default function CheckoutPage() {
       setStep("summary");
       clearCart();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao criar pedido");
+      setError(err instanceof Error ? err.message : "Não foi possível criar o pedido. Tente de novo.");
     } finally {
       setBusy(false);
     }
   }
 
-  async function startMercadoPago() {
+  async function startMercadoPago(_method: PayMethod = "pix") {
     if (!order) return;
     setBusy(true);
     setError(null);
@@ -139,6 +142,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           orderId: order.id,
           accessToken: order.accessToken,
+          preferredMethod: _method,
         }),
       });
       const data = await res.json();
@@ -146,15 +150,15 @@ export default function CheckoutPage() {
         setPaymentConfigured(false);
         setPaymentNote(
           data.message ||
-            "Pagamento online ainda não configurado. Use o atendimento para finalizar."
+            "Pagamento online ainda não está ativo. Finalize pelo atendimento — seu pedido já está registrado."
         );
         return;
       }
       const url = data.initPoint || data.sandboxInitPoint;
-      if (!url) throw new Error("Preferência criada sem URL de checkout");
+      if (!url) throw new Error("Não foi possível abrir o checkout. Tente de novo ou fale com o atendimento.");
       window.location.href = url;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Falha ao iniciar pagamento");
+      setError(err instanceof Error ? err.message : "Não foi possível iniciar o pagamento");
     } finally {
       setBusy(false);
     }
@@ -163,11 +167,10 @@ export default function CheckoutPage() {
   if (step === "summary" && order) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-12 md:px-8 md:py-20">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Pedido criado</p>
-        <h1 className="mt-2 text-3xl font-bold md:text-4xl">Resumo e pagamento</h1>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Pedido reservado</p>
+        <h1 className="mt-2 text-3xl font-bold md:text-4xl">Quase lá — finalize o pagamento</h1>
         <p className="mt-3 text-muted">
-          Status: <strong className="text-foreground">aguardando pagamento</strong>. Nenhuma cobrança
-          foi feita ainda.
+          Status: <strong className="text-foreground">aguardando pagamento</strong>. Nada foi cobrado ainda.
         </p>
 
         <div className="mt-8 rounded-2xl border border-border bg-white p-6">
@@ -202,54 +205,15 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <div className="mt-8 rounded-2xl bg-[#171512] p-6 text-white">
-          <h2 className="flex items-center gap-2 text-lg font-bold">
-            <CreditCard size={18} className="text-[#ff8a55]" /> Pagar
-          </h2>
-
-          {paymentConfigured ? (
-            <>
-              <p className="mt-3 text-sm leading-6 text-white/60">
-                Você será redirecionado ao Mercado Pago (Pix ou cartão). O pedido só muda para
-                <em> pago</em> após confirmação do webhook — não inventamos sucesso de pagamento.
-              </p>
-              <button
-                type="button"
-                disabled={busy}
-                onClick={startMercadoPago}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-bold text-white hover:bg-accent-hover disabled:opacity-60"
-              >
-                {busy ? <Loader2 className="animate-spin" size={18} /> : null}
-                Pagar com Mercado Pago
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="mt-3 flex gap-2 rounded-xl bg-white/5 p-4 text-sm text-white/70">
-                <AlertTriangle size={18} className="shrink-0 text-[#ff8a55]" />
-                <p>
-                  {paymentNote ||
-                    "Pagamento online ainda não está configurado neste ambiente (falta MERCADOPAGO_ACCESS_TOKEN). Seu pedido ficou registrado como pendente."}
-                </p>
-              </div>
-              <Link
-                href={`/contato?assunto=pedido&mensagem=${encodeURIComponent(
-                  `Olá! Quero finalizar o pedido ${order.id}.`
-                )}`}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-bold text-white hover:bg-accent-hover"
-              >
-                <MessageCircle size={18} /> Continuar no atendimento
-              </Link>
-            </>
-          )}
-
-          <div className="mt-5 flex gap-2 text-xs text-white/50">
-            <CheckCircle2 size={16} className="shrink-0 text-[#ff8a55]" />
-            Nenhuma cobrança automática sem confirmação do Mercado Pago.
-          </div>
-        </div>
-
-        {error && <p className="mt-4 text-sm font-medium text-red-600">{error}</p>}
+        <PaymentMethods
+          orderId={order.id}
+          accessToken={order.accessToken}
+          paymentConfigured={paymentConfigured}
+          paymentNote={paymentNote}
+          busy={busy}
+          error={error}
+          onPay={startMercadoPago}
+        />
       </section>
     );
   }
@@ -265,7 +229,8 @@ export default function CheckoutPage() {
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_380px]">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Checkout</p>
-          <h1 className="mt-2 text-3xl font-bold md:text-5xl">Seus dados e pedido</h1>
+          <h1 className="mt-2 text-3xl font-bold md:text-5xl">Finalize sua compra</h1>
+          <p className="mt-2 text-sm text-muted">Confira os itens, informe o endereço e siga para Pix ou cartão.</p>
 
           <ul className="mt-8 divide-y divide-border rounded-2xl border border-border bg-white">
             {items.map((item) => (
@@ -295,7 +260,7 @@ export default function CheckoutPage() {
           </ul>
 
           <form onSubmit={createOrder} className="mt-8 space-y-4 rounded-2xl border border-border bg-white p-6">
-            <h2 className="text-lg font-bold">Dados para entrega</h2>
+            <h2 className="text-lg font-bold">Endereço de entrega</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block text-sm sm:col-span-2">
                 <span className="font-semibold">Nome</span>
@@ -460,7 +425,7 @@ export default function CheckoutPage() {
               className="flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-bold text-white hover:bg-accent-hover disabled:opacity-60"
             >
               {busy ? <Loader2 className="animate-spin" size={18} /> : null}
-              Criar pedido e continuar
+              Continuar para pagamento
             </button>
             <p className="text-xs text-muted">
               Em produção sem banco, a API responde 503 com instruções. Em desenvolvimento local,
@@ -494,9 +459,17 @@ export default function CheckoutPage() {
             <span className="text-white/70">Total</span>
             <strong>R$ {orderTotal.toFixed(2).replace(".", ",")}</strong>
           </div>
-          <p className="mt-5 text-sm leading-6 text-white/60">
-            Pagamento via Mercado Pago quando as variáveis de ambiente estiverem configuradas.
-          </p>
+          <div className="mt-5 space-y-2 text-sm text-white/60">
+            <p className="flex items-center gap-2">
+              <QrCode size={14} className="text-[#ff8a55]" /> Pix — aprovação na hora
+            </p>
+            <p className="flex items-center gap-2">
+              <CreditCard size={14} className="text-[#ff8a55]" /> Cartão de crédito
+            </p>
+            <p className="pt-1 text-xs text-white/45">
+              Checkout seguro via Mercado Pago. Se o pagamento online estiver off, finalizamos no atendimento.
+            </p>
+          </div>
           <Link
             href="/contato?assunto=pedido"
             className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-bold text-white hover:border-accent"
@@ -505,7 +478,7 @@ export default function CheckoutPage() {
           </Link>
           <div className="mt-5 flex gap-2 text-xs text-white/50">
             <CheckCircle2 size={16} className="shrink-0 text-[#ff8a55]" />
-            Nenhuma cobrança é realizada só por criar o pedido.
+            Criar o pedido não cobra nada. Você só paga na próxima etapa.
           </div>
         </aside>
       </div>

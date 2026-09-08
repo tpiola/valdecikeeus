@@ -1,4 +1,4 @@
-export type ProductCategory = "slides" | "flipflops" | "premium";
+export type ProductCategory = "slides" | "flipflops" | "premium" | "kits";
 
 export interface Product {
   id: number;
@@ -20,4 +20,6 @@ export interface Product {
   gallery: string[];
   angleCount: number;
   originalPrice?: number;
+  /** Slugs dos pares inclusos quando category === "kits" */
+  kitItems?: string[];
 }

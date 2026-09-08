@@ -333,3 +333,16 @@ h1, h2, h3 {
 .breadcrumb a:hover {
   color: var(--accent);
 }
+
+
+/* keeus-marquee */
+@keyframes keeus-marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.keeus-marquee {
+  animation: keeus-marquee-x 48s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .keeus-marquee { animation: none !important; }
+}

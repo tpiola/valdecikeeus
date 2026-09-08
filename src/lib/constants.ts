@@ -8,6 +8,7 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: "Chinelos", href: "/colecao" },
+  { label: "Kits", href: "/colecao?categoria=kits" },
   { label: "Lançamentos", href: "/colecao?filtro=novos" },
   { label: "Sobre", href: "/sobre" },
   { label: "Contato", href: "/contato" },

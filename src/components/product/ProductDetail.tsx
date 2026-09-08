@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Heart, Ruler, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/lib/types";
+import { getKitContents } from "@/lib/products";
+import Image from "next/image";
 import { useCartStore } from "@/lib/store/cart";
 import { useWishlistStore } from "@/lib/store/wishlist";
 import ProductGallery from "./ProductGallery";
@@ -33,7 +35,10 @@ export default function ProductDetail({
       ? "Slide"
       : product.category === "flipflops"
         ? "Chinelo de dedo"
-        : "Edição especial";
+        : product.category === "kits"
+          ? "Kit"
+          : "Edição especial";
+  const kitContents = product.category === "kits" ? getKitContents(product) : [];
 
   function availableFor(sizeNum: number): number {
     if (sizeStock && Object.prototype.hasOwnProperty.call(sizeStock, sizeNum)) {
@@ -100,10 +105,40 @@ export default function ProductDetail({
 
         <p className="mt-6 text-base leading-7 text-foreground/75">{product.description}</p>
 
+        {kitContents.length > 0 && (
+          <div className="mt-6 rounded-2xl border border-border bg-surface p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Este kit inclui</p>
+            <ul className="mt-4 space-y-3">
+              {kitContents.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={`/produto/${item.slug}`}
+                    className="flex items-center gap-3 rounded-xl border border-transparent p-2 transition-colors hover:border-border hover:bg-white"
+                  >
+                    <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-white">
+                      <Image src={item.image} alt="" fill className="object-contain p-1" sizes="56px" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold text-foreground">{item.name}</span>
+                      <span className="block text-xs text-muted">
+                        {item.category === "slides" ? "Slide" : "Chinelo de dedo"} · R${" "}
+                        {item.price.toFixed(2).replace(".", ",")}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-5 text-muted">
+              O tamanho escolhido vale para os dois pares do kit. Na dúvida entre números, escolha o maior.
+            </p>
+          </div>
+        )}
+
         <div className="mt-8 rounded-2xl border border-border bg-surface p-5">
           <div className="flex items-center justify-between gap-3">
             <label className="flex items-center gap-2 text-sm font-bold" id="size-label">
-              <Ruler size={18} className="text-accent" /> Escolha o tamanho
+              <Ruler size={18} className="text-accent" /> {product.category === "kits" ? "Tamanho dos dois pares" : "Escolha o tamanho"}
             </label>
             <span className="text-xs text-muted">
               {size ? `Selecionado: ${size}` : "Obrigatório"}
