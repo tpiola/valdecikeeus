@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
             src={product.image}
             alt={product.name}
             fill
-            className="object-contain p-5 transition-all duration-500 ease-out group-hover:scale-[1.07] group-hover:opacity-0 md:p-6"
+            className="object-contain p-5 transition-all duration-500 ease-out group-hover:scale-[1.12] group-hover:opacity-0 md:p-6"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
           {hoverImage && (
@@ -38,7 +38,7 @@ export default function ProductCard({ product }: { product: Product }) {
               src={hoverImage}
               alt=""
               fill
-              className="absolute inset-0 object-contain p-5 opacity-0 transition-all duration-500 ease-out group-hover:scale-[1.07] group-hover:opacity-100 md:p-6"
+              className="absolute inset-0 object-contain p-5 opacity-0 transition-all duration-500 ease-out group-hover:scale-[1.12] group-hover:opacity-100 md:p-6"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               aria-hidden="true"
             />
@@ -52,7 +52,24 @@ export default function ProductCard({ product }: { product: Product }) {
               -{discount}% OFF
             </span>
           )}
-          {product.isNew && !product.isLowStock && (
+          {product.flashSaleEndsAt &&
+            product.originalPrice &&
+            new Date(product.flashSaleEndsAt).getTime() > Date.now() && (
+            <span className="rounded-full bg-[#FF5F1F] px-2.5 py-1 text-[10px] font-bold text-white">
+              Oferta
+            </span>
+          )}
+          {product.category === "kits" && (
+            <span className="rounded-full bg-[#1a1a1a] px-2.5 py-1 text-[10px] font-bold text-white">
+              Kit
+            </span>
+          )}
+          {product.isNew && !product.isLowStock && product.category !== "kits" && (
+            <span className="rounded-full bg-[#ff5f1f] px-2.5 py-1 text-[10px] font-bold text-white">
+              Novo
+            </span>
+          )}
+          {product.isNew && product.category === "kits" && (
             <span className="rounded-full bg-[#ff5f1f] px-2.5 py-1 text-[10px] font-bold text-white">
               Novo
             </span>
@@ -80,7 +97,13 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* ── Info ── */}
       <div className="flex flex-1 flex-col p-4">
         <span className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-[#ff5f1f]">
-          {product.category === "slides" ? "Slide" : product.category === "flipflops" ? "Chinelo de dedo" : "Edição especial"}
+          {product.category === "slides"
+            ? "Slide"
+            : product.category === "flipflops"
+              ? "Chinelo de dedo"
+              : product.category === "kits"
+                ? "Kit"
+                : "Edição especial"}
         </span>
 
         <Link href={`/produto/${product.slug}`}>
@@ -125,10 +148,10 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* CTA — aparece com movimento no hover */}
         <Link
           href={`/produto/${product.slug}`}
-          aria-label={`Escolher tamanho de ${product.name}`}
+          aria-label={product.category === "kits" ? `Ver ${product.name}` : `Selecionar tamanho de ${product.name}`}
           className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-[#1a1a1a] bg-transparent py-2.5 text-xs font-bold text-[#1a1a1a] transition-all duration-300 group-hover:border-[#ff5f1f] group-hover:bg-[#ff5f1f] group-hover:text-white"
         >
-          Escolher tamanho
+          {product.category === "kits" ? "Ver kit" : "Selecionar tamanho"}
           <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
         </Link>
       </div>

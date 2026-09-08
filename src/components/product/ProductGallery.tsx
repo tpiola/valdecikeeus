@@ -34,7 +34,7 @@ export default function ProductGallery({
           fill
           priority={active === 0}
           sizes="(max-width: 1024px) 100vw, 50vw"
-          className="keeus-photo-fade object-contain p-6 transition-transform duration-700 ease-out group-hover:scale-[1.04] md:p-10"
+          className="keeus-photo-fade object-contain p-6 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:scale-[1.12] md:p-10"
         />
         <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white">
           {active + 1}/{images.length}

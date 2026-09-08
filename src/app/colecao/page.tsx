@@ -35,11 +35,28 @@ export default async function ColecaoPage({
     products = products.filter((p) => p.category === "premium");
     title = "Premium";
     subtitle = "Edições exclusivas e limitadas";
+  } else if (categoria === "kits") {
+    products = products.filter((p) => p.category === "kits");
+    title = "Kits Keeus";
+    subtitle = "Dois pares com preço de kit — viagem ou presente";
   }
   if (filtro === "novos") {
     products = products.filter((p) => p.isNew);
     title = "Lançamentos";
     subtitle = "Os mais recentes chinelos Keeus";
+  }
+  if (filtro === "oferta") {
+    const now = Date.now();
+    products = products.filter(
+      (p) =>
+        Boolean(p.flashSaleEndsAt) &&
+        Boolean(p.originalPrice) &&
+        new Date(p.flashSaleEndsAt!).getTime() > now
+    );
+    title = "Oferta relâmpago";
+    subtitle = products.length
+      ? `${products.length} modelo(s) com preço de oferta e prazo real`
+      : "Nenhuma oferta ativa no momento";
   }
   if (filtro === "edicao-limitada") {
     products = products.filter((p) => p.isLimitedEdition);

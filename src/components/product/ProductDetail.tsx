@@ -4,11 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Heart, Ruler, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { Product } from "@/lib/types";
+import { getKitContents } from "@/lib/products";
+import Image from "next/image";
 import { useCartStore } from "@/lib/store/cart";
 import { useWishlistStore } from "@/lib/store/wishlist";
 import ProductGallery from "./ProductGallery";
 import SizeFinder from "./SizeFinder";
 import ShippingCalculator from "./ShippingCalculator";
+import ScarcityNote from "@/components/conversion/ScarcityNote";
+import ShippingCutoff from "@/components/conversion/ShippingCutoff";
+import Countdown from "@/components/conversion/Countdown";
 
 export type SizeAvailability = Record<number, number>;
 
@@ -33,7 +38,10 @@ export default function ProductDetail({
       ? "Slide"
       : product.category === "flipflops"
         ? "Chinelo de dedo"
-        : "Edição especial";
+        : product.category === "kits"
+          ? "Kit"
+          : "Edição especial";
+  const kitContents = product.category === "kits" ? getKitContents(product) : [];
 
   function availableFor(sizeNum: number): number {
     if (sizeStock && Object.prototype.hasOwnProperty.call(sizeStock, sizeNum)) {
@@ -89,21 +97,67 @@ export default function ProductDetail({
               R$ {product.originalPrice.toFixed(2).replace(".", ",")}
             </p>
           )}
-          <p className="text-3xl font-extrabold">
-            R$ {product.price.toFixed(2).replace(".", ",")}
-          </p>
+          <div className="flex flex-wrap items-end gap-3">
+            <p className="text-3xl font-extrabold">
+              R$ {product.price.toFixed(2).replace(".", ",")}
+            </p>
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="mb-1 rounded-full bg-[#FF5F1F] px-2.5 py-1 text-[11px] font-bold text-white">
+                -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+              </span>
+            )}
+          </div>
           <p className="mt-1 text-sm text-muted">
             em até {product.installments}x de R${" "}
             {product.installmentPrice.toFixed(2).replace(".", ",")} sem juros
           </p>
+          {product.flashSaleEndsAt &&
+            new Date(product.flashSaleEndsAt).getTime() > Date.now() && (
+            <div className="mt-3 flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2.5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-stone-600">
+                Preço promocional até
+              </span>
+              <Countdown endsAt={product.flashSaleEndsAt} compact className="text-sm font-semibold text-stone-900" />
+            </div>
+          )}
         </div>
 
         <p className="mt-6 text-base leading-7 text-foreground/75">{product.description}</p>
 
+        {kitContents.length > 0 && (
+          <div className="mt-6 rounded-2xl border border-border bg-surface p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Este kit inclui</p>
+            <ul className="mt-4 space-y-3">
+              {kitContents.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={`/produto/${item.slug}`}
+                    className="flex items-center gap-3 rounded-xl border border-transparent p-2 transition-colors hover:border-border hover:bg-white"
+                  >
+                    <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-white">
+                      <Image src={item.image} alt="" fill className="object-contain p-1" sizes="56px" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-bold text-foreground">{item.name}</span>
+                      <span className="block text-xs text-muted">
+                        {item.category === "slides" ? "Slide" : "Chinelo de dedo"} · R${" "}
+                        {item.price.toFixed(2).replace(".", ",")}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-5 text-muted">
+              O tamanho escolhido vale para os dois pares do kit. Na dúvida entre números, escolha o maior.
+            </p>
+          </div>
+        )}
+
         <div className="mt-8 rounded-2xl border border-border bg-surface p-5">
           <div className="flex items-center justify-between gap-3">
             <label className="flex items-center gap-2 text-sm font-bold" id="size-label">
-              <Ruler size={18} className="text-accent" /> Escolha o tamanho
+              <Ruler size={18} className="text-accent" /> {product.category === "kits" ? "Tamanho dos dois pares" : "Escolha o tamanho"}
             </label>
             <span className="text-xs text-muted">
               {size ? `Selecionado: ${size}` : "Obrigatório"}
@@ -137,6 +191,12 @@ export default function ProductDetail({
           <div className="mt-4">
             <SizeFinder sizes={product.sizes} />
           </div>
+          {size != null && (
+            <ScarcityNote
+              available={availableFor(size)}
+              isLowStock={product.isLowStock}
+            />
+          )}
         </div>
 
         <button
@@ -170,6 +230,10 @@ export default function ProductDetail({
             Escolha um tamanho acima primeiro
           </p>
         )}
+
+        <div className="mt-4">
+          <ShippingCutoff />
+        </div>
 
         <ShippingCalculator productPrice={product.price} />
 

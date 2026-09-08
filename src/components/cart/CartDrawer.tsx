@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Minus, Plus, ShoppingBag, X } from "lucide-react";
+import { Minus, Plus, ShoppingBag, X, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/lib/store/cart";
@@ -119,12 +119,21 @@ export default function CartDrawer() {
 
             {items.length > 0 && (
               <div className="border-t border-border px-6 py-5">
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-3 flex items-center justify-between">
                   <span className="text-sm text-muted">Subtotal</span>
                   <span className="font-display text-lg">
                     R$ {total().toFixed(2).replace(".", ",")}
                   </span>
                 </div>
+                <p className="mb-4 flex items-start gap-2 text-[11px] leading-4 text-muted">
+                  <ShieldCheck size={14} className="mt-0.5 shrink-0 text-accent" />
+                  <span>
+                    Pix e cartão no checkout · frete e total antes de pagar ·{" "}
+                    <Link href="/trocas" onClick={close} className="underline underline-offset-2">
+                      trocas
+                    </Link>
+                  </span>
+                </p>
                 <Link
                   href="/checkout"
                   onClick={close}

@@ -35,9 +35,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { orderId?: string; accessToken?: string };
+  let body: { orderId?: string; accessToken?: string; preferredMethod?: "pix" | "card" };
   try {
-    body = (await req.json()) as { orderId?: string; accessToken?: string };
+    body = (await req.json()) as { orderId?: string; accessToken?: string; preferredMethod?: "pix" | "card" };
   } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
@@ -86,6 +86,10 @@ export async function POST(req: NextRequest) {
     auto_return: "approved",
     notification_url: notificationUrl,
     statement_descriptor: "KEEUS",
+    // Keeus aceita apenas Pix e cartão — sem boleto
+    payment_methods: {
+      excluded_payment_types: [{ id: "ticket" }],
+    },
   };
 
   // Include shipping as a separate item if > 0
