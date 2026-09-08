@@ -11,6 +11,13 @@ type OrderView = {
   total: number;
   subtotal: number;
   shippingPrice: number;
+  shipping?: {
+    cep?: string;
+    service?: string;
+    carrier?: string;
+    price?: number;
+    days?: number;
+  } | null;
   items: Array<{ name: string; size: number; qty: number; lineTotal: number }>;
   customer: { name: string; email: string };
   paidAt?: string | null;
@@ -55,6 +62,7 @@ function PedidoInner() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!params.id || !token) return;
     let cancelled = false;
     async function load() {
       setLoading(true);
@@ -69,15 +77,23 @@ function PedidoInner() {
         if (!cancelled) setLoading(false);
       }
     }
-    if (params.id && token) load();
-    else {
-      setError("Link incompleto — falta o token de acesso.");
-      setLoading(false);
-    }
+    load();
     return () => {
       cancelled = true;
     };
   }, [params.id, token]);
+
+  if (!token) {
+    return (
+      <section className="mx-auto max-w-2xl px-4 py-20 text-center">
+        <h1 className="text-2xl font-bold">Pedido</h1>
+        <p className="mt-3 text-muted">Link incompleto — falta o token de acesso.</p>
+        <Link href="/colecao" className="btn-primary mt-8 inline-flex rounded-full">
+          Voltar à coleção
+        </Link>
+      </section>
+    );
+  }
 
   if (loading) {
     return (
@@ -144,9 +160,17 @@ function PedidoInner() {
           <span>R$ {Number(order.subtotal).toFixed(2).replace(".", ",")}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted">Frete</span>
+          <span className="text-muted">
+            Frete
+            {order.shipping?.service
+              ? ` (${order.shipping.service}${order.shipping.cep ? ` · CEP ${order.shipping.cep}` : ""})`
+              : ""}
+          </span>
           <span>R$ {Number(order.shippingPrice).toFixed(2).replace(".", ",")}</span>
         </div>
+        {order.shipping?.days != null && (
+          <p className="text-xs text-muted">Prazo estimado: {order.shipping.days} dias úteis</p>
+        )}
         <div className="flex justify-between border-t border-border pt-3 text-base font-bold">
           <span>Total</span>
           <span>R$ {Number(order.total).toFixed(2).replace(".", ",")}</span>

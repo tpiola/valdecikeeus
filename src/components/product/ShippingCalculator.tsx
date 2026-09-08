@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Loader2, Truck, Package, CheckCircle, AlertCircle, MapPin } from "lucide-react";
 
-interface FreteOpcao {
+export interface FreteOpcao {
   servico: string;
   transportadora: string;
   preco: number;
@@ -12,7 +12,7 @@ interface FreteOpcao {
   descricao: string;
 }
 
-interface FreteResult {
+export interface FreteResult {
   cep: string;
   cidade: string;
   estado: string;
@@ -20,17 +20,49 @@ interface FreteResult {
   observacao: string;
 }
 
-export default function ShippingCalculator({ productPrice = 0 }: { productPrice?: number }) {
-  const [cep, setCep] = useState("");
+/** Normalized quote passed to checkout / order create. */
+export interface SelectedShippingQuote {
+  cep: string;
+  service: string;
+  carrier: string;
+  price: number;
+  days: number;
+  id?: string;
+}
+
+type Props = {
+  productPrice?: number;
+  /** Prefill CEP (e.g. from checkout address). */
+  initialCep?: string;
+  /** When set, options are selectable and invoke this callback. */
+  onSelect?: (quote: SelectedShippingQuote) => void;
+  /** Currently selected service name (SEDEX / PAC). */
+  selectedService?: string | null;
+  /** Visual density for embedding in checkout. */
+  compact?: boolean;
+};
+
+function formatCepInput(raw: string): string {
+  let val = raw.replace(/\D/g, "");
+  if (val.length > 8) val = val.slice(0, 8);
+  if (val.length > 5) val = val.replace(/^(\d{5})(\d)/, "$1-$2");
+  return val;
+}
+
+export default function ShippingCalculator({
+  productPrice = 0,
+  initialCep = "",
+  onSelect,
+  selectedService = null,
+  compact = false,
+}: Props) {
+  const [cep, setCep] = useState(() => formatCepInput(initialCep));
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<FreteResult | null>(null);
   const [error, setError] = useState("");
 
   const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/\D/g, "");
-    if (val.length > 8) val = val.slice(0, 8);
-    if (val.length > 5) val = val.replace(/^(\d{5})(\d)/, "$1-$2");
-    setCep(val);
+    setCep(formatCepInput(e.target.value));
     setError("");
     setResult(null);
   };
@@ -59,17 +91,31 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") calculate();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      calculate();
+    }
+  };
+
+  const pickOption = (opcao: FreteOpcao) => {
+    if (!onSelect || !result) return;
+    onSelect({
+      id: opcao.servico,
+      cep: result.cep,
+      service: opcao.servico,
+      carrier: opcao.transportadora,
+      price: opcao.preco,
+      days: opcao.prazo,
+    });
   };
 
   return (
-    <div className="mt-6 border-t border-border pt-6">
+    <div className={compact ? "" : "mt-6 border-t border-border pt-6"}>
       <label className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted">
         <Truck size={14} />
-        Calcular frete e prazo de entrega
+        {onSelect ? "Frete e prazo" : "Calcular frete e prazo de entrega"}
       </label>
 
-      {/* CEP Input */}
       <div className="flex gap-2">
         <div className="relative flex-1">
           <MapPin size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
@@ -85,6 +131,7 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
           />
         </div>
         <button
+          type="button"
           onClick={calculate}
           disabled={loading || cep.replace(/\D/g, "").length < 8}
           className="flex min-w-[100px] items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-xs font-black uppercase tracking-widest text-accent-fore transition-all hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
@@ -102,7 +149,6 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
         Não sei meu CEP
       </a>
 
-      {/* Error */}
       {error && (
         <div className="mt-3 flex items-center gap-2 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">
           <AlertCircle size={15} />
@@ -110,10 +156,8 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
         </div>
       )}
 
-      {/* Results */}
       {result && (
         <div className="mt-4 space-y-2">
-          {/* City confirmation */}
           {result.cidade && (
             <div className="flex items-center gap-2 text-xs text-muted">
               <CheckCircle size={12} className="text-accent" />
@@ -124,48 +168,73 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
             </div>
           )}
 
-          {/* Options */}
-          {result.opcoes.map((opcao) => (
-            <div
-              key={opcao.servico}
-              className={`flex items-center justify-between rounded-xl border p-3.5 transition-colors ${
-                opcao.gratis
+          {result.opcoes.map((opcao) => {
+            const selected = selectedService === opcao.servico;
+            const className = `flex w-full items-center justify-between rounded-xl border p-3.5 text-left transition-colors ${
+              selected
+                ? "border-accent bg-accent/10 ring-1 ring-accent"
+                : opcao.gratis
                   ? "border-accent/30 bg-accent/5"
                   : "border-border bg-surface"
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                {opcao.servico === "SEDEX" ? (
-                  <Truck size={18} className={opcao.gratis ? "text-accent" : "text-signal"} />
-                ) : (
-                  <Package size={18} className="text-muted" />
-                )}
-                <div>
-                  <p className="text-sm font-bold">
-                    {opcao.servico}
-                    {opcao.gratis && (
-                      <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase text-accent-fore">
-                        GRÁTIS
-                      </span>
-                    )}
-                  </p>
-                  <p className="text-xs text-muted">{opcao.descricao}</p>
+            } ${onSelect ? "cursor-pointer hover:border-accent/60" : ""}`;
+            const body = (
+              <>
+                <div className="flex items-center gap-3">
+                  {opcao.servico === "SEDEX" ? (
+                    <Truck size={18} className={opcao.gratis || selected ? "text-accent" : "text-signal"} />
+                  ) : (
+                    <Package size={18} className={selected ? "text-accent" : "text-muted"} />
+                  )}
+                  <div>
+                    <p className="text-sm font-bold">
+                      {opcao.servico}
+                      {opcao.gratis && (
+                        <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase text-accent-fore">
+                          GRÁTIS
+                        </span>
+                      )}
+                      {selected && (
+                        <span className="ml-2 text-[10px] font-bold uppercase tracking-wide text-accent">
+                          selecionado
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-xs text-muted">{opcao.descricao}</p>
+                  </div>
                 </div>
+                <div className="text-right">
+                  <p className={`font-black ${opcao.gratis || selected ? "text-accent" : ""}`}>
+                    {opcao.gratis ? "R$ 0,00" : `R$ ${opcao.preco.toFixed(2).replace(".", ",")}`}
+                  </p>
+                  <p className="text-xs text-muted">{opcao.prazo} dias úteis</p>
+                </div>
+              </>
+            );
+            if (onSelect) {
+              return (
+                <button
+                  key={opcao.servico}
+                  type="button"
+                  onClick={() => pickOption(opcao)}
+                  className={className}
+                >
+                  {body}
+                </button>
+              );
+            }
+            return (
+              <div key={opcao.servico} className={className}>
+                {body}
               </div>
-              <div className="text-right">
-                <p className={`font-black ${opcao.gratis ? "text-accent" : ""}`}>
-                  {opcao.gratis ? "R$ 0,00" : `R$ ${opcao.preco.toFixed(2).replace(".", ",")}`}
-                </p>
-                <p className="text-xs text-muted">{opcao.prazo} dias úteis</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
 
-          {/* Observation */}
+          {onSelect && !selectedService && (
+            <p className="text-xs font-medium text-accent">Selecione uma opção de frete para continuar.</p>
+          )}
+
           {result.observacao && (
-            <p className="rounded-lg bg-surface p-2.5 text-[11px] text-muted">
-              {result.observacao}
-            </p>
+            <p className="rounded-lg bg-surface p-2.5 text-[11px] text-muted">{result.observacao}</p>
           )}
 
           <p className="text-[10px] text-muted/50">
