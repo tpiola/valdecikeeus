@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRef } from "react";
 import {
   motion,
@@ -13,7 +12,8 @@ import { PRODUCTS } from "@/lib/products";
 import LazyVideo from "@/components/ui/LazyVideo";
 
 /**
- * Hero editorial — vídeo ken-burns suave + tipografia clara no fundo escuro.
+ * Hero cinematic — full-bleed ken-burns + tipografia editorial.
+ * Nike/Apple energy: quiet, alive, purchase-forward. No AI gimmicks.
  */
 export default function Hero() {
   const heroProduct =
@@ -26,107 +26,175 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 48]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 1.04]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 24]);
+  const mediaY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduceMotion ? 0 : 80]
+  );
+  const mediaScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, reduceMotion ? 1 : 1.08]
+  );
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, reduceMotion ? 0 : 36]
+  );
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.55],
+    [1, reduceMotion ? 1 : 0.35]
+  );
+  const veilOpacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.55, reduceMotion ? 0.55 : 0.78]
+  );
+
+  const ease = [0.16, 1, 0.3, 1] as const;
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#0f0f0f] text-white"
+      className="hero-cinematic relative isolate min-h-[min(92vh,920px)] overflow-hidden bg-[#0a0a0a] text-white"
+      aria-label="Keeus — chinelo e slide"
     >
+      {/* Full-bleed media */}
+      <motion.div
+        aria-hidden
+        style={{ y: mediaY, scale: mediaScale }}
+        className="absolute inset-0 will-change-transform"
+      >
+        <div className="absolute inset-0 overflow-hidden">
+          <LazyVideo
+            mp4="/videos/hero-toledo.mp4"
+            webm="/videos/hero-toledo.webm"
+            poster={heroProduct.image}
+            lazy={false}
+            className={`absolute inset-0 h-full w-full object-cover ${
+              reduceMotion ? "" : "animate-ken-burns"
+            }`}
+          />
+        </div>
+      </motion.div>
+
+      {/* Editorial veils — legibility without killing the film */}
+      <motion.div
+        aria-hidden
+        style={{ opacity: veilOpacity }}
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25"
+      />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 top-1/4 h-[360px] w-[360px] rounded-full bg-[#FF5F1F]/25 blur-[110px]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-24 bottom-0 h-[420px] w-[420px] rounded-full bg-[#FF5F1F]/18 blur-[120px]"
       />
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2 md:gap-14 md:px-8 md:py-24">
-        <motion.div style={{ y: textY }} className="order-2 md:order-1">
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#FF5F1F]"
-          >
-            Slide e chinelo de dedo
-          </motion.p>
-          <motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight !text-white md:text-6xl"
-            style={{ color: "#ffffff" }}
-          >
-            Chinelo Keeus.
-            <br />
-            Feito pro seu pé.
-          </motion.h1>
+      {/* Content */}
+      <div className="relative z-10 mx-auto flex min-h-[min(92vh,920px)] max-w-7xl flex-col justify-end px-4 pb-14 pt-28 md:justify-center md:px-8 md:pb-24 md:pt-32">
+        <motion.div
+          style={{ y: contentY, opacity: contentOpacity }}
+          className="max-w-2xl"
+        >
           <motion.p
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-5 max-w-md text-base leading-relaxed text-white/70"
+            transition={{ duration: 0.55, ease }}
+            className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#FF5F1F]"
           >
-            Fotos reais, numeração conforme o modelo e frete cotado pelo CEP. Pix ou cartão no checkout.
+            Slide e chinelo de dedo
           </motion.p>
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+
+          <motion.h1
+            initial={reduceMotion ? false : { opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-9 flex flex-wrap gap-3"
+            transition={{ duration: 0.7, delay: 0.06, ease }}
+            className="mt-5 font-display text-[clamp(2.6rem,8vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-white"
+          >
+            O pé encontra
+            <br />
+            o par certo.
+          </motion.h1>
+
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.14, ease }}
+            className="mt-6 max-w-md text-base leading-relaxed text-white/72 md:text-lg"
+          >
+            Fotos reais. Numeração por modelo. Frete cotado pelo CEP.
+            Pix ou cartão no checkout — sem surpresa na hora de pagar.
+          </motion.p>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.22, ease }}
+            className="mt-9 flex flex-wrap items-center gap-3"
           >
             <Link
               href="/colecao"
-              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#ff5f1f] px-7 text-sm font-bold text-white transition hover:bg-[#e04e0e]"
+              className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#FF5F1F] px-8 text-sm font-bold text-white shadow-[0_12px_40px_-12px_rgba(255,95,31,0.65)] transition hover:bg-[#E04E0E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Comprar agora
-              <span aria-hidden>→</span>
+              <span aria-hidden className="translate-y-px">
+                →
+              </span>
             </Link>
             <Link
-              href="/colecao?categoria=kits"
-              className="inline-flex min-h-12 items-center rounded-full border border-white/30 px-7 text-sm font-semibold text-white transition hover:border-white/60"
+              href={`/produto/${heroProduct.slug}`}
+              className="inline-flex min-h-12 items-center rounded-full border border-white/35 bg-white/5 px-7 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-white/10"
             >
-              Ver kits
+              Ver {heroProduct.name.replace(/^Keeus\s+/i, "")}
             </Link>
           </motion.div>
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-white/15 pt-6 text-sm text-white/65">
+
+          <motion.ul
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.32 }}
+            className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/15 pt-6 text-[13px] text-white/60"
+          >
             <li>
-              <strong className="font-semibold text-white">13</strong> itens
+              <span className="font-semibold text-white">
+                {PRODUCTS.length}
+              </span>{" "}
+              modelos
             </li>
             <li>
-              <strong className="font-semibold text-white">Por modelo</strong> numeração
+              <span className="font-semibold text-white">Pix e cartão</span>
             </li>
             <li>
-              <strong className="font-semibold text-white">Pix e cartão</strong>
+              <span className="font-semibold text-white">Frete pelo CEP</span>
             </li>
-          </ul>
+          </motion.ul>
         </motion.div>
 
-        <div className="order-1 md:order-2">
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
-            <motion.div
-              style={{ y: imageY, scale: imageScale }}
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#0c0c0c] md:aspect-square"
-            >
-              <LazyVideo
-                mp4="/videos/hero-toledo.mp4"
-                webm="/videos/hero-toledo.webm"
-                poster={heroProduct.image}
-                lazy={false}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-stone-800">
-                {heroProduct.name}
-              </span>
-            </motion.div>
-          </motion.div>
-        </div>
+        {/* Quiet product cue — bottom right on desktop */}
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="pointer-events-none absolute bottom-8 right-4 hidden max-w-[11rem] text-right md:bottom-12 md:right-8 md:block"
+        >
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">
+            Em destaque
+          </p>
+          <p className="mt-1 text-sm font-medium text-white/85">
+            {heroProduct.name}
+          </p>
+        </motion.div>
       </div>
+
+      {/* Soft bottom mask into next section */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0a0a0a]/40 md:h-24"
+      />
     </section>
   );
 }
