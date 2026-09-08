@@ -70,7 +70,7 @@ export default function LeadCapture() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-xs font-bold uppercase tracking-widest text-accent-foreground transition-transform hover:scale-105 disabled:opacity-60"
+              className="flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-xs font-bold uppercase tracking-widest text-accent-fore transition-transform hover:scale-105 disabled:opacity-60"
             >
               {status === "loading" ? (
                 <Loader2 size={16} className="animate-spin" />

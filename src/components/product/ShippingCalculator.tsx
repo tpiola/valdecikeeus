@@ -87,7 +87,7 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
         <button
           onClick={calculate}
           disabled={loading || cep.replace(/\D/g, "").length < 8}
-          className="flex min-w-[100px] items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-xs font-black uppercase tracking-widest text-accent-foreground transition-all hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex min-w-[100px] items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-xs font-black uppercase tracking-widest text-accent-fore transition-all hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-40"
         >
           {loading ? <Loader2 size={14} className="animate-spin" /> : "Calcular"}
         </button>
@@ -144,7 +144,7 @@ export default function ShippingCalculator({ productPrice = 0 }: { productPrice?
                   <p className="text-sm font-bold">
                     {opcao.servico}
                     {opcao.gratis && (
-                      <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase text-accent-foreground">
+                      <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase text-accent-fore">
                         GRÁTIS
                       </span>
                     )}

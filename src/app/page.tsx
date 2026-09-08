@@ -4,6 +4,7 @@ import { Ruler, Camera, RefreshCcw, MessageCircle } from "lucide-react";
 import Hero from "@/components/home/Hero";
 import ProductGrid from "@/components/home/ProductGrid";
 import FaqSection from "@/components/home/FaqSection";
+import LeadCapture from "@/components/home/LeadCapture";
 import Reveal from "@/components/ui/Reveal";
 import { PRODUCTS } from "@/lib/products";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
@@ -145,6 +146,8 @@ export default function Home() {
         </div>
         </Reveal>
       </section>
+
+      <LeadCapture />
 
       <FaqSection />
     </>
