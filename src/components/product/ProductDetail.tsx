@@ -22,14 +22,16 @@ export default function ProductDetail({
   sizeStock,
 }: {
   product: Product;
-  /** available units per size; missing key = use catalog fallback */
   sizeStock?: SizeAvailability;
 }) {
   const [size, setSize] = useState<number | null>(null);
   const [added, setAdded] = useState(false);
   const [nudge, setNudge] = useState(false);
+  const [liveMsg, setLiveMsg] = useState("");
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sizeGroupRef = useRef<HTMLDivElement>(null);
   const addItem = useCartStore((state) => state.addItem);
+  const openCart = useCartStore((state) => state.open);
   const isFav = useWishlistStore((state) => state.has(product.slug));
   const toggleFav = useWishlistStore((state) => state.toggle);
 
@@ -50,15 +52,29 @@ export default function ProductDetail({
     return product.stock > 0 ? product.stock : 0;
   }
 
+  function focusSizePicker() {
+    const el = sizeGroupRef.current;
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const first =
+      el.querySelector<HTMLButtonElement>("button:not([disabled])") ||
+      el.querySelector<HTMLButtonElement>("button");
+    first?.focus({ preventScroll: true });
+    setLiveMsg("Escolha um tamanho para continuar");
+    setNudge(true);
+    setTimeout(() => setNudge(false), 450);
+  }
+
   const handleClick = () => {
     if (!size) {
-      setNudge(true);
-      setTimeout(() => setNudge(false), 450);
+      focusSizePicker();
       return;
     }
     if (availableFor(size) < 1) return;
     addItem(product, size);
     setAdded(true);
+    setLiveMsg(`Tamanho ${size} adicionado à sacola`);
+    openCart();
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setAdded(false), 2200);
   };
@@ -75,8 +91,8 @@ export default function ProductDetail({
     : soldOutSelected
       ? "Tamanho esgotado"
       : size
-        ? `Adicionar tamanho ${size}`
-        : "Escolha o tamanho";
+        ? "Adicionar à sacola"
+        : "Escolher tamanho";
 
   return (
     <>
@@ -86,7 +102,7 @@ export default function ProductDetail({
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{tipo}</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
+              <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-stone-900 md:text-4xl">
                 {product.name}
               </h1>
             </div>
@@ -109,11 +125,11 @@ export default function ProductDetail({
               </p>
             )}
             <div className="flex flex-wrap items-end gap-3">
-              <p className="text-3xl font-extrabold text-stone-900">
+              <p className="text-3xl font-semibold text-stone-900">
                 R$ {product.price.toFixed(2).replace(".", ",")}
               </p>
               {product.originalPrice && product.originalPrice > product.price && (
-                <span className="mb-1 rounded bg-[#FF5F1F] px-2 py-0.5 text-[11px] font-bold text-white">
+                <span className="mb-1 rounded bg-[var(--accent)] px-2 py-0.5 text-[11px] font-bold text-white">
                   -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
                 </span>
               )}
@@ -175,7 +191,14 @@ export default function ProductDetail({
                 {size ? `Selecionado: ${size}` : "Obrigatório"}
               </span>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2" role="group" aria-labelledby="size-label">
+            <div
+              ref={sizeGroupRef}
+              id="size-picker"
+              tabIndex={-1}
+              className={`mt-4 flex flex-wrap gap-2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-accent ${nudge ? "keeus-shake" : ""}`}
+              role="group"
+              aria-labelledby="size-label"
+            >
               {product.sizes.map((itemSize) => {
                 const avail = availableFor(itemSize);
                 const soldOut = avail < 1;
@@ -184,8 +207,16 @@ export default function ProductDetail({
                     key={itemSize}
                     type="button"
                     disabled={soldOut}
-                    onClick={() => setSize(itemSize)}
+                    onClick={() => {
+                      setSize(itemSize);
+                      setLiveMsg(`Tamanho ${itemSize} selecionado`);
+                    }}
                     aria-pressed={size === itemSize}
+                    aria-label={
+                      soldOut
+                        ? `Tamanho ${itemSize} — esgotado`
+                        : `Tamanho ${itemSize} — ${avail} disponíveis`
+                    }
                     title={soldOut ? "Esgotado" : `${avail} disponível(is)`}
                     className={`flex h-12 min-w-12 items-center justify-center rounded-full border px-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
                       soldOut
@@ -208,6 +239,10 @@ export default function ProductDetail({
             )}
           </div>
 
+          <p className="sr-only" aria-live="polite">
+            {liveMsg}
+          </p>
+
           <button
             onClick={handleClick}
             disabled={soldOutSelected}
@@ -217,7 +252,7 @@ export default function ProductDetail({
                 : size
                   ? "bg-accent hover:bg-accent-hover"
                   : "bg-accent/90 hover:bg-accent"
-            } ${nudge ? "keeus-shake" : ""} disabled:cursor-not-allowed disabled:opacity-50`}
+            } disabled:cursor-not-allowed disabled:opacity-50`}
             aria-live="polite"
           >
             {added ? (
@@ -229,10 +264,13 @@ export default function ProductDetail({
             )}
           </button>
           {nudge && (
-            <p className="mt-2 hidden text-center text-xs font-medium text-accent md:block">
+            <p className="mt-2 hidden text-center text-xs font-medium text-accent md:block" role="status">
               Escolha um tamanho acima primeiro
             </p>
           )}
+          <p className="mt-2 hidden text-center text-[11px] text-muted md:block">
+            Pix ou cartão · frete pelo CEP
+          </p>
 
           <div className="mt-4">
             <ShippingCutoff />
@@ -277,13 +315,14 @@ export default function ProductDetail({
         </div>
       </div>
 
-      {/* Mobile sticky ATC — large taps, thumb zone */}
       <div className="pdp-sticky-bar fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 px-4 pt-3 shadow-[0_-8px_30px_-12px_rgba(0,0,0,0.18)] backdrop-blur-md md:hidden">
         <div className="mx-auto flex max-w-lg items-center gap-3">
           <div className="min-w-0 flex-1">
-            <p className="truncate text-xs text-muted">{product.name}</p>
-            <p className="text-base font-extrabold text-stone-900">
+            <p className="text-base font-semibold tabular-nums text-stone-900">
               R$ {product.price.toFixed(2).replace(".", ",")}
+            </p>
+            <p className="truncate text-[11px] text-muted" title={product.name}>
+              {product.name}
             </p>
           </div>
           <button
@@ -292,21 +331,21 @@ export default function ProductDetail({
             disabled={soldOutSelected}
             className={`min-h-12 flex-1 rounded-full px-4 text-sm font-bold text-white transition ${
               added ? "bg-green-600" : "bg-accent active:bg-accent-hover"
-            } ${nudge ? "keeus-shake" : ""} disabled:opacity-50`}
+            } disabled:opacity-50`}
           >
             {added ? (
               <span className="inline-flex items-center justify-center gap-1.5">
                 <Check size={16} /> Sacola
               </span>
             ) : size ? (
-              soldOutSelected ? "Esgotado" : "Adicionar"
+              soldOutSelected ? "Esgotado" : "Adicionar à sacola"
             ) : (
               "Escolher tamanho"
             )}
           </button>
         </div>
         {nudge && (
-          <p className="mx-auto mt-1.5 max-w-lg text-center text-[11px] font-medium text-accent">
+          <p className="mx-auto mt-1.5 max-w-lg text-center text-[11px] font-medium text-accent" role="status">
             Selecione o tamanho acima
           </p>
         )}

@@ -8,7 +8,8 @@ import {
 
 /**
  * Creates a Mercado Pago Checkout Preference for an existing pending order.
- * Does NOT mark the order as paid — money only moves after MP redirect/webhook.
+ * Does NOT mark the order as paid.
+ * Never puts accessToken in back_urls or metadata.
  */
 export async function POST(req: NextRequest) {
   if (!isMercadoPagoConfigured()) {
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest) {
           "Mercado Pago não configurado. Defina MERCADOPAGO_ACCESS_TOKEN no ambiente. " +
           "Enquanto isso, finalize pelo atendimento (WhatsApp/contato).",
       },
-      { status: 503 }
+      { status: 503, headers: { "Cache-Control": "no-store" } }
     );
   }
 
@@ -31,13 +32,17 @@ export async function POST(req: NextRequest) {
         error: "orders_unavailable",
         message: getPersistenceUnavailableMessage(),
       },
-      { status: 503 }
+      { status: 503, headers: { "Cache-Control": "no-store" } }
     );
   }
 
   let body: { orderId?: string; accessToken?: string; preferredMethod?: "pix" | "card" };
   try {
-    body = (await req.json()) as { orderId?: string; accessToken?: string; preferredMethod?: "pix" | "card" };
+    body = (await req.json()) as {
+      orderId?: string;
+      accessToken?: string;
+      preferredMethod?: "pix" | "card";
+    };
   } catch {
     return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
   }
@@ -61,49 +66,49 @@ export async function POST(req: NextRequest) {
   }
 
   const site = getSiteUrl();
-  const notificationUrl = process.env.MERCADOPAGO_WEBHOOK_URL || `${site}/api/payments/mercadopago/webhook`;
+  const notificationUrl =
+    process.env.MERCADOPAGO_WEBHOOK_URL || `${site}/api/payments/mercadopago/webhook`;
 
-  const preferenceBody = {
-    external_reference: order.id,
-    metadata: { order_id: order.id, access_token: order.accessToken },
-    items: order.items.map((item) => ({
-      id: item.sku,
-      title: `${item.name} — tam. ${item.size}`,
-      quantity: item.qty,
-      unit_price: item.unitPrice,
-      currency_id: "BRL",
-    })),
-    payer: {
-      name: order.customer.name,
-      email: order.customer.email,
-      phone: { number: order.customer.phone },
-    },
-    back_urls: {
-      success: `${site}/pedido/${order.id}?token=${order.accessToken}&mp=success`,
-      pending: `${site}/pedido/${order.id}?token=${order.accessToken}&mp=pending`,
-      failure: `${site}/pedido/${order.id}?token=${order.accessToken}&mp=failure`,
-    },
-    auto_return: "approved",
-    notification_url: notificationUrl,
-    statement_descriptor: "KEEUS",
-    // Keeus aceita apenas Pix e cartão — sem boleto
-    payment_methods: {
-      excluded_payment_types: [{ id: "ticket" }],
-    },
-  };
+  const items = order.items.map((item) => ({
+    id: item.sku,
+    title: `${item.name} — tam. ${item.size}`,
+    quantity: item.qty,
+    unit_price: item.unitPrice,
+    currency_id: "BRL",
+  }));
 
-  // Include shipping as a separate item if > 0
   if (order.shippingPrice > 0) {
-    preferenceBody.items.push({
+    items.push({
       id: "SHIPPING",
-      title: order.shipping?.service
-        ? `Frete ${order.shipping.service}`
-        : "Frete",
+      title: order.shipping?.service ? `Frete ${order.shipping.service}` : "Frete",
       quantity: 1,
       unit_price: order.shippingPrice,
       currency_id: "BRL",
     });
   }
+
+  const preferenceBody = {
+    external_reference: order.id,
+    metadata: { order_id: order.id },
+    items,
+    payer: {
+      name: order.customer.name,
+      email: order.customer.email,
+      phone: { number: order.customer.phone },
+    },
+    // No accessToken in URLs — order cookie / client token covers status page
+    back_urls: {
+      success: `${site}/pedido/${order.id}?mp=success`,
+      pending: `${site}/pedido/${order.id}?mp=pending`,
+      failure: `${site}/pedido/${order.id}?mp=failure`,
+    },
+    auto_return: "approved" as const,
+    notification_url: notificationUrl,
+    statement_descriptor: "KEEUS",
+    payment_methods: {
+      excluded_payment_types: [{ id: "ticket" }],
+    },
+  };
 
   const mpRes = await fetch("https://api.mercadopago.com/checkout/preferences", {
     method: "POST",
@@ -137,13 +142,15 @@ export async function POST(req: NextRequest) {
     mercadopagoPreferenceId: pref.id,
   });
 
-  return NextResponse.json({
-    configured: true,
-    preferenceId: pref.id,
-    initPoint: pref.init_point,
-    sandboxInitPoint: pref.sandbox_init_point,
-    // Explicit: creating a preference is NOT payment success
-    paid: false,
-    orderStatus: "pending_payment",
-  });
+  return NextResponse.json(
+    {
+      configured: true,
+      preferenceId: pref.id,
+      initPoint: pref.init_point,
+      sandboxInitPoint: pref.sandbox_init_point,
+      paid: false,
+      orderStatus: "pending_payment",
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

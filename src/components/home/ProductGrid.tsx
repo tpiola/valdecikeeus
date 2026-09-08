@@ -9,12 +9,16 @@ export default function ProductGrid({
   subtitle,
   products,
   viewAllHref,
+  headingAs = "h2",
 }: {
   title: string;
   subtitle?: string;
   products: Product[];
   viewAllHref?: string;
+  headingAs?: "h1" | "h2";
 }) {
+  const Heading = headingAs;
+
   return (
     <section className="bg-white px-4 py-14 md:px-8 md:py-16">
       <div className="mx-auto max-w-7xl">
@@ -22,9 +26,9 @@ export default function ProductGrid({
         <Reveal>
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+              <Heading className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
                 {title}
-              </h2>
+              </Heading>
               {subtitle && (
                 <p className="mt-1.5 text-sm text-muted">{subtitle}</p>
               )}

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { COMPANY, SITE } from "@/lib/constants";
-import { PRODUCTS } from "@/lib/products";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,12 +14,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -29,12 +22,15 @@ export const metadata: Metadata = {
     template: `%s | Keeus`,
   },
   description:
-    "Slide e chinelo de dedo Keeus, do 34 ao 45. Foto real de cada modelo e tabela de tamanho para escolher antes de comprar.",
+    "Slide e chinelo de dedo Keeus. Foto real de cada modelo e tabela de tamanho (conforme o modelo) para escolher antes de comprar.",
   keywords: [
-    "chinelos premium", "keeus chinelos", "chinelo slide",
-    "chinelo flip flop", "chinelo verão", "chinelo conforto",
-    "chinelo masculino", "chinelo feminino", "chinelo praia",
-    "chinelo EVA", "chinelo frete grátis",
+    "chinelos Keeus",
+    "chinelo slide",
+    "chinelo de dedo",
+    "flip flop",
+    "chinelo verão",
+    "chinelo EVA",
+    "kit chinelo",
   ],
   icons: {
     icon: [
@@ -46,7 +42,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Keeus — Chinelos Premium de Verão",
+    title: "Keeus — Slide e Chinelo de Dedo | Loja Oficial",
     description: "Slides e chinelos Keeus com fotos reais, frete pelo CEP e Pix ou cartão.",
     url: SITE.url,
     siteName: "Keeus",
@@ -56,12 +52,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keeus — Chinelos Premium",
+    title: "Keeus — Slide e Chinelo de Dedo | Loja Oficial",
     description: "Slide e chinelo de dedo Keeus, com foto real e escolha de tamanho antes de comprar.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://valdecikeeus.vercel.app" },
 };
 
 export default function RootLayout({
@@ -86,50 +81,7 @@ export default function RootLayout({
       : {}),
   };
 
-  const productCatalogJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Catálogo Keeus — Slide e Chinelo de Dedo",
-    url: `${SITE.url}/colecao`,
-    numberOfItems: PRODUCTS.length,
-    itemListElement: PRODUCTS.slice(0, 12).map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Product",
-        name: p.name,
-        brand: { "@type": "Brand", name: p.brand },
-        description: p.description,
-        image: `${SITE.url}${p.image}`,
-        offers: {
-          "@type": "Offer",
-          price: p.price.toFixed(2),
-          priceCurrency: "BRL",
-          availability: "https://schema.org/InStock",
-          url: `${SITE.url}/produto/${p.slug}`,
-        },
-      },
-    })),
-  };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE.url,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Coleção",
-        item: `${SITE.url}/colecao`,
-      },
-    ],
-  };
 
   const scrollObserverScript = `
     (function() {
@@ -163,14 +115,20 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
     >
       <head>
         <meta name="theme-color" content="#FF5F1F" />
         <meta name="color-scheme" content="light" />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <div className="progress-bar" style={{ width: "0%" }} />
+        <a
+          href="#conteudo"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-full focus:bg-[#FF5F1F] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white"
+        >
+          Ir para o conteúdo
+        </a>
+        <div className="progress-bar" style={{ width: "0%" }} aria-hidden="true" />
 
         <Script
           id="scroll-observer"
@@ -181,16 +139,6 @@ export default function RootLayout({
           id="schema-org"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <Script
-          id="schema-product-catalog"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(productCatalogJsonLd) }}
-        />
-        <Script
-          id="schema-breadcrumb"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
         <Script
           id="schema-website"

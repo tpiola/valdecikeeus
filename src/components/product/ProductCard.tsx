@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ArrowRight, Heart } from "lucide-react";
+import Badge from "@/components/ui/Badge";
 import { Product } from "@/lib/types";
 import { useWishlistStore } from "@/lib/store/wishlist";
 
@@ -62,12 +63,12 @@ export default function ProductCard({ product }: { product: Product }) {
         {badge && (
           <div className="absolute left-3 top-3 z-10">
             <span
-              className={`inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white ${
+              className={`inline-block px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white ${
                 badge.tone === "accent"
-                  ? "bg-[#FF5F1F]"
+                  ? "bg-[var(--accent)]"
                   : badge.tone === "muted"
                     ? "bg-stone-500"
-                    : "bg-[#1a1a1a]"
+                    : "bg-[var(--foreground)]"
               }`}
             >
               {badge.label}
@@ -87,7 +88,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <Heart
           size={15}
           className={`transition-colors ${
-            mounted && isFav ? "fill-[#ff5f1f] text-[#ff5f1f]" : "text-[#4a4a4a]"
+            mounted && isFav ? "fill-[var(--accent)] text-[var(--accent)]" : "text-[var(--foreground-mid)]"
           }`}
         />
       </button>
@@ -104,7 +105,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </span>
 
         <Link href={`/produto/${product.slug}`}>
-          <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-stone-900 transition-colors group-hover:text-[#e04e0e]">
+          <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-stone-900 transition-colors group-hover:text-[var(--accent-hover)]">
             {product.name}
           </h3>
         </Link>
@@ -128,7 +129,7 @@ export default function ProductCard({ product }: { product: Product }) {
               R$ {product.originalPrice.toFixed(2).replace(".", ",")}
             </p>
           )}
-          <p className="text-lg font-bold text-stone-900">
+          <p className="text-lg font-semibold text-stone-900">
             R$ {product.price.toFixed(2).replace(".", ",")}
           </p>
           <p className="text-xs text-stone-500">
@@ -143,7 +144,7 @@ export default function ProductCard({ product }: { product: Product }) {
               ? `Ver ${product.name}`
               : `Selecionar tamanho de ${product.name}`
           }
-          className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 border border-stone-900 bg-transparent text-xs font-semibold text-stone-900 transition hover:border-[#ff5f1f] hover:bg-[#ff5f1f] hover:text-white"
+          className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 border border-stone-900 bg-transparent text-xs font-semibold text-stone-900 transition hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white"
         >
           {product.category === "kits" ? "Ver kit" : "Selecionar tamanho"}
           <ArrowRight size={14} />

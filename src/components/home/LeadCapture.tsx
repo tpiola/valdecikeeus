@@ -52,20 +52,28 @@ export default function LeadCapture() {
             onSubmit={handleSubmit}
             className="mt-8 flex flex-col gap-3 sm:flex-row"
           >
+            <label className="sr-only" htmlFor="lead-name">Nome</label>
             <input
+              id="lead-name"
               required
+              name="name"
+              autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Seu nome"
-              className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm outline-none focus:border-accent"
+              className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm outline-none focus:border-[var(--accent)]"
             />
+            <label className="sr-only" htmlFor="lead-email">E-mail</label>
             <input
+              id="lead-email"
               required
               type="email"
+              name="email"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Seu melhor e-mail"
-              className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm outline-none focus:border-accent"
+              className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm outline-none focus:border-[var(--accent)]"
             />
             <button
               type="submit"

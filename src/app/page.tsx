@@ -1,13 +1,12 @@
 import Script from "next/script";
 import Link from "next/link";
+import Image from "next/image";
 import { Ruler, Camera, RefreshCcw, Truck } from "lucide-react";
 import Hero from "@/components/home/Hero";
 import ProductGrid from "@/components/home/ProductGrid";
 import FaqSection from "@/components/home/FaqSection";
 import LeadCapture from "@/components/home/LeadCapture";
 import ScrollStory from "@/components/home/ScrollStory";
-import ProductMarquee from "@/components/home/ProductMarquee";
-import FlashSaleBanner from "@/components/conversion/FlashSaleBanner";
 import TrustStrip from "@/components/conversion/TrustStrip";
 import Reveal from "@/components/ui/Reveal";
 import { PRODUCTS, getKits } from "@/lib/products";
@@ -16,6 +15,8 @@ import { FAQ_ITEMS, SITE } from "@/lib/constants";
 export default function Home() {
   const allProducts = PRODUCTS.filter((p) => p.category !== "kits");
   const kits = getKits();
+  const slideTile = PRODUCTS.find((p) => p.category === "slides") ?? PRODUCTS[0];
+  const flipTile = PRODUCTS.find((p) => p.category === "flipflops") ?? PRODUCTS[0];
 
   return (
     <>
@@ -37,47 +38,6 @@ export default function Home() {
 
       <Hero />
 
-      <FlashSaleBanner />
-
-      <ProductMarquee />
-
-      <section className="border-y border-stone-200 bg-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 md:px-8 lg:grid-cols-4">
-          {[
-            {
-              icon: Ruler,
-              title: "Tamanho antes da compra",
-              text: "Guia com medidas em centímetros em cada produto.",
-            },
-            {
-              icon: Camera,
-              title: "Foto real do modelo",
-              text: "O par que você vê é o par que chega.",
-            },
-            {
-              icon: Truck,
-              title: "Frete pelo CEP",
-              text: "SEDEX e PAC com prazo em dias úteis na hora.",
-            },
-            {
-              icon: RefreshCcw,
-              title: "Troca explicada",
-              text: "Regras claras na página de trocas, antes de fechar.",
-            },
-          ].map((item) => {
-            const Icon = item.icon;
-            return (
-              <div key={item.title} className="flex items-start gap-3">
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[#ff5f1f]" />
-                <div>
-                  <p className="text-sm font-semibold text-stone-900">{item.title}</p>
-                  <p className="mt-0.5 text-[13px] leading-5 text-stone-500">{item.text}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
       <section className="bg-[#f6f3ef]">
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
@@ -104,7 +64,7 @@ export default function Home() {
 
       <ProductGrid
         title="A coleção"
-        subtitle={`${allProducts.length} modelos de slide e chinelo de dedo, do 34 ao 45`}
+        subtitle={`${allProducts.length} modelos de slide e chinelo de dedo — numeração conforme o modelo`}
         products={allProducts}
         viewAllHref="/colecao"
       />
@@ -118,7 +78,7 @@ export default function Home() {
                   <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#e04e0e]">
                     Kits
                   </p>
-                  <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
+                  <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl">
                     Dois pares, um preço de kit
                   </h2>
                   <p className="mt-2 max-w-lg text-sm text-stone-600">
@@ -151,11 +111,11 @@ export default function Home() {
                       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#ff5f1f]">
                         Kit
                       </p>
-                      <h3 className="mt-1 font-display text-xl font-extrabold text-stone-900 group-hover:text-[#e04e0e]">
+                      <h3 className="mt-1 font-display text-xl font-semibold text-stone-900 group-hover:text-[#e04e0e]">
                         {kit.name}
                       </h3>
                       <p className="mt-1 line-clamp-2 text-sm text-stone-600">{kit.description}</p>
-                      <p className="mt-3 text-lg font-extrabold text-stone-900">
+                      <p className="mt-3 text-lg font-semibold text-stone-900">
                         R$ {kit.price.toFixed(2).replace(".", ",")}
                         {kit.originalPrice ? (
                           <span className="ml-2 text-sm font-medium text-stone-400 line-through">
@@ -177,13 +137,15 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-14 sm:grid-cols-2 md:px-8">
             <Link
               href="/colecao?categoria=slides"
-              className="group relative flex min-h-40 items-end overflow-hidden bg-[#1a1a1a] p-6"
+              className="group relative flex min-h-44 items-end overflow-hidden bg-stone-900 p-6"
             >
-              <div>
+              <Image src={slideTile.image} alt="" fill className="object-contain p-6 opacity-40 transition duration-500 group-hover:scale-105 group-hover:opacity-55" sizes="(max-width:640px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="relative">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
                   Slide
                 </p>
-                <h2 className="font-display mt-1 text-2xl font-extrabold text-white">
+                <h2 className="mt-1 text-2xl font-semibold text-white">
                   Faixa larga, pé firme
                 </h2>
                 <p className="mt-1 text-sm text-white/70">Do dia a dia ao pós-banho.</p>
@@ -197,13 +159,15 @@ export default function Home() {
             </Link>
             <Link
               href="/colecao?categoria=flipflops"
-              className="group relative flex min-h-40 items-end overflow-hidden bg-[#ff5f1f] p-6"
+              className="group relative flex min-h-44 items-end overflow-hidden bg-[var(--accent)] p-6"
             >
-              <div>
+              <Image src={flipTile.image} alt="" fill className="object-contain p-6 opacity-35 transition duration-500 group-hover:scale-105 group-hover:opacity-50" sizes="(max-width:640px) 100vw, 50vw" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="relative">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
                   Chinelo de dedo
                 </p>
-                <h2 className="font-display mt-1 text-2xl font-extrabold text-white">
+                <h2 className="mt-1 text-2xl font-semibold text-white">
                   O clássico do verão
                 </h2>
                 <p className="mt-1 text-sm text-white/90">Leve, seca rápido, vai pra tudo.</p>
@@ -220,7 +184,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-4xl px-4 py-14 md:px-8">
-        <h2 className="font-display text-center text-2xl font-extrabold tracking-tight text-stone-900 md:text-3xl">
+        <h2 className="font-display text-center text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl">
           Como comprar
         </h2>
         <Reveal>
@@ -243,7 +207,7 @@ export default function Home() {
               ],
             ].map(([num, title, text]) => (
               <div key={num} className="text-center sm:text-left">
-                <span className="font-display text-3xl font-extrabold text-[#ff5f1f]">{num}</span>
+                <span className="font-display text-3xl font-semibold text-[#ff5f1f]">{num}</span>
                 <h3 className="mt-2 text-sm font-bold text-stone-900">{title}</h3>
                 <p className="mt-1.5 text-[13px] leading-6 text-stone-500">{text}</p>
               </div>

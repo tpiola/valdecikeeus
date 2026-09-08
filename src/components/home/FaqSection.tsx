@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FAQ_ITEMS } from "@/lib/constants";
 
 export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 md:px-8">
       <div className="mb-10 text-center">
-        <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+        <h2 className="text-28 font-semibold tracking-tight md:text-40">
           Perguntas frequentes
         </h2>
       </div>
@@ -38,7 +39,7 @@ export default function FaqSection() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
                     <p className="pb-5 text-sm leading-6 text-muted">{item.answer}</p>
