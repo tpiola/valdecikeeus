@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Política de Privacidade | ${SITE.name}`,
+  title: "Política de Privacidade",
   description: "Saiba como a Keeus coleta, usa e protege seus dados pessoais. Em conformidade com a LGPD.",
+  alternates: { canonical: `${SITE.url}/privacidade` },
+  openGraph: {
+    title: "Política de Privacidade | Keeus",
+    description: "Saiba como a Keeus coleta, usa e protege seus dados pessoais. Em conformidade com a LGPD.",
+    url: `${SITE.url}/privacidade`,
+  },
 };
 
 export default function PrivacidadePage() {
