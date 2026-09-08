@@ -1,4 +1,3 @@
-import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
 import { Ruler, Camera, RefreshCcw, Truck } from "lucide-react";
@@ -10,7 +9,16 @@ import ScrollStory from "@/components/home/ScrollStory";
 import TrustStrip from "@/components/conversion/TrustStrip";
 import Reveal from "@/components/ui/Reveal";
 import { PRODUCTS, getKits } from "@/lib/products";
+import type { Metadata } from "next";
 import { FAQ_ITEMS, SITE } from "@/lib/constants";
+
+
+export const metadata: Metadata = {
+  alternates: { canonical: SITE.url },
+  openGraph: {
+    url: SITE.url,
+  },
+};
 
 export default function Home() {
   const allProducts = PRODUCTS.filter((p) => p.category !== "kits");
@@ -20,8 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <Script
-        id="faq-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -220,8 +227,7 @@ export default function Home() {
 
       <FaqSection />
 
-      <Script
-        id="home-org-extra"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

@@ -5,9 +5,11 @@ export const metadata: Metadata = {
   title: "Sobre",
   description:
     "Como a Keeus vende chinelo: modelos com foto real, tamanho pra conferir antes de comprar e atendimento direto pra tirar dúvida.",
+  alternates: { canonical: `${SITE.url}/sobre` },
   openGraph: {
     title: "Sobre | Keeus",
     description: "A Keeus vende chinelo do jeito que loja de verdade vende: com foto real, tamanho certo e atendimento direto.",
+    url: `${SITE.url}/sobre`,
   },
 };
 

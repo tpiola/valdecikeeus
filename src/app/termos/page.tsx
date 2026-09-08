@@ -2,8 +2,14 @@ import { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Termos de Uso | ${SITE.name}`,
+  title: "Termos de Uso",
   description: "Termos e condições de uso da loja Keeus Chinelos Premium. Leia antes de realizar sua compra.",
+  alternates: { canonical: `${SITE.url}/termos` },
+  openGraph: {
+    title: "Termos de Uso | Keeus",
+    description: "Termos e condições de uso da loja Keeus Chinelos Premium. Leia antes de realizar sua compra.",
+    url: `${SITE.url}/termos`,
+  },
 };
 
 export default function TermosPage() {

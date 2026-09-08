@@ -135,13 +135,11 @@ export default function RootLayout({
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: scrollObserverScript }}
         />
-        <Script
-          id="schema-org"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Script
-          id="schema-website"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
