@@ -36,10 +36,10 @@ export default function SobrePage() {
         </p>
 
         <p>
-          A sacola é montada no atendimento: a gente confirma o modelo, o
-          número, o prazo e a forma de pagamento com você antes de qualquer
-          cobrança. Se algo não servir, as condições de troca estão escritas na
-          página de trocas — sem letra miúda.
+          No site você escolhe o tamanho, calcula frete (SEDEX/PAC) pelo CEP e
+          paga com Pix ou cartão no checkout. Nada é cobrado ao só montar o
+          pedido. Se algo não servir, as condições de troca estão na página de
+          trocas — sem letra miúda.
         </p>
 
         <h2 className="font-display mt-10 text-xl font-bold text-foreground">

@@ -3,8 +3,14 @@ import Link from "next/link";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Trocas e Devoluções | ${SITE.name}`,
+  title: "Trocas e Devoluções",
   description: "Orientações da Keeus para solicitar análise de troca, devolução ou problema com um produto.",
+  alternates: { canonical: `${SITE.url}/trocas` },
+  openGraph: {
+    title: "Trocas e Devoluções | Keeus",
+    description: "Regras claras de troca e devolução antes de fechar o pedido.",
+    url: `${SITE.url}/trocas`,
+  },
 };
 
 export default function TrocasPage() {

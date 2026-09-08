@@ -4,11 +4,15 @@ import { SITE } from "@/lib/constants";
 import ProductGrid from "@/components/home/ProductGrid";
 
 export const metadata: Metadata = {
-  title: `Coleção | ${SITE.name}`,
-  description: "Explore a coleção Keeus de slides e chinelos de dedo. Compare modelos, cores, tamanhos e preços.",
+  title: "Coleção",
+  description:
+    "Coleção Keeus: slides, chinelos de dedo e kits. Fotos reais, numeração 34–45 e frete cotado pelo CEP.",
+  alternates: { canonical: `${SITE.url}/colecao` },
   openGraph: {
     title: "Coleção Keeus — Slide e Chinelo de Dedo",
-    description: "Slides, flip flops e lançamentos exclusivos.",
+    description: "Slides, chinelos de dedo e kits com prazo real de entrega.",
+    url: `${SITE.url}/colecao`,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Coleção Keeus" }],
   },
 };
 
@@ -26,15 +30,15 @@ export default async function ColecaoPage({
   if (categoria === "slides") {
     products = products.filter((p) => p.category === "slides");
     title = "Slides";
-    subtitle = "Conforto e estilo premium em cada passo";
+    subtitle = "Faixa larga, do 34 ao 45";
   } else if (categoria === "flipflops") {
     products = products.filter((p) => p.category === "flipflops");
     title = "Flip Flops";
-    subtitle = "Leveza e frescor para o verão";
+    subtitle = "Chinelo de dedo, do 34 ao 45";
   } else if (categoria === "premium") {
     products = products.filter((p) => p.category === "premium");
     title = "Premium";
-    subtitle = "Edições exclusivas e limitadas";
+    subtitle = "Edições especiais Keeus";
   } else if (categoria === "kits") {
     products = products.filter((p) => p.category === "kits");
     title = "Kits Keeus";

@@ -25,13 +25,13 @@ export default function LeadCapture() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-surface py-20">
+    <section className="relative overflow-hidden bg-surface py-16 md:py-20">
       <div className="mx-auto max-w-xl px-4 text-center md:px-8">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
-          Fique por dentro
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+          Novidades
         </p>
-        <h2 className="mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl">
-          Lançamentos e ofertas
+        <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">
+          Lançamentos e reposições
         </h2>
         <p className="mt-3 text-sm text-muted">
           Novos modelos e reposições da coleção, direto no seu e-mail. Sem spam, sem empurrar outra coisa.

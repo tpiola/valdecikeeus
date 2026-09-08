@@ -54,7 +54,7 @@ export default function ScrollStory() {
 
   return (
     <section ref={ref} className="relative bg-[#f6f3ef]">
-      <div className="sticky top-0 z-[1] h-[min(100svh,920px)] overflow-hidden">
+      <div className="sticky top-0 z-[1] h-[min(88svh,780px)] overflow-hidden">
         <div className="absolute inset-x-0 top-0 z-20 h-0.5 bg-stone-200/80">
           <motion.div
             style={{ width: progressWidth }}
@@ -67,7 +67,7 @@ export default function ScrollStory() {
             Do pé ao lugar
           </p>
           <h2 className="mt-3 max-w-xl font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">
-            Um chinelo pra cada momento — sem discurso vazio.
+            Um par pra cada momento.
           </h2>
 
           <div className="relative mt-10 min-h-[340px] md:mt-12 md:min-h-[400px]">
@@ -85,7 +85,7 @@ export default function ScrollStory() {
         </div>
       </div>
 
-      <div className="h-[220vh]" aria-hidden />
+      <div className="h-[140vh] md:h-[160vh]" aria-hidden />
     </section>
   );
 }

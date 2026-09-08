@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CreditCard, QrCode, RotateCcw, ShieldCheck } from "lucide-react";
+import { CreditCard, QrCode, RotateCcw, Ruler } from "lucide-react";
 
 const ITEMS = [
   {
@@ -13,9 +13,9 @@ const ITEMS = [
     detail: "Via Mercado Pago",
   },
   {
-    icon: ShieldCheck,
-    label: "Compra segura",
-    detail: "Pedido só como pago após confirmação",
+    icon: Ruler,
+    label: "Tamanho primeiro",
+    detail: "Guia em cm em cada produto",
   },
   {
     icon: RotateCcw,
@@ -36,36 +36,22 @@ export default function TrustStrip({
   const dark = tone === "dark";
   return (
     <div
-      className={`grid grid-cols-2 gap-3 lg:grid-cols-4 ${className}`}
+      className={`grid grid-cols-2 gap-x-6 gap-y-5 lg:grid-cols-4 ${className}`}
       aria-label="Informações de confiança"
     >
       {ITEMS.map((item) => {
         const Icon = item.icon;
         const body = (
-          <div
-            className={`flex items-start gap-2.5 rounded-xl border px-3 py-3 ${
-              dark
-                ? "border-white/10 bg-white/5"
-                : "border-stone-200 bg-white"
-            }`}
-          >
+          <div className="flex items-start gap-3">
             <Icon
-              size={16}
+              size={18}
               className={`mt-0.5 shrink-0 ${dark ? "text-[#ff8a55]" : "text-[#FF5F1F]"}`}
             />
             <div>
-              <p
-                className={`text-xs font-bold ${
-                  dark ? "text-white" : "text-stone-900"
-                }`}
-              >
+              <p className={`text-sm font-semibold ${dark ? "text-white" : "text-stone-900"}`}>
                 {item.label}
               </p>
-              <p
-                className={`mt-0.5 text-[11px] leading-4 ${
-                  dark ? "text-white/55" : "text-stone-500"
-                }`}
-              >
+              <p className={`mt-0.5 text-xs leading-4 ${dark ? "text-white/55" : "text-stone-500"}`}>
                 {item.detail}
               </p>
             </div>

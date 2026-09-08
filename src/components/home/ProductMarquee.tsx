@@ -18,7 +18,7 @@ export default function ProductMarquee() {
     >
       <div className="mb-5 px-4 text-center md:px-8">
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e04e0e]">
-          A coleção em movimento
+          Modelos
         </p>
       </div>
 

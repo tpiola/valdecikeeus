@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
- * Revela o conteúdo com fade + leve subida quando entra na viewport.
- * Leve (IntersectionObserver, zero lib), respeita prefers-reduced-motion.
+ * Scroll reveal — starts visible if already in view (no empty-card flash).
+ * Respects prefers-reduced-motion.
  */
 export default function Reveal({
   children,
@@ -16,18 +16,30 @@ export default function Reveal({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true); // SSR + first paint: visible
+  const [armed, setArmed] = useState(false);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
     const el = ref.current;
-    if (!el) return;
-    if (mq.matches) {
+    if (!el || mq.matches) {
       setVisible(true);
       return;
     }
+
+    // Only animate elements that are below the fold
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    if (inView) {
+      setVisible(true);
+      setArmed(true);
+      return;
+    }
+
+    setVisible(false);
+    setArmed(true);
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -35,13 +47,19 @@ export default function Reveal({
           obs.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -32px 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  if (reduced) return <div className={className}>{children}</div>;
+  if (reduced || !armed) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -49,9 +67,8 @@ export default function Reveal({
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(18px)",
-        transition: `opacity 0.6s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
-        willChange: "opacity, transform",
+        transform: visible ? "translateY(0)" : "translateY(14px)",
+        transition: `opacity 0.55s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.55s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
       }}
     >
       {children}
