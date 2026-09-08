@@ -30,8 +30,14 @@ export interface CartLineInput {
 
 export interface ShippingQuoteInput {
   id?: string;
+  /** Destination CEP digits or formatted (00000-000). */
+  cep?: string;
+  /** Service name, e.g. SEDEX / PAC. */
   service?: string;
+  /** Carrier label, e.g. Correios. */
+  carrier?: string;
   price: number;
+  /** Estimated business days. */
   days?: number;
 }
 

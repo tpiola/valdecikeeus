@@ -52,6 +52,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: customerError || "Cliente inválido" }, { status: 400 });
   }
 
+  if (body.shipping) {
+    if (typeof body.shipping.price !== "number" || body.shipping.price < 0 || Number.isNaN(body.shipping.price)) {
+      return NextResponse.json({ error: "Frete inválido" }, { status: 400 });
+    }
+  }
+
   try {
     const order = await orders.create({
       items: body.items,
@@ -73,6 +79,7 @@ export async function POST(req: NextRequest) {
           total: order.total,
           subtotal: order.subtotal,
           shippingPrice: order.shippingPrice,
+          shipping: order.shipping ?? null,
           items: order.items,
           createdAt: order.createdAt,
         },

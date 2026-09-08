@@ -13,6 +13,9 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart";
+import ShippingCalculator, {
+  type SelectedShippingQuote,
+} from "@/components/product/ShippingCalculator";
 
 type CreatedOrder = {
   id: string;
@@ -21,6 +24,13 @@ type CreatedOrder = {
   total: number;
   subtotal: number;
   shippingPrice: number;
+  shipping?: {
+    cep?: string;
+    service?: string;
+    carrier?: string;
+    price: number;
+    days?: number;
+  };
 };
 
 type Step = "form" | "summary";
@@ -43,6 +53,7 @@ export default function CheckoutPage() {
   const [paymentNote, setPaymentNote] = useState<string | null>(null);
   const [paymentConfigured, setPaymentConfigured] = useState(false);
   const [order, setOrder] = useState<CreatedOrder | null>(null);
+  const [shipping, setShipping] = useState<SelectedShippingQuote | null>(null);
   const [customer, setCustomer] = useState({
     name: "",
     email: "",
@@ -51,8 +62,9 @@ export default function CheckoutPage() {
   });
 
   const subtotal = useMemo(() => total(), [items, total]);
+  const shippingPrice = shipping?.price ?? 0;
+  const orderTotal = Number((subtotal + shippingPrice).toFixed(2));
 
-  // clear may not exist on older cart — guard
   const clearCart = () => {
     if (typeof clear === "function") clear();
   };
@@ -72,6 +84,10 @@ export default function CheckoutPage() {
 
   async function createOrder(e: React.FormEvent) {
     e.preventDefault();
+    if (!shipping) {
+      setError("Calcule o frete e selecione SEDEX ou PAC antes de criar o pedido.");
+      return;
+    }
     setBusy(true);
     setError(null);
     setPaymentNote(null);
@@ -86,6 +102,14 @@ export default function CheckoutPage() {
             qty: i.quantity,
           })),
           customer,
+          shipping: {
+            id: shipping.id,
+            cep: shipping.cep,
+            service: shipping.service,
+            carrier: shipping.carrier,
+            price: shipping.price,
+            days: shipping.days,
+          },
         }),
       });
       const data = await res.json();
@@ -159,9 +183,22 @@ export default function CheckoutPage() {
               Ver status do pedido
             </Link>
           </div>
-          <div className="mt-5 flex justify-between border-t border-border pt-5 text-sm">
-            <span className="text-muted">Total</span>
-            <strong>R$ {order.total.toFixed(2).replace(".", ",")}</strong>
+          <div className="mt-5 space-y-2 border-t border-border pt-5 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted">Subtotal</span>
+              <span>R$ {order.subtotal.toFixed(2).replace(".", ",")}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted">
+                Frete
+                {order.shipping?.service ? ` (${order.shipping.service})` : ""}
+              </span>
+              <span>R$ {order.shippingPrice.toFixed(2).replace(".", ",")}</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Total</span>
+              <strong>R$ {order.total.toFixed(2).replace(".", ",")}</strong>
+            </div>
           </div>
         </div>
 
@@ -294,12 +331,15 @@ export default function CheckoutPage() {
                   required
                   className="mt-1 w-full rounded-xl border border-border bg-surface px-4 py-3"
                   value={customer.address.cep}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const cep = e.target.value;
                     setCustomer({
                       ...customer,
-                      address: { ...customer.address, cep: e.target.value },
-                    })
-                  }
+                      address: { ...customer.address, cep },
+                    });
+                    // Clear selected frete when CEP changes
+                    setShipping(null);
+                  }}
                 />
               </label>
               <label className="block text-sm">
@@ -388,6 +428,26 @@ export default function CheckoutPage() {
               </label>
             </div>
 
+            <div className="rounded-2xl border border-border bg-surface/60 p-4">
+              <h3 className="text-sm font-bold">Frete</h3>
+              <p className="mt-1 text-xs text-muted">
+                O frete da PDP não carrega automaticamente — calcule e escolha o serviço aqui.
+              </p>
+              <div className="mt-3">
+                <ShippingCalculator
+                  key={customer.address.cep.replace(/\D/g, "").slice(0, 8) || "cep"}
+                  productPrice={subtotal}
+                  initialCep={customer.address.cep}
+                  compact
+                  selectedService={shipping?.service ?? null}
+                  onSelect={(quote) => {
+                    setShipping(quote);
+                    setError(null);
+                  }}
+                />
+              </div>
+            </div>
+
             {error && (
               <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
                 {error}
@@ -396,7 +456,7 @@ export default function CheckoutPage() {
 
             <button
               type="submit"
-              disabled={busy}
+              disabled={busy || !shipping}
               className="flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-sm font-bold text-white hover:bg-accent-hover disabled:opacity-60"
             >
               {busy ? <Loader2 className="animate-spin" size={18} /> : null}
@@ -411,13 +471,31 @@ export default function CheckoutPage() {
 
         <aside className="h-fit rounded-2xl bg-[#171512] p-6 text-white lg:sticky lg:top-32">
           <h2 className="text-lg font-bold text-white">Resumo</h2>
-          <div className="mt-5 flex justify-between border-b border-white/10 pb-5 text-sm">
-            <span className="text-white/60">Subtotal</span>
-            <strong>R$ {subtotal.toFixed(2).replace(".", ",")}</strong>
+          <div className="mt-5 space-y-3 border-b border-white/10 pb-5 text-sm">
+            <div className="flex justify-between">
+              <span className="text-white/60">Subtotal</span>
+              <strong>R$ {subtotal.toFixed(2).replace(".", ",")}</strong>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-white/60">
+                Frete{shipping?.service ? ` (${shipping.service})` : ""}
+              </span>
+              <strong>
+                {shipping
+                  ? `R$ ${shippingPrice.toFixed(2).replace(".", ",")}`
+                  : "—"}
+              </strong>
+            </div>
+            {shipping?.days != null && (
+              <p className="text-xs text-white/50">Prazo estimado: {shipping.days} dias úteis</p>
+            )}
+          </div>
+          <div className="mt-5 flex justify-between text-base">
+            <span className="text-white/70">Total</span>
+            <strong>R$ {orderTotal.toFixed(2).replace(".", ",")}</strong>
           </div>
           <p className="mt-5 text-sm leading-6 text-white/60">
-            Frete pode ser confirmado no atendimento ou calculado na PDP. Pagamento via Mercado Pago
-            quando as variáveis de ambiente estiverem configuradas.
+            Pagamento via Mercado Pago quando as variáveis de ambiente estiverem configuradas.
           </p>
           <Link
             href="/contato?assunto=pedido"
