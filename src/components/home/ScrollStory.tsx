@@ -38,8 +38,64 @@ const FRAMES = [
   },
 ] as const;
 
+type Frame = (typeof FRAMES)[number];
+
+function StoryCopy({
+  productSlug,
+  eyebrow,
+  title,
+  copy,
+}: Pick<Frame, "productSlug" | "eyebrow" | "title" | "copy">) {
+  const product = PRODUCTS.find((p) => p.slug === productSlug) ?? PRODUCTS[0];
+  return (
+    <div className="max-w-md">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF5F1F]">
+        {eyebrow}
+      </p>
+      <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight text-stone-900 md:text-3xl">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-stone-600 md:text-base">
+        {copy}
+      </p>
+      <Link
+        href={`/produto/${product.slug}`}
+        className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-stone-900 transition-colors hover:text-[#e04e0e]"
+      >
+        Ver {product.name}
+        <span aria-hidden>→</span>
+      </Link>
+    </div>
+  );
+}
+
+function StoryMedia({
+  productSlug,
+  video,
+  scale,
+}: {
+  productSlug: string;
+  video: Frame["video"];
+  scale?: ReturnType<typeof useTransform<number, number>>;
+}) {
+  const product = PRODUCTS.find((p) => p.slug === productSlug) ?? PRODUCTS[0];
+  const inner = (
+    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-[0_24px_50px_-24px_rgba(26,26,26,0.35)] md:aspect-square">
+      <LazyVideo
+        mp4={video.mp4}
+        webm={video.webm}
+        poster={product.image}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    </div>
+  );
+  if (!scale) return inner;
+  return <motion.div style={{ scale }}>{inner}</motion.div>;
+}
+
 /**
- * Scroll storytelling — pin/reveal com clips ken-burns das fotos reais.
+ * Mobile: stack vertical (sem absolute overlap).
+ * Desktop: sticky pin + crossfade; sticky top = --header-offset.
  */
 export default function ScrollStory() {
   const ref = useRef<HTMLElement>(null);
@@ -54,38 +110,70 @@ export default function ScrollStory() {
 
   return (
     <section ref={ref} className="relative bg-[#f6f3ef]">
-      <div className="sticky top-0 z-[1] h-[min(88svh,780px)] overflow-hidden">
-        <div className="absolute inset-x-0 top-0 z-20 h-0.5 bg-stone-200/80">
-          <motion.div
-            style={{ width: progressWidth }}
-            className="h-full bg-[#FF5F1F]"
-          />
-        </div>
-
-        <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-4 py-16 md:px-8">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e04e0e]">
-            Do pé ao lugar
-          </p>
-          <h2 className="mt-3 max-w-xl font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">
-            Um par pra cada momento.
-          </h2>
-
-          <div className="relative mt-10 min-h-[340px] md:mt-12 md:min-h-[400px]">
-            {FRAMES.map((frame, i) => (
-              <StoryFrame
-                key={frame.productSlug}
-                index={i}
-                total={FRAMES.length}
-                progress={scrollYProgress}
-                reduceMotion={!!reduceMotion}
-                {...frame}
+      {/* Mobile — stack limpo */}
+      <div className="mx-auto max-w-7xl px-4 py-16 md:hidden">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e04e0e]">
+          Do pé ao lugar
+        </p>
+        <h2 className="mt-3 max-w-xl font-display text-3xl font-semibold tracking-tight text-stone-900">
+          Um par pra cada momento.
+        </h2>
+        <div className="mt-10 flex flex-col gap-14">
+          {FRAMES.map((frame) => (
+            <div key={frame.productSlug} className="flex flex-col gap-6">
+              <StoryMedia
+                productSlug={frame.productSlug}
+                video={frame.video}
               />
-            ))}
-          </div>
+              <StoryCopy
+                productSlug={frame.productSlug}
+                eyebrow={frame.eyebrow}
+                title={frame.title}
+                copy={frame.copy}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="h-[140vh] md:h-[160vh]" aria-hidden />
+      {/* Desktop — sticky pin */}
+      <div className="relative hidden md:block">
+        <div
+          className="sticky z-[1] h-[min(88svh,780px)] overflow-hidden"
+          style={{ top: "var(--header-offset)" }}
+        >
+          <div className="absolute inset-x-0 top-0 z-20 h-0.5 bg-stone-200/80">
+            <motion.div
+              style={{ width: progressWidth }}
+              className="h-full bg-[#FF5F1F]"
+            />
+          </div>
+
+          <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-8 py-16">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e04e0e]">
+              Do pé ao lugar
+            </p>
+            <h2 className="mt-3 max-w-xl font-display text-3xl font-semibold tracking-tight text-stone-900 md:text-4xl">
+              Um par pra cada momento.
+            </h2>
+
+            <div className="relative mt-12 min-h-[400px]">
+              {FRAMES.map((frame, i) => (
+                <StoryFrame
+                  key={frame.productSlug}
+                  index={i}
+                  total={FRAMES.length}
+                  progress={scrollYProgress}
+                  reduceMotion={!!reduceMotion}
+                  {...frame}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="h-[160vh]" aria-hidden />
+      </div>
     </section>
   );
 }
@@ -105,13 +193,7 @@ function StoryFrame({
   total: number;
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   reduceMotion: boolean;
-  productSlug: string;
-  video: { mp4: string; webm: string };
-  eyebrow: string;
-  title: string;
-  copy: string;
-}) {
-  const product = PRODUCTS.find((p) => p.slug === productSlug) ?? PRODUCTS[0];
+} & Frame) {
   const start = index / total;
   const end = (index + 1) / total;
   const mid = (start + end) / 2;
@@ -137,38 +219,15 @@ function StoryFrame({
   return (
     <motion.div
       style={{ opacity, y }}
-      className="absolute inset-0 grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10"
+      className="absolute inset-0 grid grid-cols-2 items-center gap-10"
     >
-      <motion.div
-        style={{ scale }}
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-[0_24px_50px_-24px_rgba(26,26,26,0.35)] md:aspect-square"
-      >
-        <LazyVideo
-          mp4={video.mp4}
-          webm={video.webm}
-          poster={product.image}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </motion.div>
-
-      <div className="max-w-md">
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF5F1F]">
-          {eyebrow}
-        </p>
-        <h3 className="mt-2 font-display text-2xl font-extrabold text-stone-900 md:text-3xl">
-          {title}
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-stone-600 md:text-base">
-          {copy}
-        </p>
-        <Link
-          href={`/produto/${product.slug}`}
-          className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-stone-900 transition-colors hover:text-[#e04e0e]"
-        >
-          Ver {product.name}
-          <span aria-hidden>→</span>
-        </Link>
-      </div>
+      <StoryMedia productSlug={productSlug} video={video} scale={scale} />
+      <StoryCopy
+        productSlug={productSlug}
+        eyebrow={eyebrow}
+        title={title}
+        copy={copy}
+      />
     </motion.div>
   );
 }
