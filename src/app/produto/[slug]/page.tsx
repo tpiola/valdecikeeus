@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { getProductBySlug, PRODUCTS } from "@/lib/products";
 import { SITE } from "@/lib/constants";
 import ProductDetail from "@/components/product/ProductDetail";
+import { getProductRepository, stockAvailable } from "@/lib/commerce";
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -35,6 +36,18 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
+
+  let sizeStock: Record<number, number> | undefined;
+  try {
+    const variants = await getProductRepository().getStockBySlug(slug);
+    if (variants.length) {
+      sizeStock = Object.fromEntries(
+        variants.map((v) => [v.size, stockAvailable(v)])
+      );
+    }
+  } catch {
+    sizeStock = undefined;
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,7 +82,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ProductDetail product={product} />
+      <ProductDetail product={product} sizeStock={sizeStock} />
     </>
   );
 }
