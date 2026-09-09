@@ -298,7 +298,7 @@ export const PRODUCTS: Product[] = [
     sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
     colors: ["#1A1A1A"],
     description:
-      "O Toledo na versão toda preta. Faixa larga de TPU, palmilha anatômica, solado antiderrapante. Sem estampa, sem firula — só o chinelo.",
+      "O Toledo na versão toda preta. Faixa larga de TPU, palmilha anatômica, solado antiderrapante. Sem estampa, sem excesso — só o chinelo.",
     image: IMG("toledo-preto-preto/2k/1.png"),
     gallery: [
       IMG("toledo-preto-preto/2k/1.png"),
@@ -355,7 +355,7 @@ export const PRODUCTS: Product[] = [
     sizes: [35, 36, 37, 38, 39, 40, 41, 42, 43, 44],
     colors: ["#1A1A1A"],
     description:
-      "O clássico preto em dobro: Bahamas Preto (slide) + Malibu Preto (chinelo de dedo). Presente sem firula — foto real, tamanho pra escolher e preço de kit, sem surpresa.",
+      "O clássico preto em dobro: Bahamas Preto (slide) + Malibu Preto (chinelo de dedo). Presente simples e bem resolvido — foto real, tamanho pra escolher e preço de kit.",
     image: IMG("bahamas-preto-preto/2k/1.png"),
     gallery: [
       IMG("bahamas-preto-preto/2k/1.png"),

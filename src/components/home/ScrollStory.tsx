@@ -24,7 +24,7 @@ const FRAMES = [
     video: { mp4: "/videos/story-malibu.mp4", webm: "/videos/story-malibu.webm" },
     eyebrow: "Na praia",
     title: "Chinelo de dedo que seca rápido",
-    copy: "Leve, flexível e sem firula. Sai da água, seca na sombra, volta pra mesa.",
+    copy: "Leve e flexível. Sai da água, seca na sombra, volta pra mesa.",
   },
   {
     productSlug: "bahamas-cafe-cafe",

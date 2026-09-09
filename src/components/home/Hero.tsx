@@ -126,9 +126,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.14, ease }}
             className="mt-6 max-w-md text-base leading-relaxed text-white/72 md:text-lg"
           >
-            Foto real do modelo, numeração que confere e frete cotado pelo CEP
-            antes de fechar. Comprar chinelo online não devia ser loteria —
-            aqui não é.
+            Foto real de cada modelo, guia de tamanho em centímetros e frete
+            cotado pelo CEP — tudo claro antes de você fechar o pedido.
           </motion.p>
 
           <motion.div
