@@ -15,9 +15,9 @@ const FRAMES = [
   {
     productSlug: "toledo-preto-laranja",
     video: {
-      mp4: "/videos/hero-toledo.mp4",
-      webm: "/videos/hero-toledo.webm",
-      poster: "/videos/posters/hero-toledo.webp",
+      mp4: "/videos/story-toledo-rua.mp4",
+      webm: "/videos/story-toledo-rua.webm",
+      poster: "/videos/posters/story-toledo-rua.webp",
     },
     eyebrow: "Na rua",
     title: "Slide firme o dia inteiro",
