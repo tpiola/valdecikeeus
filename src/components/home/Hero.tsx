@@ -115,9 +115,9 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.06, ease }}
             className="mt-5 font-display text-[clamp(2.6rem,8vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-white"
           >
-            O pé encontra
+            Chinelo que encaixa
             <br />
-            o par certo.
+            no seu pé.
           </motion.h1>
 
           <motion.p
@@ -126,8 +126,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.14, ease }}
             className="mt-6 max-w-md text-base leading-relaxed text-white/72 md:text-lg"
           >
-            Foto real de cada modelo, guia de tamanho em centímetros e frete
-            cotado pelo CEP — tudo claro antes de você fechar o pedido.
+            Foto real de cada modelo, tamanho em centímetros e frete cotado
+            pelo CEP — você vê tudo antes de fechar o pedido.
           </motion.p>
 
           <motion.div
