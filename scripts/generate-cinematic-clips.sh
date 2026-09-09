@@ -27,25 +27,25 @@ zoompan=z='${zoom_expr}':x='${x_expr}':y='${y_expr}':d=${frames}:s=${w}x${h}:fps
 
 # Hero 16:9 — slow zoom in on Toledo Preto Laranja (dark stage)
 gen "hero-toledo" \
-  "$ROOT/public/assets/real/produtos/toledo-preto-laranja/2k/1.png" \
+  "$ROOT/public/assets/real/produtos/toledo-preto-laranja/2k-v2/1.png" \
   "0x0f0f0f" "min(1.0+0.0009*on,1.12)" "iw/2-(iw/zoom/2)" "ih/2-(ih/zoom/2)" \
   6 1280 720
 
 # Story — Malibu Mel Café, slight pan right + zoom
 gen "story-malibu" \
-  "$ROOT/public/assets/real/produtos/malibu-mel-cafe/2k/1.png" \
+  "$ROOT/public/assets/real/produtos/malibu-mel-cafe/2k-v2/1.png" \
   "0xf6f3ef" "min(1.0+0.0008*on,1.10)" "iw/2-(iw/zoom/2)+on*0.15" "ih/2-(ih/zoom/2)" \
   5 1280 720
 
 # Story — Bahamas Café, zoom out feel (start higher)
 gen "story-bahamas" \
-  "$ROOT/public/assets/real/produtos/bahamas-cafe-cafe/2k/1.png" \
+  "$ROOT/public/assets/real/produtos/bahamas-cafe-cafe/2k-v2/1.png" \
   "0xf6f3ef" "max(1.12-0.0009*on,1.0)" "iw/2-(iw/zoom/2)" "ih/2-(ih/zoom/2)" \
   5 1280 720
 
 # Story — Toledo Café, vertical-ish crop for mobile hero alt (9:16)
 gen "story-toledo-cafe" \
-  "$ROOT/public/assets/real/produtos/toledo-cafe-cafe/2k/1.png" \
+  "$ROOT/public/assets/real/produtos/toledo-cafe-cafe/2k-v2/1.png" \
   "0x1a1a1a" "min(1.0+0.0010*on,1.14)" "iw/2-(iw/zoom/2)" "ih/2-(ih/zoom/2)-on*0.08" \
   5 720 1280
 
