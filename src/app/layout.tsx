@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
+import BackToTop from "@/components/ui/BackToTop";
 import { COMPANY, SITE } from "@/lib/constants";
 
 const inter = Inter({
@@ -163,6 +164,7 @@ export default function RootLayout({
         <main className="flex-1" id="conteudo">{children}</main>
         <Footer />
         <CartDrawer />
+        <BackToTop />
       </body>
     </html>
   );

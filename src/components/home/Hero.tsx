@@ -73,7 +73,7 @@ export default function Hero() {
             poster="/videos/posters/hero-toledo.webp"
             lazy={false}
             className={`absolute inset-0 h-full w-full object-cover ${
-              reduceMotion ? "" : "animate-ken-burns"
+              reduceMotion ? "" : "hero-media-in"
             }`}
           />
         </div>

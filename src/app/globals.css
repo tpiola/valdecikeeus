@@ -262,18 +262,24 @@ h1, h2, h3 {
   /* Reserve space above sticky header / notice without clipping CTA */
   --hero-pad-top: calc(var(--header-offset) + 0.5rem);
 }
-.hero-cinematic .animate-ken-burns {
-  animation-duration: 18s;
-  transform-origin: 55% 40%;
+.hero-cinematic .hero-media-in {
+  animation: heroMediaIn 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: 52% 42%;
 }
 
-/* ── Ken Burns ── */
+/* ── Ken Burns (não usado no hero — mantido p/ compatibilidade) ── */
 @keyframes kenBurns {
   0%   { transform: scale(1.0); }
   100% { transform: scale(1.06); }
 }
 .animate-ken-burns {
   animation: kenBurns 10s ease-out infinite alternate;
+}
+
+/* Entrada do vídeo do hero: zoom-out suave de 1.08 → 1.0 (uma vez, sem loop) */
+@keyframes heroMediaIn {
+  0%   { transform: scale(1.08) translateY(0); opacity: 0.92; }
+  100% { transform: scale(1.0) translateY(0); opacity: 1; }
 }
 
 /* ── Section Divider ── */
