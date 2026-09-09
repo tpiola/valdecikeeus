@@ -46,13 +46,6 @@ export const NAV_LINKS = [
   { label: "Contato", href: "/contato" },
 ];
 
-export const TRUST_BADGES = [
-  { label: "Fotos reais", detail: "O par que você vê é o modelo anunciado" },
-  { label: "Pix e cartão", detail: "Sem boleto · checkout via Mercado Pago" },
-  { label: "Tamanho antes da compra", detail: "Escolha a numeração com guia em cm" },
-  { label: "Trocas com regras claras", detail: "Leia a política antes de fechar" },
-];
-
 export const FAQ_ITEMS = [
   {
     question: "Como escolher o tamanho certo do chinelo Keeus?",

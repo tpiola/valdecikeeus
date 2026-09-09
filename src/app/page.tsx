@@ -50,19 +50,15 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
           <TrustStrip />
           <p className="mt-5 text-center text-xs text-stone-500">
-            Dúvidas?{" "}
+            Ficou com dúvida de tamanho, entrega ou troca?{" "}
             <a href="/faq" className="font-semibold text-stone-800 underline underline-offset-2">
-              FAQ
-            </a>
-            ,{" "}
-            <a href="/trocas" className="font-semibold text-stone-800 underline underline-offset-2">
-              trocas
+              Perguntas frequentes
             </a>{" "}
-            ou{" "}
+            e{" "}
             <a href="/contato" className="font-semibold text-stone-800 underline underline-offset-2">
               contato
-            </a>
-            .
+            </a>{" "}
+            respondem antes de você fechar o pedido.
           </p>
         </div>
       </section>

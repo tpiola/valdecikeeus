@@ -68,15 +68,22 @@ export default function Header() {
   }
 
   const flashItems = flashAlive ? getFlashSaleProducts() : [];
+  // Data de fim da oferta (BRT) para a copy — ex.: "até 12/09"
+  const flashEnd = new Date(FLASH_SALE.endsAt);
+  const flashEndLabel = new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone: "America/Sao_Paulo",
+  }).format(flashEnd);
   const flashCountText =
     flashItems.length === 0
       ? ""
       : flashItems.length === 1
-        ? " · 1 modelo em oferta"
-        : ` · ${flashItems.length} modelos em oferta`;
+        ? "1 modelo em oferta"
+        : `${flashItems.length} modelos em oferta`;
   const notice = flashAlive
-    ? `${FLASH_SALE.label}${flashCountText} · Pix e cartão · Trocas claras`
-    : "Keeus — slide e chinelo de dedo · Pix e cartão · Trocas com regras claras";
+    ? `Oferta até ${flashEndLabel} — ${flashCountText}, Pix ou cartão`
+    : "Slide e chinelo de dedo com foto real do modelo — numeração do 34 ao 45";
 
   return (
     <>

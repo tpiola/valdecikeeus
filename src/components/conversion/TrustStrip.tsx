@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CreditCard, QrCode, RotateCcw, Ruler } from "lucide-react";
+import { CreditCard, QrCode, Ruler, Camera } from "lucide-react";
 
 const ITEMS = [
   {
@@ -14,14 +14,13 @@ const ITEMS = [
   },
   {
     icon: Ruler,
-    label: "Tamanho primeiro",
+    label: "Tamanho por modelo",
     detail: "Guia em cm em cada produto",
   },
   {
-    icon: RotateCcw,
-    label: "Trocas",
-    detail: "Regras claras antes de fechar",
-    href: "/trocas",
+    icon: Camera,
+    label: "Foto real",
+    detail: "O par que você vê é o que chega",
   },
 ] as const;
 
@@ -41,8 +40,8 @@ export default function TrustStrip({
     >
       {ITEMS.map((item) => {
         const Icon = item.icon;
-        const body = (
-          <div className="flex items-start gap-3">
+        return (
+          <div key={item.label} className="flex items-start gap-3">
             <Icon
               size={18}
               className={`mt-0.5 shrink-0 ${dark ? "text-[#ff8a55]" : "text-[#FF5F1F]"}`}
@@ -57,14 +56,6 @@ export default function TrustStrip({
             </div>
           </div>
         );
-        if ("href" in item && item.href) {
-          return (
-            <Link key={item.label} href={item.href} className="block transition hover:opacity-90">
-              {body}
-            </Link>
-          );
-        }
-        return <div key={item.label}>{body}</div>;
       })}
     </div>
   );
