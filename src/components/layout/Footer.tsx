@@ -68,6 +68,29 @@ export default function Footer() {
                 ? `${COMPANY.legalName} · CNPJ ${COMPANY.cnpj}`
                 : COMPANY.policiesNote}
             </p>
+
+            {/* WhatsApp — QR code para atendimento direto */}
+            <div className="mt-7 max-w-sm">
+              <p className="text-sm font-semibold text-white/85">Atendimento no WhatsApp</p>
+              <p className="mt-1 text-xs leading-5 text-white/50">
+                (16) 99175-8901 — dúvida de tamanho, pedido ou troca, chama aqui.
+              </p>
+              <a
+                href="https://wa.me/5516991758901?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Keeus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block overflow-hidden rounded-2xl border border-white/10 bg-white p-2 transition hover:border-[#FF5F1F]/60"
+                aria-label="Abrir WhatsApp da Keeus — (16) 99175-8901"
+              >
+                <Image
+                  src="/assets/real/whatsapp-qr-keeus.png"
+                  alt="QR code para o WhatsApp da Keeus"
+                  width={132}
+                  height={132}
+                  className="h-auto w-28 md:w-32"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Shop */}
