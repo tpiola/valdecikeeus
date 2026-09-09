@@ -3,11 +3,11 @@ import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Termos de Uso",
-  description: "Termos e condições de uso da loja Keeus Chinelos Premium. Leia antes de realizar sua compra.",
+  description: "Termos e condições de uso da loja Keeus. Leia antes de realizar sua compra.",
   alternates: { canonical: `${SITE.url}/termos` },
   openGraph: {
     title: "Termos de Uso | Keeus",
-    description: "Termos e condições de uso da loja Keeus Chinelos Premium. Leia antes de realizar sua compra.",
+    description: "Termos e condições de uso da loja Keeus. Leia antes de realizar sua compra.",
     url: `${SITE.url}/termos`,
   },
 };
@@ -28,7 +28,7 @@ export default function TermosPage() {
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-foreground-mid">
         <div className="rounded-2xl bg-surface border border-border p-6">
           <p>
-            Ao acessar e utilizar o site <strong className="text-foreground">Keeus Chinelos Premium</strong>, 
+            Ao acessar e utilizar o site <strong className="text-foreground">Keeus</strong>, 
             você concorda com os termos e condições descritos abaixo. Leia atentamente antes de realizar qualquer compra.
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function TermosPage() {
 
         <h2 className="font-display text-lg font-bold text-foreground">4. Propriedade intelectual</h2>
         <p>
-          Todo o conteúdo do site — textos, imagens, logotipo e layout — é de propriedade da Keeus Chinelos Premium. 
+          Todo o conteúdo do site — textos, imagens, logotipo e layout — é de propriedade da Keeus. 
           É proibida a reprodução total ou parcial sem autorização expressa.
         </p>
 

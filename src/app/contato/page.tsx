@@ -79,8 +79,9 @@ function ContatoForm() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Atendimento</p>
           <h1 className="mt-2 text-3xl font-bold md:text-5xl">Fale com a Keeus</h1>
           <p className="mt-4 leading-7 text-muted">
-            Envie sua dúvida sobre modelos, tamanhos, disponibilidade ou revisão do pedido. Não
-            exibimos telefone, prazo de resposta ou redes sociais que ainda não foram confirmados.
+            Envie sua dúvida sobre modelos, tamanhos, disponibilidade ou revisão do pedido.
+            Se for sobre um pedido que já fechou, informe o número — se não tiver, o e-mail
+            usado na compra já ajuda a gente a achar.
           </p>
         </div>
         <div className="rounded-3xl border border-border bg-surface p-6 md:p-8">

@@ -104,7 +104,7 @@ export default function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease }}
-            className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#FF5F1F]"
+            className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#ff8a55]"
           >
             Slide e chinelo de dedo
           </motion.p>
@@ -126,8 +126,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.14, ease }}
             className="mt-6 max-w-md text-base leading-relaxed text-white/72 md:text-lg"
           >
-            Fotos reais. Numeração por modelo. Frete cotado pelo CEP.
-            Pix ou cartão no checkout — sem surpresa na hora de pagar.
+            Foto real do modelo, numeração que confere e frete cotado pelo CEP
+            antes de fechar. Comprar chinelo online não devia ser loteria —
+            aqui não é.
           </motion.p>
 
           <motion.div
@@ -160,16 +161,16 @@ export default function Hero() {
             className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/15 pt-6 text-[13px] text-white/60"
           >
             <li>
-              <span className="font-semibold text-white">
-                {PRODUCTS.length}
-              </span>{" "}
+              <span className="font-semibold text-white">{PRODUCTS.length}</span>{" "}
               modelos
             </li>
             <li>
-              <span className="font-semibold text-white">Pix e cartão</span>
+              Tamanho por modelo,{" "}
+              <span className="font-semibold text-white">34 ao 45</span>
             </li>
             <li>
-              <span className="font-semibold text-white">Frete pelo CEP</span>
+              <span className="font-semibold text-white">Pix ou cartão</span> no
+              checkout
             </li>
           </motion.ul>
         </motion.div>

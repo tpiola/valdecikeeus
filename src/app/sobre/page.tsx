@@ -63,7 +63,9 @@ export default function SobrePage() {
           </li>
           <li>
             <strong className="text-foreground">Atendimento direto</strong> —
-            dúvida de número, de pedido ou de troca, é só chamar pelo WhatsApp.
+            dúvida de número, de pedido ou de troca, o
+            <a href="/contato" className="font-semibold text-accent underline underline-offset-2"> contato</a>{" "}
+            responde.
           </li>
         </ul>
 

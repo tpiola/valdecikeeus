@@ -11,7 +11,7 @@ export const COMPANY = {
   legalName: "Keeus",
   /** Preencha com CNPJ real quando disponível; string vazia = não exibir. */
   cnpj: "",
-  email: "contato@keeus.com.br",
+  email: "",  // domínio keeus.com.br ainda sem e-mail ativo — contato via formulário
   city: "Brasil",
   policiesNote:
     "Razão social e CNPJ constam nos documentos do pedido e no atendimento quando disponíveis.",
@@ -22,7 +22,7 @@ export const FLASH_SALE = {
   enabled: true,
   /** Fim: 12/09/2026 23:59 BRT */
   endsAt: "2026-09-13T02:59:59.000Z",
-  label: "Oferta com data",
+  label: "Oferta por tempo limitado",
   href: "/colecao?filtro=oferta",
   /** Corta frete do dia útil até este horário local (BRT). */
   sameDayCutoffHour: 15,

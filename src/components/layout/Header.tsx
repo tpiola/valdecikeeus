@@ -68,8 +68,14 @@ export default function Header() {
   }
 
   const flashItems = flashAlive ? getFlashSaleProducts() : [];
+  const flashCountText =
+    flashItems.length === 0
+      ? ""
+      : flashItems.length === 1
+        ? " · 1 modelo em oferta"
+        : ` · ${flashItems.length} modelos em oferta`;
   const notice = flashAlive
-    ? `${FLASH_SALE.label}${flashItems.length ? ` · ${flashItems.length} modelo(s)` : ""} · Pix e cartão · Trocas claras`
+    ? `${FLASH_SALE.label}${flashCountText} · Pix e cartão · Trocas claras`
     : "Keeus — slide e chinelo de dedo · Pix e cartão · Trocas com regras claras";
 
   return (

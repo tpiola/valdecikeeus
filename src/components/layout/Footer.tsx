@@ -128,9 +128,9 @@ export default function Footer() {
             <div className="mt-10 space-y-2 border-t border-white/[0.08] pt-6">
               <p className="text-sm font-medium text-white/80">Pix e cartão</p>
               <p className="text-xs leading-5 text-white/40">
-                Total e frete visíveis antes de pagar. Trocas com regras em{" "}
+                Total e frete visíveis antes de pagar. Trocas com regras claras em{" "}
                 <Link href="/trocas" className="text-white/55 underline-offset-2 hover:text-white hover:underline">
-                  /trocas
+                  trocas e devoluções
                 </Link>
                 .
               </p>

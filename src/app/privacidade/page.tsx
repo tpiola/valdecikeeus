@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function PrivacidadePage() {
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-foreground-mid">
         <div className="rounded-2xl bg-surface border border-border p-6">
           <p>
-            A <strong className="text-foreground">Keeus Chinelos Premium</strong> leva a sério a privacidade 
+            A <strong className="text-foreground">Keeus</strong> leva a sério a privacidade 
             dos seus dados. Esta política explica como coletamos, usamos e protegemos suas informações pessoais, 
             em conformidade com a Lei Geral de Proteção de Dados (LGPD).
           </p>
@@ -75,7 +76,7 @@ export default function PrivacidadePage() {
           <li>Portabilidade dos seus dados</li>
         </ul>
         <p>
-          Envie sua solicitação para <strong className="text-foreground">privacidade@keeus.com.br</strong>.
+          Envie sua solicitação pela página de <Link href="/contato" className="font-semibold text-foreground underline underline-offset-2">contato</Link>, com o assunto “Privacidade”.
         </p>
 
         <h2 className="font-display text-lg font-bold text-foreground">5. Cookies</h2>
@@ -87,7 +88,7 @@ export default function PrivacidadePage() {
 
         <h2 className="font-display text-lg font-bold text-foreground">6. Segurança</h2>
         <p>
-          Seu pagamento é processado com criptografia SSL de 256 bits. Todos os dados são armazenados 
+          O site usa conexão segura (HTTPS) e o processamento do pagamento é feito pelo Mercado Pago, que criptografa seus dados. As informações são armazenadas 
           em servidores seguros com acesso restrito. Implementamos medidas técnicas e organizacionais 
           para proteger suas informações contra acessos não autorizados.
         </p>
