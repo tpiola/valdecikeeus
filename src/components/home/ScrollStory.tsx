@@ -14,14 +14,22 @@ import LazyVideo from "@/components/ui/LazyVideo";
 const FRAMES = [
   {
     productSlug: "toledo-preto-laranja",
-    video: { mp4: "/videos/hero-toledo.mp4", webm: "/videos/hero-toledo.webm" },
+    video: {
+      mp4: "/videos/hero-toledo.mp4",
+      webm: "/videos/hero-toledo.webm",
+      poster: "/videos/posters/hero-toledo.webp",
+    },
     eyebrow: "Na rua",
     title: "Slide firme o dia inteiro",
     copy: "Faixa larga, palmilha anatômica, solado que aguenta. Do café da manhã ao fim da tarde sem trocar o pé.",
   },
   {
     productSlug: "malibu-mel-cafe",
-    video: { mp4: "/videos/story-malibu.mp4", webm: "/videos/story-malibu.webm" },
+    video: {
+      mp4: "/videos/story-malibu.mp4",
+      webm: "/videos/story-malibu.webm",
+      poster: "/videos/posters/story-malibu.webp",
+    },
     eyebrow: "Na praia",
     title: "Chinelo de dedo que seca rápido",
     copy: "Leve e flexível. Sai da água, seca na sombra, volta pra mesa.",
@@ -31,6 +39,7 @@ const FRAMES = [
     video: {
       mp4: "/videos/story-bahamas.mp4",
       webm: "/videos/story-bahamas.webm",
+      poster: "/videos/posters/story-bahamas.webp",
     },
     eyebrow: "Em casa",
     title: "O par que some no dia a dia",
@@ -78,13 +87,12 @@ function StoryMedia({
   video: Frame["video"];
   scale?: ReturnType<typeof useTransform<number, number>>;
 }) {
-  const product = PRODUCTS.find((p) => p.slug === productSlug) ?? PRODUCTS[0];
   const inner = (
     <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-[0_24px_50px_-24px_rgba(26,26,26,0.35)] md:aspect-square">
       <LazyVideo
         mp4={video.mp4}
         webm={video.webm}
-        poster={product.image}
+        poster={video.poster}
         className="absolute inset-0 h-full w-full object-cover"
       />
     </div>

@@ -103,11 +103,12 @@ export default function Home() {
                     className="group flex gap-5 border border-stone-200 bg-white p-5 transition hover:border-stone-300"
                   >
                     <div className="relative h-24 w-24 shrink-0 overflow-hidden bg-[#f5f2ee]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={kit.image}
                         alt=""
-                        className="h-full w-full object-contain p-2 transition duration-500 group-hover:scale-105"
+                        fill
+                        sizes="96px"
+                        className="object-contain p-2 transition duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="min-w-0">

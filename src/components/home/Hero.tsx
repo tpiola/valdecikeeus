@@ -70,7 +70,7 @@ export default function Hero() {
           <LazyVideo
             mp4="/videos/hero-toledo.mp4"
             webm="/videos/hero-toledo.webm"
-            poster={heroProduct.image}
+            poster="/videos/posters/hero-toledo.webp"
             lazy={false}
             className={`absolute inset-0 h-full w-full object-cover ${
               reduceMotion ? "" : "animate-ken-burns"
