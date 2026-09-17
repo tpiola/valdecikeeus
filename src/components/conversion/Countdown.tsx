@@ -40,13 +40,40 @@ export default function Countdown({
   className?: string;
   compact?: boolean;
 }) {
-  const [parts, setParts] = useState<CountdownParts>(() => getCountdownParts(endsAt));
+  // Estado inicia nulo: o valor real só é calculado no cliente (useEffect).
+  // Se calculássemos no SSR a partir de Date.now(), servidor e cliente chegariam
+  // a segundos diferentes e o React acusaria erro de hidratação (#418).
+  const [parts, setParts] = useState<CountdownParts | null>(null);
 
   useEffect(() => {
     setParts(getCountdownParts(endsAt));
     const id = window.setInterval(() => setParts(getCountdownParts(endsAt)), 1000);
     return () => window.clearInterval(id);
   }, [endsAt]);
+
+  // Antes de montar: marcadores estáveis, com a mesma estrutura visual
+  if (!parts) {
+    if (compact) {
+      return <span className={`font-mono tabular-nums ${className}`}>--:--:--</span>;
+    }
+    return (
+      <div className={`flex items-center gap-1.5 ${className}`}>
+        {["h", "m", "s"].map((label) => (
+          <div
+            key={label}
+            className="min-w-[2.75rem] rounded-lg bg-black/25 px-2 py-1.5 text-center backdrop-blur-sm"
+          >
+            <div className="font-mono text-base font-bold tabular-nums leading-none md:text-lg">
+              --
+            </div>
+            <div className="mt-1 text-[9px] font-semibold uppercase tracking-wider opacity-70">
+              {label}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   if (parts.expired) {
     return <span className={className}>Oferta encerrada</span>;
