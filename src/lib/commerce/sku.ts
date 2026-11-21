@@ -17,11 +17,6 @@ export function distributeStock(total: number, sizes: number[]): number[] {
   return sizes.map((_, i) => {
     // Spread remainder around the middle of the size curve
     const offset = Math.abs(i - mid);
-    const rank = sizes
-      .map((_, j) => Math.abs(j - mid))
-      .sort((a, b) => a - b)
-      .indexOf(offset);
-    // Give extra units to sizes closest to mid first
     const extras = sizes
       .map((_, j) => ({ j, d: Math.abs(j - mid) }))
       .sort((a, b) => a.d - b.d || a.j - b.j)

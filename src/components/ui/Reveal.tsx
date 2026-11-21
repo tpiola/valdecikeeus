@@ -22,17 +22,15 @@ export default function Reveal({
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const el = ref.current;
-    if (!el || mq.matches) {
-      setVisible(true);
-      return;
-    }
+    const handleReducedMotionChange = () => setReduced(mq.matches);
+    handleReducedMotionChange();
+    mq.addEventListener("change", handleReducedMotionChange);
+    return () => mq.removeEventListener("change", handleReducedMotionChange);
+  }, []);
 
-    // Only animate elements that are below the fold
-    const rect = el.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
-    if (inView) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced) {
       setVisible(true);
       setArmed(true);
       return;

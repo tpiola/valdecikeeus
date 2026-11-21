@@ -23,15 +23,10 @@ export default function FadeIn({
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    if (mq.matches) {
-      setState("show");
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
-    const t = setTimeout(() => setState("show"), 60);
-    return () => clearTimeout(t);
+    const handleReducedMotionChange = () => setReduced(mq.matches);
+    handleReducedMotionChange(); // Initial check
+    mq.addEventListener("change", handleReducedMotionChange);
+    return () => mq.removeEventListener("change", handleReducedMotionChange);
   }, []);
 
   if (reduced) return <div className={className}>{children}</div>;
